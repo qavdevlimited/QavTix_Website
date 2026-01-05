@@ -44,7 +44,7 @@ export default function AuthPageImageCarousel() {
     }, [emblaApi])
 
     return (
-        <div className="relative w-full hidden">
+        <div className="relative w-2/5">
             <div className="overflow-hidden rounded-2xl" ref={emblaRef}>
                 <div className="flex">
                     {slides.map((slide) => (

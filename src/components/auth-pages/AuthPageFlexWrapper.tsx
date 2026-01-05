@@ -9,10 +9,12 @@ export default function AuthPageFlexWrapper({ children }: { children: React.Reac
             <div className="flex justify-center items-center h-24">
                 <Logo />
             </div>
-            <div>
-                {children}
+            <div className="lg:flex justify-between">
+                <div>
+                    {children}
+                </div>
+                <AuthPageImageCarousel />
             </div>
-            <AuthPageImageCarousel />
         </div>
     )
 }
