@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-const initialState: IAuthUser = {
+const initialState = {
     id: null, 
     emailOrUsername: null,
     group: null,
@@ -11,12 +11,11 @@ const authUserSlice = createSlice({
     name: "authUser",
     initialState,
     reducers: {
-        setAuthUser: (state, { payload }: PayloadAction<IAuthUser>) => {
+        setAuthUser: (state, { payload }) => {
             state.id = payload.id;
             state.emailOrUsername = payload.emailOrUsername;
             state.group = payload.group;
             state.name = payload.name
-            state.branch = payload.branch
         },
         logoutUser: (state) => {
             state.id = null;
