@@ -63,8 +63,9 @@ export default function CountdownTimer({
                     </span>
                 </p>
                 :
-                <p className="text-xs font-medium mt-3 text-center">
-                    OTP has expired. Please request a new code.
+                <p className="text-sm text-[#616166] text-center">
+                    Time expired.
+                    <button onClick={() => {}} className="font-medium text-primary-6 lg:text-accent-6 mx-1">Resend</button>
                 </p>
             }
         </div>

@@ -50,7 +50,7 @@ export default function PasswordInput1({
                     className="shrink-0 p-1 hover:bg-[rgb(var(--neutral-2))] rounded transition-colors"
                     tabIndex={-1}
                 >
-                    {showPassword ? (
+                    {!showPassword ? (
                         <Icon icon="octicon:eye-closed-16" className="w-5 h-5 text-neutral-8" />
                     ) : (
                         <Icon icon="octicon:eye-16" className="w-5 h-5 text-neutral-8" />

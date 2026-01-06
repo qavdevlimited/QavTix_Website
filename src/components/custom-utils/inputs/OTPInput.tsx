@@ -74,7 +74,7 @@ export default function OTPInput({ otp, setOtp }:{ otp: string[], setOtp: Dispat
                     onKeyDown={(e) => handleKeyDown(index, e)}
                     onPaste={index === 0 ? handlePaste : undefined}
                     onFocus={() => handleFocus(index)}
-                    className={`w-11 aspect-square sm:w-12 text-center text-2xl border text-secondary-9 rounded-xl transition-all duration-200 outline-none
+                    className={`w-11 aspect-square sm:w-14 text-center text-2xl md:text-3xl border text-secondary-9 rounded-[13.5px] transition-all duration-200 outline-none
                     ${digit ? 'border-primary-6' : 'border-neutral-5'}
                     ${focusedIndex === index && !digit ? 'border-blue-400 shadow-md' : ''}
                     focus:border-primary-5 focus:shadow-md hover:border-primary-5/80`}

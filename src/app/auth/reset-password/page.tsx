@@ -2,7 +2,7 @@
 
 import AuthPageFlexWrapper from "@/components/auth-pages/AuthPageFlexWrapper";
 import ResetPasswordSuccessMessage from "@/components/auth-pages/ResetPasswordSuccessMessage";
-import AuthButton1 from "@/components/custom-utils/buttons/AuthButton1";
+import ActionButton1 from "@/components/custom-utils/buttons/ActionButton1";
 import CountdownTimer from "@/components/custom-utils/CountDownTimer";
 import OTPInput from "@/components/custom-utils/inputs/OTPInput";
 import PasswordInput1 from "@/components/custom-utils/inputs/PasswordInput1";
@@ -12,10 +12,10 @@ import { useState } from "react";
 
 export default function ForgotPasswordPage(){
 
-    const [hasValidToken, setHasValidToken] = useState(false)
+    const [hasValidToken, setHasValidToken] = useState(true)
     const [otp, setOtp] = useState<string[]>(Array(6).fill(''))
     const [expiresIn, setExpiresIn] = useState(298) // 4 minutes 58 seconds
-    const [resetSuccessful, setResetSuccessful] = useState(true)
+    const [resetSuccessful, setResetSuccessful] = useState(false)
 
     return (
         <AuthPageFlexWrapper>
@@ -25,7 +25,7 @@ export default function ForgotPasswordPage(){
                     <ResetPasswordSuccessMessage />
                     :
                     <>
-                        <h1 className={`${space_grotesk.className} text-secondary-9 text-2xl font-bold mt-4 mb-2`}>
+                        <h1 className={`${space_grotesk.className} text-secondary-9 text-2xl md:text-3xl font-bold mt-4 mb-2`}>
                             {
                                 hasValidToken ? 'Create new password' : 'Password reset'
                             }
@@ -37,11 +37,11 @@ export default function ForgotPasswordPage(){
                                 `We sent a code to ${maskEmail("johnpork@gmail.com")}. Didn’t receive the email?`
                             }
                             {!hasValidToken &&
-                                <button onClick={() => {}} className="font-medium text-primary-6 mx-1">Resend</button>
+                                <button onClick={() => {}} className="font-medium text-primary-6 lg:text-accent-6 mx-1">Resend</button>
                             }
                         </p>
 
-                        <form className="mt-8 space-y-8">
+                        <form className="mt-8 space-y-10 lg:space-y-12">
                             {
                                 !hasValidToken ?
                                 <>
@@ -49,7 +49,7 @@ export default function ForgotPasswordPage(){
                 
                                     <CountdownTimer initialSeconds={expiresIn} />
                 
-                                    <AuthButton1 buttonText="Continue" />
+                                    <ActionButton1 buttonText="Continue" />
                                 </>
                                 :
                                 <>
@@ -61,7 +61,7 @@ export default function ForgotPasswordPage(){
                                         <label className="text-sm font-medium text-neutral-10 mb-2 block">Confirm Password</label>
                                         <PasswordInput1 />
                                     </div>
-                                    <AuthButton1 buttonText="Create Password" className="mt-6" />
+                                    <ActionButton1 buttonText="Create Password" className="mt-6 lg:mt-4" />
                                 </>
                             }
                         </form>                

@@ -53,26 +53,21 @@ export const signUpSlides : AuthPagesSlidesData[] = [
     image: '/images/auth-pages/unsplash_-xUwHb6uaUo.png',
     title: 'Discover Your Next Experience',
     description: 'From Concerts to travel, find and book tickets for everything you love'
-  }
-]
-
-
-
-export const onboardingSlides : AuthPagesSlidesData[] = [
+  },
   {
-    id: 1,
+    id: 3,
     image: '/images/auth-pages/unsplash_Lpk_o-XeRWo.png',
     title: 'Create Events, Sell Easily, Grow Reach.',
     description: 'Create events quickly, sell tickets seamlessly, and reach a wider audience with built-in promotion and tracking tools.'
   },
   {
-    id: 2,
+    id: 4,
     image: '/images/auth-pages/unsplash_6qekp4-XZHI.png',
     title: 'Create Events, Sell Easily, Grow Reach.',
     description: 'Create events quickly, sell tickets seamlessly, and reach a wider audience with built-in promotion and tracking tools.'
   },
   {
-    id: 3,
+    id: 5,
     image: '/images/auth-pages/unsplash_rE9vgD_TXgM.png',
     title: 'Create Events, Sell Easily, Grow Reach.',
     description: 'Create events quickly, sell tickets seamlessly, and reach a wider audience with built-in promotion and tracking tools.'
