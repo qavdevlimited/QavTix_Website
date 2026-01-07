@@ -97,6 +97,11 @@
   --color-neutral-9: #454545;
   --color-neutral-10: #262626;
   --color-neutral: #8c8c8c; /* Default neutral */
+
+
+  --color-danger-tertiary: #FEE9E7;
+  --color-postive-tertiary: #EBFFEE;
+  --color-warning-tertiary: #FFFBEB;
 }
 
 @layer base {

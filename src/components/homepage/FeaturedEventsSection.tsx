@@ -60,18 +60,22 @@ export default function FeaturedEventsSection() {
         },
         [
             Autoplay({ 
-                delay: 2500,
+                delay: 2000,
                 stopOnInteraction: false
             })
         ]
     )
 
     const scrollPrev = useCallback(() => {
-        if (emblaApi) emblaApi.scrollPrev()
+        const autoplayPlugin = emblaApi?.plugins()?.autoplay
+        autoplayPlugin?.stop()
+        emblaApi?.scrollPrev()
     }, [emblaApi])
 
     const scrollNext = useCallback(() => {
-        if (emblaApi) emblaApi.scrollNext()
+        const autoplayPlugin = emblaApi?.plugins()?.autoplay
+        autoplayPlugin?.stop()
+        emblaApi?.scrollNext()
     }, [emblaApi])
 
     const [canScrollPrev, setCanScrollPrev] = useState(false)
