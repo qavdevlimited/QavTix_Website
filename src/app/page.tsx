@@ -1,4 +1,5 @@
 import EventCategorySection from "@/components/homepage/EventCategorySection";
+import FeaturedEventsSection from "@/components/homepage/FeaturedEventsSection";
 import HeroSection from "@/components/homepage/HeroSection";
 
 export default function Homepage(){
@@ -6,6 +7,7 @@ export default function Homepage(){
     <main className="">
       <HeroSection />
       <EventCategorySection />
+      <FeaturedEventsSection />
     </main>
   )
 }
