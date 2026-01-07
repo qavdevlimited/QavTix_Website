@@ -27,12 +27,6 @@ export const signInSlides : AuthPagesSlidesData[] = [
   },
   {
     id: 5,
-    image: '/images/auth-pages/unsplash_E2vA_AMubQ0.png',
-    title: 'Discover Your Next Experience',
-    description: 'From Concerts to travel, find and book tickets for everything you love'
-  },
-  {
-    id: 6,
     image: '/images/auth-pages/unsplash_F2KRf_QfCqw.png',
     title: 'Discover Your Next Experience',
     description: 'From Concerts to travel, find and book tickets for everything you love'
@@ -73,3 +67,9 @@ export const signUpSlides : AuthPagesSlidesData[] = [
     description: 'Create events quickly, sell tickets seamlessly, and reach a wider audience with built-in promotion and tracking tools.'
   }
 ]
+
+
+
+export const slides_onlyImages : string[] = [
+  ...signInSlides, ...signUpSlides
+].map(v => v.image)

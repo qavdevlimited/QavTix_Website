@@ -74,7 +74,7 @@
 
   /* Accent colors */
   --color-accent-1: #fff2e9;
-  --color-accent-2: #fffdca;
+  --color-accent-2: #ffdfca;
   --color-accent-3: #ffc6a0;
   --color-accent-4: #ffab73;
   --color-accent-5: #ff9249;
@@ -107,7 +107,7 @@
 
 @layer utilities {
   .global-px {
-    @apply px-4 md:px-10;
+    @apply px-4 md:px-10 lg:px-16;
   }
 }
 

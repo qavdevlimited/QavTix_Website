@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { inter } from "@/lib/redux/fonts";
+import Header from "@/components/layout/Header";
 
 
 export const metadata: Metadata = {
@@ -18,8 +19,9 @@ export default function RootLayout({
       <body
         className={`${inter.className} bg-gray-50 `}
       >
+        <Header />
         {children}
       </body>
     </html>
-  );
+  )
 }
