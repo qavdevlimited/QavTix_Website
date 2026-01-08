@@ -61,7 +61,7 @@ export default function DateFilter({ value, onChange, filterFor = "homepage" }: 
     return (
         <>
             {/* Mobile & Tablet - Bottom Sheet */}
-            <div className="lg:hidden relative w-full">
+            <div className="lg:hidden relative">
 
                 {
                     filterFor === "homepage" ?

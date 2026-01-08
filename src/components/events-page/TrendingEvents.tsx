@@ -1,10 +1,6 @@
 'use client'
 
-import * as React from 'react'
-import { Search } from 'lucide-react'
-import { Button } from '@/components/ui/button'
 import { DateRange } from 'react-day-picker'
-import { Country, State } from 'country-state-city'
 import DateFilter from '../homepage/dropdowns/DateFilter'
 import LocationFilter from '../homepage/dropdowns/LocationFilter'
 import CategoryFilter from '../homepage/dropdowns/CategoryFilter'
@@ -12,10 +8,12 @@ import PriceFilter from '../homepage/dropdowns/PriceFilter'
 import { space_grotesk } from '@/lib/redux/fonts'
 import EventsCard1 from '../custom-utils/cards/EventCards'
 import { eventsMock } from '@/components-data/demo-data'
+import { useState } from 'react'
+import { countries, getStates } from '@/components-data/location'
 
 
 export function TrendingEvents() {
-    const [filters, setFilters] = React.useState<FilterValues>({
+    const [filters, setFilters] = useState<FilterValues>({
         categories: [],
         priceRange: null
     })
@@ -23,18 +21,6 @@ export function TrendingEvents() {
     const handleSearch = () => {
         console.log('Search with filters:', filters)
     }
-
-    const countries = Country.getAllCountries().map(c => ({
-        value: c.isoCode,
-        label: c.name
-    }))
-
-    const getStates = (countryCode: string) => 
-        State.getStatesOfCountry(countryCode).map(s => ({
-            value: s.isoCode,
-            label: s.name
-        }
-    ))
 
     return (
         <section className="w-full py-8 mt-12 md:mt-20 global-px">

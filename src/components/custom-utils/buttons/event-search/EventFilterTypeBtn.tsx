@@ -44,8 +44,8 @@ export default function EventFilterTypeBtn({
             <Icon
                 icon="fluent:chevron-down-20-filled"
                 className={cn(
-                    'size-5 shrink-0',
-                    hasActiveFilter ? 'text-primary' : 'text-neutral-6'
+                    'size-5 shrink-0 text-neutral-6',
+                    'group-hover:text-primary-6'
                 )}
             />
         </button>

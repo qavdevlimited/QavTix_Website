@@ -67,7 +67,7 @@ export default function PriceFilter({
     return (
         <>
             {/* Mobile & Tablet - Bottom Sheet */}
-            <div className="lg:hidden relative w-full">
+            <div className="lg:hidden relative">
                 {
                     filterFor === "homepage" ?
                     <EventFilterTypeBtn 

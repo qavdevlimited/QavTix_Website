@@ -5,7 +5,7 @@ import { motion, useInView } from "framer-motion"
 import { Icon } from "@iconify/react"
 import Link from "next/link"
 import { useRef } from "react"
-import { nigeriaStates } from "@/components-data/ng-state"
+import { nigeriaStates } from "@/components-data/location"
 
 interface LocationLink {
   cityOrState: string

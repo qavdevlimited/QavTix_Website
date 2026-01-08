@@ -16,7 +16,7 @@ export const NAV_LINKS = {
   FORGOT_PASSWORD: { label: 'Forgot password', href: '/auth/forgot-password' },
   RESET_PASSWORD: { label: 'Reset password', href: '/auth/reset-password' },
 
-  SEARCH_EVENTS: { label: 'Search Events', href: '/events/search' },
+  SEARCH_EVENTS: { label: 'Search Events', href: '/events/explore-events' },
 } as const satisfies Record<string, NavLink>
 
 export const navLinks: NavLink[] = [

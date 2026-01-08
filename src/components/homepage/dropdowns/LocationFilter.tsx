@@ -12,6 +12,7 @@ import {
     DialogTrigger,
 } from '@/components/ui/dialog'
 import EventFilterTypeBtn from '@/components/custom-utils/buttons/event-search/EventFilterTypeBtn'
+import { resolveCountryCode } from '@/helper-fns/resolveCountryCode'
 
 interface LocationFilterProps {
     value?: { country: string; state: string } | null
@@ -34,7 +35,13 @@ export default function LocationFilter({
         state: value?.state || ''
     })
 
-    const states = location.country ? getStates(location.country) : []
+    const countryCode = location.country
+    ? resolveCountryCode(location.country)
+    : null;
+
+    const states = countryCode
+    ? getStates(countryCode)
+    : [];
     
     const hasActiveFilter = value && (value.country || value.state)
     
@@ -42,8 +49,8 @@ export default function LocationFilter({
         if (!value?.country && !value?.state) return 'Location'
         
         const countryName = countries.find(c => c.value === value.country)?.label
-        const stateName = states.find(s => s.value === value.state)?.label
-        
+        const stateName = states.find(s => s.label.toLowerCase() === value.state.toLowerCase())?.label
+                
         if (countryName && stateName) {
             return `${stateName}, ${countryName}`
         }
@@ -63,7 +70,7 @@ export default function LocationFilter({
     return (
         <>
             {/* Mobile & Tablet - Bottom Sheet */}
-            <div className="lg:hidden relative w-full">
+            <div className="lg:hidden relative">
                 {
                     filterFor === "homepage" ?
                     <EventFilterTypeBtn

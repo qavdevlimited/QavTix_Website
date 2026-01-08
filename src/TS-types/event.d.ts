@@ -21,7 +21,7 @@ interface FilterValues {
         country: string,
         state: string
     } | null
-    categories: string[]
+    categories: Category["value"][]
     priceRange: PriceRange | null
 }
 
