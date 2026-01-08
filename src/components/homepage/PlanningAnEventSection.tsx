@@ -12,7 +12,7 @@ export default function PlanningAnEventSection(){
         <section className="mb-8 global-px mt-8 md:flex justify-between gap-7 items-center">
             <div className="md:w-[45%]">
                 <h2
-                    className={`text-2xl md:text-[2rem] font-bold text-secondary-9 ${space_grotesk.className}`}
+                    className={`text-2xl sm:text-3xl  md:text-[2rem] font-bold text-secondary-9 ${space_grotesk.className}`}
                 >
                     Planning an event?
                 </h2>
@@ -40,7 +40,7 @@ export default function PlanningAnEventSection(){
                 </div>
             </div>
 
-            <div className="max-w-[90%] sm:max-w-[30em] mx-auto md:mx-0 md:max-w-[unset] md:w-[45%]">
+            <div className="max-w-[90%] mt-10 md:mt-0 sm:max-w-[30em] mx-auto md:mx-0 md:max-w-[unset] md:w-[45%]">
                 <Image src="/images/vectors/illustration-img1.svg" alt="" aria-hidden="true" width={700} height={700} />
             </div>
         </section>

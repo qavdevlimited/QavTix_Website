@@ -8,8 +8,7 @@ import { navLinks } from '@/components-data/navLinks'
 import SearchEventInput1 from '../custom-utils/inputs/event-search/SearchEventInput1'
 
 
-export default function MobileMenu() {
-    const [isOpen, setIsOpen] = useState(false)
+export default function MobileMenu({ openMobileMenu, setOpenMobileMenu }:{ openMobileMenu: boolean, setOpenMobileMenu: (v: boolean) => void }) {
     const [searchQuery, setSearchQuery] = useState('')
     const pathname = usePathname()
 
@@ -21,7 +20,7 @@ export default function MobileMenu() {
     return (
         <>
             <AnimatePresence mode="wait">
-                {isOpen && (
+                {openMobileMenu && (
                     <>
                         {/* Backdrop */}
                         <motion.div
@@ -30,7 +29,7 @@ export default function MobileMenu() {
                             exit={{ opacity: 0 }}
                             transition={{ duration: 0.2 }}
                             className="fixed inset-0 bg-black/20 backdrop-blur-sm z-40 md:hidden"
-                            onClick={() => setIsOpen(false)}
+                            onClick={() => setOpenMobileMenu(false)}
                         />
 
                         {/* Menu Panel */}
@@ -120,7 +119,7 @@ export default function MobileMenu() {
                                             >
                                                 <Link
                                                     href={link.href}
-                                                    onClick={() => setIsOpen(false)}
+                                                    onClick={() => setOpenMobileMenu(false)}
                                                     className={`
                                                         block px-4 py-3 rounded-lg font-normal text-[15px] transition-all
                                                         ${active
@@ -155,14 +154,14 @@ export default function MobileMenu() {
                                 >
                                     <Link
                                         href="/auth/signin"
-                                        onClick={() => setIsOpen(false)}
+                                        onClick={() => setOpenMobileMenu(false)}
                                         className="block px-6 py-3 rounded-full text-center font-medium text-neutral-8 border-2 border-neutral-3 hover:bg-neutral-2 active:scale-[0.98] transition-all"
                                     >
                                         Sign in
                                     </Link>
                                     <Link
                                         href="/auth/signup"
-                                        onClick={() => setIsOpen(false)}
+                                        onClick={() => setOpenMobileMenu(false)}
                                         className="block px-6 py-3 rounded-full text-center font-medium bg-primary text-white hover:bg-primary-7 active:scale-[0.98] transition-all shadow-md"
                                     >
                                         Get started

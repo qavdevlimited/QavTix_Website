@@ -8,7 +8,7 @@ import { Icon } from "@iconify/react";
 import { navLinks } from "@/components-data/navLinks";
 import { useState } from "react";
 import MobileMenu from "./MobileMenu";
-
+import logoSrc from "@/public-assets/logo/qavtix-logo-white.svg"
 
 export default function Header(){
 
@@ -24,10 +24,10 @@ export default function Header(){
 
 
     return (
-        !pathName.startsWith("/auth") &&
+        !pathName.startsWith("/auth") && pathName !== "/about-us" &&
         <header className="py-8 w-full absolute top-0 left-0 z-100 flex justify-between items-center global-px">
             <div className="flex items-center gap-8">
-                <Logo />
+                <Logo logo={pathName.includes("about-us") ? logoSrc : undefined} />
                 <SearchEventInput1 className="hidden lg:block" />
             </div>
             <nav className="items-center gap-1 hidden lg:flex">
@@ -40,7 +40,7 @@ export default function Header(){
                             <Link
                                 key={link.href}
                                 href={link.href}
-                                className="ml-4 px-6 py-2.5 rounded-full bg-primary text-white font-medium text-sm hover:bg-primary-7 hover:shadow-md active:bg-primary-8 active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-all duration-150"
+                                className="ml-4 px-6 py-4 rounded-full bg-primary text-white font-medium text-sm hover:bg-primary-7 hover:shadow-md active:bg-primary-8 active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-all duration-150"
                             >
                                 {link.label}
                             </Link>
@@ -69,7 +69,7 @@ export default function Header(){
             </nav>
 
 
-            <div className="flex gap-2.5 lg:hidden items-center text-secondary-9">
+            <div className="flex gap-3 lg:hidden items-center text-secondary-9">
                 <button>
                     <Icon icon="lineicons:search-1" width="24" height="25" className="size-7" />
                     <span className="sr-only">Search</span>
@@ -83,7 +83,7 @@ export default function Header(){
 
             {
                 showMobileMenu &&
-                <MobileMenu />
+                <MobileMenu openMobileMenu={showMobileMenu} setOpenMobileMenu={setShowMobileMenu} />
             }
         </header>
     )

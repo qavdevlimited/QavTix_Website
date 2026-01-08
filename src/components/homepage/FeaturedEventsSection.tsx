@@ -61,7 +61,7 @@ export default function FeaturedEventsSection() {
         [
             Autoplay({ 
                 delay: 2000,
-                stopOnInteraction: false
+                stopOnInteraction: true
             })
         ]
     )
@@ -77,6 +77,17 @@ export default function FeaturedEventsSection() {
         autoplayPlugin?.stop()
         emblaApi?.scrollNext()
     }, [emblaApi])
+
+    const pauseAutoPlay = useCallback(() => {
+        const autoplayPlugin = emblaApi?.plugins()?.autoplay
+        autoplayPlugin?.stop()
+    }, [emblaApi])
+
+    const play = useCallback(() => {
+        const autoplayPlugin = emblaApi?.plugins()?.autoplay
+        autoplayPlugin?.play()
+    }, [emblaApi])
+
 
     const [canScrollPrev, setCanScrollPrev] = useState(false)
     const [canScrollNext, setCanScrollNext] = useState(false)
@@ -98,7 +109,7 @@ export default function FeaturedEventsSection() {
         <section className="w-full py-10 mt-10 md:mt-20 px-4 md:ps-10 lg:ps-16 md:pe-0">
             <div className="max-w-7xl mx-auto">
                 <div className="flex items-center gap-6 justify-between mb-8 md:pe-16">
-                    <h2 className={`text-2xl md:text-[2rem] font-bold text-secondary-9 ${space_grotesk.className}`}>
+                    <h2 className={`text-2xl sm:text-3xl  md:text-[2rem] font-bold text-secondary-9 ${space_grotesk.className}`}>
                         Featured events
                     </h2>
                     
@@ -128,6 +139,8 @@ export default function FeaturedEventsSection() {
                         {dupliactedFeaturedEvents.map((event) => (
                             <div 
                                 key={event.id}
+                                onMouseOver={() => pauseAutoPlay()}
+                                onMouseLeave={() => play()}
                                 className="flex-[0_0_85%] sm:flex-[0_0_45%] lg:flex-[0_0_20%] min-w-0"
                             >
                                 <div className="group relative aspect-3/4 rounded-3xl overflow-hidden cursor-pointer">

@@ -8,6 +8,7 @@ interface MobileInfiniteScrollProps {
     images: string[]
     duration?: number // seconds for one full loop
     autoPlay?: boolean
+    className?: string
 }
 
 export interface MobileInfiniteScrollRef {
@@ -15,7 +16,7 @@ export interface MobileInfiniteScrollRef {
 }
 
 const MobileInfiniteScroll = forwardRef<MobileInfiniteScrollRef, MobileInfiniteScrollProps>(
-    ({ images, duration = 40, autoPlay = true }, ref) => {
+    ({ images, duration = 40, className, autoPlay = true }, ref) => {
         const controls = useAnimation()
         const itemWidth = 400 + 24 // image width + gap-6 (24px)
 
@@ -69,7 +70,7 @@ const MobileInfiniteScroll = forwardRef<MobileInfiniteScrollRef, MobileInfiniteS
         }, [])
 
         return (
-            <div className="overflow-hidden my-12 md:hidden">
+            <div className={`overflow-hidden my-12 ${className}`}>
                 <motion.div
                     className="flex gap-6"
                     animate={controls}

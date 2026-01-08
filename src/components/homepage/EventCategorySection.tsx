@@ -4,7 +4,7 @@ import { space_grotesk } from "@/lib/redux/fonts";
 
 export default function EventCategorySection(){
     return (
-        <section className="mt-16 global-px">
+        <section className="mt-16 md:mt-20 global-px">
             <div className="text-center">
                 <h2 className={`${space_grotesk.className} font-bold text-[2rem] text-secondary-9 mb-3`}>We’ve got you!</h2>
                 <p className="text-sm text-neutral-8">No one gets left out. We’ve got something for everyone, and finding events that make your vibe has never been easier.</p>

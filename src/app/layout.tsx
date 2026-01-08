@@ -3,6 +3,7 @@ import "./globals.css";
 import { inter } from "@/lib/redux/fonts";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import AboutPageHeader from "@/components/layout/AboutPageHeader";
 
 
 export const metadata: Metadata = {
@@ -20,6 +21,7 @@ export default function RootLayout({
       <body
         className={`${inter.className} bg-gray-50 `}
       >
+        <AboutPageHeader />
         <Header />
         {children}
         <Footer />

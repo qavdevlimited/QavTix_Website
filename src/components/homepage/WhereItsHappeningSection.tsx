@@ -100,7 +100,7 @@ export default function WhereItsHappeningSection() {
     <section className="w-full bg-neutral-1/30 py-16">
       <div className="mb-8 global-px">
         <h2
-          className={`text-2xl md:text-[2rem] font-bold text-secondary-9 ${space_grotesk.className}`}
+          className={`text-2xl sm:text-3xl  md:text-[2rem] font-bold text-secondary-9 ${space_grotesk.className}`}
         >
           Where it’s happening
         </h2>

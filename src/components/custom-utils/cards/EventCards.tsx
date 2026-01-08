@@ -39,7 +39,7 @@ const statusStyles : StatusStylesRecord  = {
 
 export default function EventsCard1(cardData : IEvent){
     return (
-        <div className="w-[18em] p-3 relative min-h-[24.5em] flex flex-col h-[24.5em] rounded-[32px] border border-neutral-6 bg-secondary-1">
+        <div className="w-[18em] p-3 relative min-h-[25em] flex flex-col h-[25em] rounded-[32px] border border-neutral-6 bg-secondary-1">
             <div className="relative shrink-0">
                 {
                     cardData.status &&
