@@ -1,6 +1,5 @@
 'use client'
 
-import * as React from 'react'
 import { Search } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { DateRange } from 'react-day-picker'
@@ -9,27 +8,18 @@ import LocationFilterDropdown from './dropdowns/LocationFilter'
 import DateFilter from './dropdowns/DateFilter'
 import CategoryFilter from './dropdowns/CategoryFilter'
 import PriceFilter from './dropdowns/PriceFilter'
+import { useState } from 'react'
 
-
-interface FilterValues {
-    dateRange?: DateRange
-    location?: {
-        country: string,
-        state: string
-    } | null
-    categories: string[]
-    priceRange: PriceRange | null
-}
 
 export function EventSearchFilters() {
-    const [filters, setFilters] = React.useState<FilterValues>({
+    const [filters, setFilters] = useState<FilterValues>({
         categories: [],
-        priceRange: null
+        priceRange: null,
+        dateRange: null
     })
 
     const handleSearch = () => {
         console.log('Search with filters:', filters)
-        // Implement your search logic here
     }
 
     const countries = Country.getAllCountries().map(c => ({

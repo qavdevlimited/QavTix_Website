@@ -4,46 +4,12 @@ import { useCallback, useEffect, useState } from 'react'
 import useEmblaCarousel from 'embla-carousel-react'
 import Autoplay from 'embla-carousel-autoplay'
 import Image from 'next/image'
-import { ChevronLeft, ChevronRight } from 'lucide-react'
-import { slides_onlyImages } from '@/components-data/auth-pages/slides'
 import { space_grotesk } from '@/lib/redux/fonts'
 import { Icon } from '@iconify/react'
+import { demoFeaturedEvents } from '@/components-data/demo-data'
 
-interface FeaturedEvent {
-    id: number
-    image: string
-    title: string
-}
 
-const featuredEvents: FeaturedEvent[] = [
-    {
-        id: 1,
-        image: slides_onlyImages[0],
-        title: 'GOGO Event'
-    },
-    {
-        id: 2,
-        image: slides_onlyImages[1],
-        title: 'Music Festival'
-    },
-    {
-        id: 3,
-        image: slides_onlyImages[2],
-        title: 'Art Exhibition'
-    },
-    {
-        id: 4,
-        image: slides_onlyImages[3],
-        title: 'Tech Conference'
-    },
-    {
-        id: 5,
-        image: slides_onlyImages[3],
-        title: 'Food Festival'
-    }
-]
-
-const dupliactedFeaturedEvents: FeaturedEvent[] = [...featuredEvents, ...featuredEvents, ...featuredEvents].map(
+const dupliactedFeaturedEvents: FeaturedEvent[] = [...demoFeaturedEvents, ...demoFeaturedEvents, ...demoFeaturedEvents].map(
     (event, index) => ({
         ...event,
         id: index + 1
@@ -106,7 +72,7 @@ export default function FeaturedEventsSection() {
     }, [emblaApi, onSelect])
 
     return (
-        <section className="w-full py-10 mt-10 md:mt-20 px-4 md:ps-10 lg:ps-16 md:pe-0">
+        <section className="w-full py-10 px-4 md:ps-10 lg:ps-16 md:pe-0">
             <div className="max-w-7xl mx-auto">
                 <div className="flex items-center gap-6 justify-between mb-8 md:pe-16">
                     <h2 className={`text-2xl sm:text-3xl  md:text-[2rem] font-bold text-secondary-9 ${space_grotesk.className}`}>

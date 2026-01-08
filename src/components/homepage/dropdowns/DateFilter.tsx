@@ -17,19 +17,21 @@ import {
     DialogTitle,
     DialogTrigger,
 } from '@/components/ui/dialog'
+import EventFilterTypeBtn from '@/components/custom-utils/buttons/event-search/EventFilterTypeBtn'
 
 interface DateFilterProps {
     value?: DateRange | null
-    onChange: (value: DateRange | null) => void
+    onChange: (value: DateRange | null) => void,
+    filterFor?: "homepage" | "eventPage"
 }
 
-export default function DateFilter({ value, onChange }: DateFilterProps) {
+export default function DateFilter({ value, onChange, filterFor = "homepage" }: DateFilterProps) {
     const [isOpen, setIsOpen] = useState(false)
     const [dateRange, setDateRange] = useState<DateRange>(
         value || { from: undefined, to: undefined }
     )
 
-    const hasActiveFilter = value && (value.from || value.to)
+    const hasActiveFilter = value && (value?.from || value?.to)
 
     const displayText = (() => {
         if (!hasActiveFilter) return 'Date'
@@ -60,21 +62,23 @@ export default function DateFilter({ value, onChange }: DateFilterProps) {
         <>
             {/* Mobile & Tablet - Bottom Sheet */}
             <div className="lg:hidden relative w-full">
-                <button
-                    onClick={() => setIsOpen(true)}
-                    className={cn(
-                        'w-full flex items-center justify-between text-left text-sm rounded-xl font-normal h-14 px-4 bg-accent-1 hover:bg-accent-2/60 border border-transparent transition-colors',
-                        hasActiveFilter ? 'text-neutral-8' : 'text-neutral-7'
-                    )}
-                >
-                    <span className="truncate">{displayText}</span>
-                    <Icon
-                        icon="flowbite:calendar-outline"
-                        width="30"
-                        height="30"
-                        className="text-neutral-8 size-6"
+
+                {
+                    filterFor === "homepage" ?
+                    <EventFilterTypeBtn 
+                        onClick={() => setIsOpen(true)}
+                        displayText={displayText} 
+                        hasActiveFilter={!!hasActiveFilter}
+                        variant='default' 
                     />
-                </button>
+                    :
+                    <EventFilterTypeBtn 
+                        onClick={() => setIsOpen(true)}
+                        displayText={displayText} 
+                        hasActiveFilter={!!hasActiveFilter}
+                        variant='compact' 
+                    />
+                }
 
                 <MobileBottomSheet
                     isOpen={isOpen}
@@ -100,24 +104,29 @@ export default function DateFilter({ value, onChange }: DateFilterProps) {
                 </MobileBottomSheet>
             </div>
 
+
+
+
             {/* Desktop - Dialog */}
             <div className="hidden lg:block">
                 <Dialog open={isOpen} onOpenChange={setIsOpen}>
                     <DialogTrigger asChild>
-                        <button
-                            className={cn(
-                                'w-full flex items-center justify-between text-left text-sm rounded-xl font-normal h-14 px-4 bg-accent-1 hover:bg-accent-2/60 border border-transparent transition-colors',
-                                hasActiveFilter ? 'text-neutral-8' : 'text-neutral-7'
-                            )}
-                        >
-                            <span className="truncate">{displayText}</span>
-                            <Icon
-                                icon="flowbite:calendar-outline"
-                                width="30"
-                                height="30"
-                                className="text-neutral-8 size-6 shrink-0"
+                        {
+                            filterFor === "homepage" ?
+                            <EventFilterTypeBtn 
+                                onClick={() => setIsOpen(true)}
+                                displayText={displayText} 
+                                hasActiveFilter={!!hasActiveFilter}
+                                variant='default' 
                             />
-                        </button>
+                            :
+                            <EventFilterTypeBtn 
+                                onClick={() => setIsOpen(true)}
+                                displayText={displayText} 
+                                hasActiveFilter={!!hasActiveFilter}
+                                variant='compact' 
+                            />
+                        }
                     </DialogTrigger>
                     <DialogContent className="max-w-150 rounded-2xl">
                         <DialogHeader>

@@ -1,8 +1,6 @@
 'use client'
 
 import { useState } from 'react'
-import { cn } from '@/lib/utils'
-import { Icon } from '@iconify/react'
 import FilterButtonsActions1 from '@/components/custom-utils/buttons/event-search/FilterActionButtons1'
 import { MobileBottomSheet } from '@/components/custom-utils/EventFilterDropdownMobileBottomSheet'
 import CategoryItemBtn from '@/components/custom-utils/buttons/event-search/CategoryItemBtn'
@@ -13,6 +11,7 @@ import {
     DialogTitle,
     DialogTrigger,
 } from '@/components/ui/dialog'
+import EventFilterTypeBtn from '@/components/custom-utils/buttons/event-search/EventFilterTypeBtn'
 
 interface Category {
     value: string
@@ -22,6 +21,7 @@ interface Category {
 
 interface CategoryFilterProps {
     value?: string[]
+    filterFor?: string
     onChange: (value: string[]) => void
     categories?: Category[]
 }
@@ -41,6 +41,7 @@ const defaultCategories: Category[] = [
 export default function CategoryFilter({
     value = [],
     onChange,
+    filterFor = "homepage",
     categories = defaultCategories,
 }: CategoryFilterProps) {
     const [isOpen, setIsOpen] = useState(false)
@@ -78,24 +79,22 @@ export default function CategoryFilter({
         <>
             {/* Mobile & Tablet - Bottom Sheet */}
             <div className="lg:hidden relative w-full">
-                <button
-                    onClick={() => setIsOpen(true)}
-                    className={cn(
-                        'w-full flex items-center justify-between text-left text-sm rounded-xl font-normal h-14 px-4 bg-accent-1 hover:bg-accent-2/60 border border-transparent transition-colors',
-                        hasActiveFilter ? 'text-neutral-8' : 'text-neutral-7'
-                    )}
-                >
-                    <span className="truncate">{displayText}</span>
-                    <Icon
-                        icon="flowbite:chevron-down-outline"
-                        width="30"
-                        height="30"
-                        className={cn(
-                            'text-neutral-8 size-6 transition-transform duration-200',
-                            isOpen && 'rotate-180'
-                        )}
+                {
+                    filterFor === "homepage" ?
+                    <EventFilterTypeBtn 
+                        onClick={() => setIsOpen(true)}
+                        displayText={displayText} 
+                        hasActiveFilter={hasActiveFilter}
+                        variant='default' 
                     />
-                </button>
+                    :
+                    <EventFilterTypeBtn 
+                        onClick={() => setIsOpen(true)}
+                        displayText={displayText} 
+                        hasActiveFilter={hasActiveFilter}
+                        variant='compact' 
+                    />
+                }
 
                 <MobileBottomSheet
                     isOpen={isOpen}
@@ -128,23 +127,22 @@ export default function CategoryFilter({
             <div className="hidden lg:block">
                 <Dialog open={isOpen} onOpenChange={setIsOpen}>
                     <DialogTrigger asChild>
-                        <button
-                            className={cn(
-                                'w-full flex items-center justify-between text-left text-sm rounded-xl font-normal h-14 px-4 bg-accent-1 hover:bg-accent-2/60 border border-transparent transition-colors',
-                                hasActiveFilter ? 'text-neutral-8' : 'text-neutral-7'
-                            )}
-                        >
-                            <span className="truncate">{displayText}</span>
-                            <Icon
-                                icon="flowbite:chevron-down-outline"
-                                width="30"
-                                height="30"
-                                className={cn(
-                                    'text-neutral-8 size-6 transition-transform duration-200',
-                                    isOpen && 'rotate-180'
-                                )}
+                        {
+                            filterFor === "homepage" ?
+                            <EventFilterTypeBtn 
+                                onClick={() => setIsOpen(true)}
+                                displayText={displayText} 
+                                hasActiveFilter={hasActiveFilter}
+                                variant='default' 
                             />
-                        </button>
+                            :
+                            <EventFilterTypeBtn 
+                                onClick={() => setIsOpen(true)}
+                                displayText={displayText} 
+                                hasActiveFilter={hasActiveFilter}
+                                variant='compact' 
+                            />
+                        }
                     </DialogTrigger>
                     <DialogContent className="max-w-125 rounded-2xl">
                         <DialogHeader>

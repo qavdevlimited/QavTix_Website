@@ -7,6 +7,7 @@ import { copyToClipboard } from "@/helper-fns/copyToClipboard";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { formatPrice } from "@/helper-fns/formatPrice";
 import { space_grotesk } from "@/lib/redux/fonts";
+import { getAvatarColor } from "@/helper-fns/getAvatarColor";
 
 type StatusStylesRecord = Record<
   IEventStatus,
@@ -35,6 +36,17 @@ const statusStyles : StatusStylesRecord  = {
     label: "Sold out",
   },
 }
+
+const avatarColors = [
+  'bg-red-500',
+  'bg-blue-500',
+  'bg-green-500',
+  'bg-purple-500',
+  'bg-pink-500',
+  'bg-yellow-500',
+  'bg-indigo-500',
+  'bg-teal-500'
+]
 
 
 export default function EventsCard1(cardData : IEvent){
@@ -110,15 +122,23 @@ export default function EventsCard1(cardData : IEvent){
                             {cardData.attendees.slice(0, 4).map((user) => (
                                 <Avatar key={user.id} className="ring-2 ring-background">
                                     <AvatarImage src={user.image} />
-                                    <AvatarFallback>{user.initials}</AvatarFallback>
+                                    <AvatarFallback
+                                        className={`${getAvatarColor(user.id)} text-white font-medium`}
+                                    >
+                                        {user.initials}
+                                    </AvatarFallback>
                                 </Avatar>
                             ))}
+                            {cardData.attendees.length > 4 && (
+                                <Avatar className="ring-1 ring-background">
+                                    <AvatarFallback
+                                        className="bg-primary-1 font-medium text-secondary-7"
+                                    >
+                                        +{cardData.attendees.length - 4}
+                                    </AvatarFallback>
+                                </Avatar>
+                            )}
                         </div>
-                        {cardData.attendees.length > 4 && (
-                            <span className="text-xs text-secondary-7">
-                                +{cardData.attendees.length - 4}
-                            </span>
-                        )}
                     </div>
 
                     {/* Price */}

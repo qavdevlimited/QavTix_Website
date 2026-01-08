@@ -4,8 +4,6 @@ import { useState } from 'react'
 import { MobileBottomSheet } from '@/components/custom-utils/EventFilterDropdownMobileBottomSheet'
 import FilterButtonsActions1 from '@/components/custom-utils/buttons/event-search/FilterActionButtons1'
 import { LocationFilterSelect } from '@/components/custom-utils/inputs/event-search/LocationFilterSelect'
-import { Icon } from '@iconify/react'
-import { cn } from '@/lib/utils'
 import {
     Dialog,
     DialogContent,
@@ -13,9 +11,11 @@ import {
     DialogTitle,
     DialogTrigger,
 } from '@/components/ui/dialog'
+import EventFilterTypeBtn from '@/components/custom-utils/buttons/event-search/EventFilterTypeBtn'
 
 interface LocationFilterProps {
     value?: { country: string; state: string } | null
+    filterFor?: FilterFor
     onChange: (value: { country: string; state: string } | null) => void
     countries: { value: string; label: string }[]
     getStates: (countryCode: string) => { value: string; label: string }[]
@@ -25,6 +25,7 @@ export default function LocationFilter({
     value,
     onChange,
     countries,
+    filterFor,
     getStates
 }: LocationFilterProps) {
     const [isOpen, setIsOpen] = useState(false)
@@ -63,24 +64,22 @@ export default function LocationFilter({
         <>
             {/* Mobile & Tablet - Bottom Sheet */}
             <div className="lg:hidden relative w-full">
-                <button
-                    onClick={() => setIsOpen(true)}
-                    className={cn(
-                        'w-full flex items-center justify-between text-left text-sm rounded-xl font-normal h-14 px-4 bg-accent-1 hover:bg-accent-2/60 border border-transparent transition-colors',
-                        hasActiveFilter ? 'text-neutral-8' : 'text-neutral-7'
-                    )}
-                >
-                    <span className="truncate">{getDisplayText()}</span>
-                    <Icon
-                        icon="flowbite:chevron-down-outline"
-                        width="30"
-                        height="30"
-                        className={cn(
-                            'text-neutral-8 size-6 transition-transform duration-200',
-                            isOpen && 'rotate-180'
-                        )}
+                {
+                    filterFor === "homepage" ?
+                    <EventFilterTypeBtn
+                        onClick={() => setIsOpen(true)}
+                        displayText={getDisplayText()} 
+                        hasActiveFilter={!!hasActiveFilter}
+                        variant='default' 
                     />
-                </button>
+                    :
+                    <EventFilterTypeBtn 
+                        onClick={() => setIsOpen(true)}
+                        displayText={getDisplayText()} 
+                        hasActiveFilter={!!hasActiveFilter}
+                        variant='compact' 
+                    />
+                }
 
                 <MobileBottomSheet isOpen={isOpen} onClose={() => setIsOpen(false)} title="Location">
                     <div className="space-y-5">
@@ -122,23 +121,22 @@ export default function LocationFilter({
             <div className="hidden lg:block">
                 <Dialog open={isOpen} onOpenChange={setIsOpen}>
                     <DialogTrigger asChild>
-                        <button
-                            className={cn(
-                                'w-full flex items-center justify-between text-left text-sm rounded-xl font-normal h-14 px-4 bg-accent-1 hover:bg-accent-2/60 border border-transparent transition-colors',
-                                hasActiveFilter ? 'text-neutral-8' : 'text-neutral-7'
-                            )}
-                        >
-                            <span className="truncate">{getDisplayText()}</span>
-                            <Icon
-                                icon="flowbite:chevron-down-outline"
-                                width="30"
-                                height="30"
-                                className={cn(
-                                    'text-neutral-8 size-6 transition-transform duration-200',
-                                    isOpen && 'rotate-180'
-                                )}
+                        {
+                            filterFor === "homepage" ?
+                            <EventFilterTypeBtn 
+                                onClick={() => setIsOpen(true)}
+                                displayText={getDisplayText()} 
+                                hasActiveFilter={!!hasActiveFilter}
+                                variant='default' 
                             />
-                        </button>
+                            :
+                            <EventFilterTypeBtn 
+                                onClick={() => setIsOpen(true)}
+                                displayText={getDisplayText()} 
+                                hasActiveFilter={!!hasActiveFilter}
+                                variant='compact' 
+                            />
+                        }
                     </DialogTrigger>
                     <DialogContent className="max-w-125 rounded-2xl">
                         <DialogHeader>

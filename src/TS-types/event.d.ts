@@ -14,6 +14,20 @@ interface Location {
     state: string
 }
 
+
+interface FilterValues {
+    dateRange?: DateRange
+    location?: {
+        country: string,
+        state: string
+    } | null
+    categories: string[]
+    priceRange: PriceRange | null
+}
+
+
+type FilterFor = "homepage" | "eventPage"
+
 type IEventStatus = "filling-fast" | "sold-out" | "new" | "near-capacity"
 
 interface IEvent {
@@ -28,4 +42,10 @@ interface IEvent {
     originalPrice?: string
     href: string
     attendees: EventCardUser[]
+}
+
+interface FeaturedEvent {
+    id: number
+    image: string
+    title: string
 }

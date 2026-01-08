@@ -1,5 +1,5 @@
 import { EVENT_CATEGORIES_ARRAY } from "@/components-data/eventCategory";
-import EventCategoryBox from "./EventCategoryBox";
+import EventCategoryBox from "../custom-utils/cards/EventCategoryBox";
 import { space_grotesk } from "@/lib/redux/fonts";
 
 export default function EventCategorySection(){

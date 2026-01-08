@@ -1,13 +1,7 @@
-"use client"
+import { randomBytes, randomUUID } from "crypto";
+import { slides_onlyImages } from "./auth-pages/slides";
 
-import { space_grotesk } from "@/lib/redux/fonts";
-import ActionButton1 from "../custom-utils/buttons/ActionButton1";
-import { useRouter } from "next/navigation";
-import EventsCard1 from "../custom-utils/cards/EventCards";
-import { Icon } from "@iconify/react";
-
-
-const eventsMock: IEvent[] = [
+export const eventsMock: IEvent[] = [
   {
     image: "/images/demo-images/unsplash_mlVbMbxfWI4.png",
     status: "filling-fast",
@@ -139,62 +133,87 @@ const eventsMock: IEvent[] = [
       { id: "1", image: "/avatars/26.jpg", initials: "ZL" },
       { id: "2", image: "/avatars/27.jpg", initials: "AM" },
     ],
-  },
+  }
 ]
 
 
-export default function EventsNearYouSection(){
 
-  const router = useRouter()
+export const demoHosts: Host[] = [
+  {
+    id: 99,
+    followers: 1240,
+    events: 12,
+    profile_img: "/images/hosts/host-1.jpg",
+    name: "Alex Morgan",
+    username: "alexmorgan",
+  },
+  {
+    id: 2,
+    followers: 980,
+    events: 8,
+    profile_img: "/images/demo-images/unsplash_vDmf4My-4k0.png",
+    name: "Sofia Ramirez",
+    username: "sofiar",
+  },
+  {
+    id: 3,
+    followers: 2145,
+    events: 19,
+    profile_img: "/images/demo-images/unsplash_vDmf4My-4k0.png",
+    name: "James Carter",
+    username: "jamescarter",
+  },
+  {
+    id: 4,
+    followers: 765,
+    events: 5,
+    profile_img: "/images/demo-images/unsplash_vDmf4My-4k0.png",
+    name: "Mia Thompson",
+    username: "miat",
+  },
+  {
+    id: 5,
+    followers: 1890,
+    events: 16,
+    profile_img: "/images/demo-images/unsplash_vDmf4My-4k0.png",
+    name: "Daniel Lee",
+    username: "daniellee",
+  },
+  {
+    id: 6,
+    followers: 432,
+    events: 3,
+    profile_img: "/images/demo-images/unsplash_vDmf4My-4k0.png",
+    name: "Chloe Bennett",
+    username: "chloeb",
+  },
+];
 
-  return (
-    <section className="global-px max-w-7xl mx-auto">
-      <div className="flex items-center justify-between gap-5">
-      <h2
-        className={`text-2xl sm:text-3xl  md:text-[2rem] font-bold text-secondary-9 ${space_grotesk.className}`}
-      >
-        Events near you
-      </h2>
 
-      <ActionButton1 buttonText="Explore Events" className="hidden! md:flex!" iconPosition="right" icon="iconoir:arrow-right" action={() => router.push("/explore-events")} />
-          <button 
-            className="
-              text-sm
-              md:hidden
-              bg-primary
-              hover:bg-primary-7
-              active:bg-primary-8
-              disabled:bg-neutral-5
-              disabled:cursor-not-allowed
-              text-white
-              p-2
-              rounded-full
-              h-12
-              aspect-square
-              font-medium
-              transition-colors
-              inline-flex
-              items-center
-              justify-center
-              "
-              >
-            <Icon
-              icon="lucide:arrow-up-right"
-              width="20"
-              height="20"
-              className="text-white"
-            />
-          </button>
-      </div>
-
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-7 mt-10 justify-items-center">
-        {eventsMock.map((event) => (
-          <EventsCard1 
-            key={event.href}
-            {...event} 
-          />
-        ))}
-      </div>
-    </section>
-  )
-}
+export const demoFeaturedEvents: FeaturedEvent[] = [
+  {
+      id: 1,
+      image: slides_onlyImages[0],
+      title: 'GOGO Event'
+  },
+  {
+      id: 2,
+      image: slides_onlyImages[1],
+      title: 'Music Festival'
+  },
+  {
+      id: 3,
+      image: slides_onlyImages[2],
+      title: 'Art Exhibition'
+  },
+  {
+      id: 4,
+      image: slides_onlyImages[3],
+      title: 'Tech Conference'
+  },
+  {
+      id: 5,
+      image: slides_onlyImages[3],
+      title: 'Food Festival'
+  }
+]

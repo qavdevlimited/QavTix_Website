@@ -1,52 +1,49 @@
 export interface NavLink {
-  label: string
-  href: string
-  type?: 'default' | 'auth' | 'cta'
+    label: string
+    href: string
+    type?: 'default' | 'auth' | 'cta'
 }
 
 export const NAV_LINKS = {
-  ABOUT: {
-    label: 'About',
-    href: '/about'
-  },
-  HOW_IT_WORKS: {
-    label: 'How it works',
-    href: '/how-it-works'
-  },
-  PRICING: {
-    label: 'Pricing',
-    href: '/pricing'
-  },
-  EVENTS: {
-    label: 'Events',
-    href: '/events'
-  },
-  SIGN_IN: {
-    label: 'Sign in',
-    href: '/auth/signin',
-    type: 'auth'
-  },
-  GET_STARTED: {
-    label: 'Get started',
-    href: '/auth/signup',
-    type: 'cta'
-  }
-} as const satisfies Record<string, NavLink>
+  HOME: { label: 'Home', href: '/' },
+  ABOUT: { label: 'About', href: '/about' },
+  HOW_IT_WORKS: { label: 'How it works', href: '/how-it-works' },
+  PRICING: { label: 'Pricing', href: '/pricing' },
+  EVENTS: { label: 'Events', href: '/events' },
 
+  SIGN_IN: { label: 'Sign in', href: '/auth/signin', type: 'auth' as const },
+  SIGN_UP: { label: 'Get Started', href: '/auth/signup', type: 'cta' as const },
+  FORGOT_PASSWORD: { label: 'Forgot password', href: '/auth/forgot-password' },
+  RESET_PASSWORD: { label: 'Reset password', href: '/auth/reset-password' },
+
+  SEARCH_EVENTS: { label: 'Search Events', href: '/events/search' },
+} as const satisfies Record<string, NavLink>
 
 export const navLinks: NavLink[] = [
   NAV_LINKS.ABOUT,
   NAV_LINKS.HOW_IT_WORKS,
   NAV_LINKS.PRICING,
   NAV_LINKS.SIGN_IN,
-  NAV_LINKS.GET_STARTED
+  NAV_LINKS.SIGN_UP,
 ]
 
-export const aboutPageNavLinks: NavLink[] = [
+export const header2NavLinks: NavLink[] = [
   NAV_LINKS.ABOUT,
   NAV_LINKS.HOW_IT_WORKS,
   NAV_LINKS.PRICING,
   NAV_LINKS.EVENTS,
   NAV_LINKS.SIGN_IN,
-  NAV_LINKS.GET_STARTED
+  NAV_LINKS.SIGN_UP,
 ]
+
+export const AUTH_ROUTES = {
+  SIGN_IN: NAV_LINKS.SIGN_IN,
+  SIGN_UP: NAV_LINKS.SIGN_UP,
+  FORGOT_PASSWORD: NAV_LINKS.FORGOT_PASSWORD,
+  RESET_PASSWORD: NAV_LINKS.RESET_PASSWORD,
+} as const
+
+export const EVENT_ROUTES = {
+  EVENTS: NAV_LINKS.EVENTS,
+  SEARCH_EVENTS: NAV_LINKS.SEARCH_EVENTS,
+} as const

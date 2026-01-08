@@ -15,6 +15,7 @@ import {
     DialogTitle,
     DialogTrigger,
 } from '@/components/ui/dialog'
+import EventFilterTypeBtn from '@/components/custom-utils/buttons/event-search/EventFilterTypeBtn'
 
 interface PriceRange {
     min: number
@@ -25,11 +26,13 @@ interface PriceFilterProps {
     value?: PriceRange | null
     onChange: (value: PriceRange | null) => void
     currency?: string
+    filterFor?: FilterFor
 }
 
 export default function PriceFilter({
     value,
     onChange,
+    filterFor = "homepage",
     currency = '₦',
 }: PriceFilterProps) {
     const [isOpen, setIsOpen] = useState(false)
@@ -65,21 +68,22 @@ export default function PriceFilter({
         <>
             {/* Mobile & Tablet - Bottom Sheet */}
             <div className="lg:hidden relative w-full">
-                <button
-                    onClick={() => setIsOpen(true)}
-                    className={cn(
-                        'w-full flex items-center justify-between text-left text-sm rounded-xl font-normal h-14 px-4 bg-accent-1 hover:bg-accent-2/60 border border-transparent transition-colors',
-                        hasActiveFilter ? 'text-neutral-8' : 'text-neutral-7'
-                    )}
-                >
-                    <span className="truncate">{displayText}</span>
-                    <Icon
-                        icon="flowbite:chevron-down-outline"
-                        width="30"
-                        height="30"
-                        className={cn('text-neutral-8 size-6 transition-transform duration-200', isOpen && 'rotate-180')}
+                {
+                    filterFor === "homepage" ?
+                    <EventFilterTypeBtn 
+                        onClick={() => setIsOpen(true)}
+                        displayText={displayText} 
+                        hasActiveFilter={!!hasActiveFilter}
+                        variant='default' 
                     />
-                </button>
+                    :
+                    <EventFilterTypeBtn 
+                        onClick={() => setIsOpen(true)}
+                        displayText={displayText} 
+                        hasActiveFilter={!!hasActiveFilter}
+                        variant='compact' 
+                    />
+                }
 
                 <MobileBottomSheet
                     isOpen={isOpen}
@@ -118,20 +122,22 @@ export default function PriceFilter({
             <div className="hidden lg:block">
                 <Dialog open={isOpen} onOpenChange={setIsOpen}>
                     <DialogTrigger asChild>
-                        <button
-                            className={cn(
-                                'w-full flex items-center justify-between text-left text-sm rounded-xl font-normal h-14 px-4 bg-accent-1 hover:bg-accent-2/60 border border-transparent transition-colors',
-                                hasActiveFilter ? 'text-neutral-8' : 'text-neutral-7'
-                            )}
-                        >
-                            <span className="truncate">{displayText}</span>
-                            <Icon
-                                icon="flowbite:chevron-down-outline"
-                                width="30"
-                                height="30"
-                                className={cn('text-neutral-8 size-6 transition-transform duration-200', isOpen && 'rotate-180')}
+                        {
+                            filterFor === "homepage" ?
+                            <EventFilterTypeBtn 
+                                onClick={() => setIsOpen(true)}
+                                displayText={displayText} 
+                                hasActiveFilter={!!hasActiveFilter}
+                                variant='default' 
                             />
-                        </button>
+                            :
+                            <EventFilterTypeBtn 
+                                onClick={() => setIsOpen(true)}
+                                displayText={displayText} 
+                                hasActiveFilter={!!hasActiveFilter}
+                                variant='compact' 
+                            />
+                        }
                     </DialogTrigger>
                     <DialogContent className="max-w-125 rounded-2xl">
                         <DialogHeader>

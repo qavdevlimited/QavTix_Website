@@ -24,10 +24,10 @@ export default function Header(){
 
 
     return (
-        !pathName.startsWith("/auth") && pathName !== "/about-us" &&
+        !pathName.startsWith("/auth") && pathName === "/" &&
         <header className="py-8 w-full absolute top-0 left-0 z-100 flex justify-between items-center global-px">
             <div className="flex items-center gap-8">
-                <Logo logo={pathName.includes("about-us") ? logoSrc : undefined} />
+                <Logo logo={pathName !== "/" ? logoSrc : undefined} />
                 <SearchEventInput1 className="hidden lg:block" />
             </div>
             <nav className="items-center gap-1 hidden lg:flex">

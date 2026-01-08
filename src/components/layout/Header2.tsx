@@ -1,15 +1,17 @@
 'use client'
 
-import { usePathname } from "next/navigation"
+import { usePathname, useRouter } from "next/navigation"
 import Logo from "./Logo"
 import Link from "next/link"
 import { Icon } from "@iconify/react"
-import { aboutPageNavLinks } from "@/components-data/navLinks"
+import { EVENT_ROUTES, header2NavLinks } from "@/components-data/navLinks"
 import { useState } from "react"
 import MobileMenu from "./MobileMenu"
 import logoSrc from "@/public-assets/logo/qavtix-logo-white.svg"
 
-export default function AboutPageHeader() {
+export default function Header2() {
+
+    const router = useRouter()
     const pathName = usePathname()
     const [showMobileMenu, setShowMobileMenu] = useState(false)
 
@@ -18,14 +20,14 @@ export default function AboutPageHeader() {
         return pathName.startsWith(href)
     }
 
-    const mainNavLinks = aboutPageNavLinks.filter(link => link.type !== 'cta' && link.type !== "auth")
-    const ctaLinks = aboutPageNavLinks.filter(link => link.type === 'cta')
+    const mainNavLinks = header2NavLinks.filter(link => link.type !== 'cta' && link.type !== "auth")
+    const ctaLinks = header2NavLinks.filter(link => link.type === 'cta')
 
     return (
-        !pathName.startsWith("/auth") && pathName === "/about-us" && (
+        !pathName.startsWith("/auth") && pathName !== "/" && (
             <header className="py-8 w-full absolute top-0 left-0 z-100">
                 <div className="global-px flex items-center justify-between">
-                    <Logo logo={pathName.includes("about-us") ? logoSrc : undefined} />
+                    <Logo logo={logoSrc} />
 
                     <nav className="hidden lg:flex items-center gap-1 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
                         {mainNavLinks.map((link) => {
@@ -51,11 +53,12 @@ export default function AboutPageHeader() {
                     </nav>
 
                     <div className="flex items-center gap-6">
-                        {/* <SearchEventInput1 className="hidden xl:block" /> */}
-
-                        <div className="hidden lg:flex items-center gap-3">
+                        <div className="hidden lg:flex items-center justify-between gap-2">
+                            <button aria-label="Search Event" onClick={() => router.push(EVENT_ROUTES.SEARCH_EVENTS.href)}>
+                                <Icon icon="lineicons:search-1" width="24" height="25" className="size-7 hover:text-primary-7" />
+                            </button>
                             {
-                                aboutPageNavLinks.map((v) => {
+                                header2NavLinks.map((v) => {
                                     const active = isActive(v.href)
                                     return (
                                         v.type === "auth" ?
@@ -63,7 +66,13 @@ export default function AboutPageHeader() {
                                             key={v.href}
                                             href={v.href}
                                             className={`
-                                                px-4 py-2 rounded-lg text-sm transition-all duration-150 text-neutral-8 font-medium hover:text-neutral-7 active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-neutral-4 focus:ring-offset-2
+                                                px-4 py-2 rounded-lg text-sm transition-all duration-150
+                                                ${active
+                                                    ? 'text-primary-7 font-semibold'
+                                                    : 'text-neutral-8 font-medium hover:text-primary-6'
+                                                }
+                                                active:scale-[0.98]
+                                                focus:outline-none focus:ring-2 focus:ring-neutral-4 focus:ring-offset-2
                                             `}
                                         >
                                             {v.label}
@@ -77,7 +86,7 @@ export default function AboutPageHeader() {
                                 <Link
                                     key={link.href}
                                     href={link.href}
-                                    className="px-6 py-4 rounded-full bg-primary text-white font-medium text-sm hover:bg-primary-7 hover:shadow-md active:bg-primary-8 active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-all duration-150"
+                                    className="px-6 py-3.5 rounded-full bg-primary text-white font-medium text-sm hover:bg-primary-7 hover:shadow-md active:bg-primary-8 active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-all duration-150"
                                 >
                                     {link.label}
                                 </Link>
@@ -85,7 +94,7 @@ export default function AboutPageHeader() {
                         </div>
 
                         <div className="flex gap-3 lg:hidden items-center text-secondary-9">
-                            <button aria-label="Search">
+                            <button aria-label="Search Event">
                                 <Icon icon="lineicons:search-1" width="24" height="25" className="size-7" />
                             </button>
                             <button
