@@ -1,6 +1,6 @@
 import EventLocationDetailsSection from "@/components/events-page/EventLocationDetailsSection";
 
-export default async function EventLocationPage({ params }:{ params: Promise<{location: string}>}){
+export default async function EventCategoryPage({ params }:{ params: Promise<{location: string}>}){
 
     const location = (await params).location;
 

@@ -2,34 +2,42 @@ export const EventCategory = {
   ConcertAndMusic: {
     value: "concert_and_music",
     label: "Concerts & Music",
+    path: "category"
   },
   SportAndFitness: {
     value: "sport_and_fitness",
     label: "Sports & Fitness",
+    path: "sports-and-fitness"
   },
   ArtAndTheater: {
     value: "art_and_theater",
     label: "Arts & Theater",
+    path: "arts-and-theater"
   },
   FoodAndDrinking: {
     value: "food_and_drinking",
     label: "Food & Dining",
+    path: "food-and-dining"
   },
   Festivals: {
     value: "festivals",
     label: "Festivals",
+    path: "festivals"
   },
   BusinessAndNetworking: {
     value: "business_and_networking",
     label: "Business & Networking",
+    path: "business-and-networking"
   },
   TravelsAndTours: {
     value: "travels_and_tours",
     label: "Travel & Tours",
+    path: "travels-and-tours"
   },
   NightlifeAndParties: {
     value: "nightlife_and_parties",
     label: "Nightlife & Parties",
+    path: "nightlife-and-parties"
   },
 } as const;
 
@@ -44,6 +52,9 @@ export type EventCategoryItem = typeof EventCategory[keyof typeof EventCategory]
 
 // Helper: Get all values
 export const EVENT_CATEGORY_VALUES = Object.values(EventCategory).map((cat) => cat.value)
+
+
+export const EVENT_CATEGORY_PATHS = Object.values(EventCategory).map((cat) => cat.path)
 
 // Helper: Get all labels
 export const EVENT_CATEGORY_LABELS = Object.values(EventCategory).map((cat) => cat.label)

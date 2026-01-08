@@ -12,6 +12,8 @@ import { useState } from 'react'
 import { countries, getStates } from '@/components-data/location'
 import { usePagination } from '@/lib/custom-hooks/PaginationHook'
 import PaginationControls from '../custom-utils/buttons/event-search/PaginationControl'
+import { usePathname } from 'next/navigation'
+import { EventCategory } from '@/components-data/eventCategory'
 
 
 export function TrendingEvents({ className }:{ className?: string }) {
@@ -28,31 +30,48 @@ export function TrendingEvents({ className }:{ className?: string }) {
         console.log('Search with filters:', filters)
     }
 
+    const pathName = usePathname()
+    const showThisFilter = (filterPath:string) => {
+        return pathName.split("/")[3] === filterPath ? false : true;
+    }
+
     return (
         <section className={`w-full py-8 global-px ${className}`}>
             <div className='flex flex-wrap gap-4 mb-8'>
-                <CategoryFilter
-                    filterFor='eventPage'
-                    value={filters.categories}
-                    onChange={(categories) => setFilters({ ...filters, categories })}
-                />
-                <LocationFilter
-                    filterFor='eventPage'
-                    value={filters.location}
-                    onChange={(location) => setFilters({ ...filters, location })} 
-                    countries={countries}
-                    getStates={getStates}
-                />
-                <PriceFilter
-                    filterFor='eventPage'
-                    value={filters.priceRange}
-                    onChange={(priceRange) => setFilters({ ...filters, priceRange })}
-                />
-                <DateFilter
-                    filterFor='eventPage'
-                    value={filters.dateRange}
-                    onChange={(v) => setFilters({...filters, dateRange: v || { from: new Date(), to: new Date()} as DateRange})}
-                />
+                {
+                    showThisFilter("category") &&
+                    <CategoryFilter
+                        filterFor='eventPage'
+                        value={filters.categories}
+                        onChange={(categories) => setFilters({ ...filters, categories })}
+                    />
+                }
+                {
+                    showThisFilter("location") &&
+                    <LocationFilter
+                        filterFor='eventPage'
+                        value={filters.location}
+                        onChange={(location) => setFilters({ ...filters, location })} 
+                        countries={countries}
+                        getStates={getStates}
+                    />
+                }
+                {
+                    showThisFilter("price") &&
+                    <PriceFilter
+                        filterFor='eventPage'
+                        value={filters.priceRange}
+                        onChange={(priceRange) => setFilters({ ...filters, priceRange })}
+                    />
+                }
+                {
+                    showThisFilter("date") &&    
+                    <DateFilter
+                        filterFor='eventPage'
+                        value={filters.dateRange}
+                        onChange={(v) => setFilters({...filters, dateRange: v || { from: new Date(), to: new Date()} as DateRange})}
+                    />
+                }
             </div>
 
 
