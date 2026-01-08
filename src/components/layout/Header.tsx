@@ -5,10 +5,10 @@ import SearchEventInput1 from "../custom-utils/inputs/event-search/SearchEventIn
 import Logo from "./Logo";
 import Link from "next/link";
 import { Icon } from "@iconify/react";
-import { navLinks } from "@/components-data/navLinks";
+import { NAV_LINKS, navLinks } from "@/components-data/navLinks";
 import { useState } from "react";
 import MobileMenu from "./MobileMenu";
-import logoSrc from "@/public-assets/logo/qavtix-logo-white.svg"
+import logoSrc from "@/public-assets/logo/qavtix-logo.svg"
 
 export default function Header(){
 
@@ -23,11 +23,17 @@ export default function Header(){
     }
 
 
+    // Show header only on non-auth pages, homepage and event location routes
     return (
-        !pathName.startsWith("/auth") && pathName === "/" &&
+        !pathName.startsWith("/auth") &&
+            (
+                pathName === "/" ||
+                pathName.startsWith(NAV_LINKS.EVENT_LOCATION.href)
+            )
+        ) && (
         <header className="py-8 w-full absolute top-0 left-0 z-100 flex justify-between items-center global-px">
             <div className="flex items-center gap-8">
-                <Logo logo={pathName !== "/" ? logoSrc : undefined} />
+                <Logo logo={logoSrc} />
                 <SearchEventInput1 className="hidden lg:block" />
             </div>
             <nav className="items-center gap-1 hidden lg:flex">

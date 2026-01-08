@@ -1,5 +1,5 @@
 import TopHostsSection from "@/components/events-page/TopHostSection";
-import { TrendingEvents } from "@/components/events-page/TrendingEvents";
+import { TrendingEvents } from "@/components/shared/TrendingEvents";
 import TopDestinationTravelledSection from "@/components/homepage/TopDestinationTravelledSection";
 import EventCategorySection2 from "@/components/shared/EventCategorySection2";
 import EventsNearYouSection from "@/components/shared/EventsNearYou";
@@ -20,7 +20,9 @@ export default function EventsPage(){
             <WhereItsHappeningSection />
             <EventsNearYouSection />
             <EventCategorySection2 />
-            <TrendingEvents />
+            <div className="mt-12 md:mt-20">
+                <TrendingEvents />
+            </div>
             <TopDestinationTravelledSection />
             <TopHostsSection />
         </main>

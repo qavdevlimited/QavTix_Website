@@ -7,6 +7,7 @@ import Image from 'next/image'
 import { Icon } from '@iconify/react'
 import { space_grotesk } from '@/lib/redux/fonts'
 import { motion } from 'framer-motion'
+import CarouselActionBtns from '../custom-utils/buttons/CarouselActionBtns'
 
 interface TopDestination {
     id: number
@@ -128,24 +129,12 @@ export default function TopDestinationTravelledSection() {
                         Top traveled destinations
                     </h2>
 
-                    <div className="flex gap-3">
-                        <button
-                            onClick={scrollPrev}
-                            disabled={!canScrollPrev}
-                            className="w-12 h-12 rounded-full border-2 border-secondary-6 flex items-center justify-center hover:bg-neutral-2 active:scale-95 transition-all disabled:opacity-40 disabled:cursor-not-allowed"
-                            aria-label="Previous"
-                        >
-                            <Icon icon="si:chevron-left-line" width="28" height="28" className="text-secondary-6" />
-                        </button>
-                        <button
-                            onClick={scrollNext}
-                            disabled={!canScrollNext}
-                            className="w-12 h-12 rounded-full bg-primary flex items-center justify-center hover:bg-primary-7 active:scale-95 transition-all disabled:opacity-40 disabled:cursor-not-allowed shadow-lg"
-                            aria-label="Next"
-                        >
-                            <Icon icon="si:chevron-right-line" width="28" height="28" className="text-white" />
-                        </button>
-                    </div>
+                    <CarouselActionBtns
+                        scrollPrev={scrollPrev}
+                        scrollNext={scrollNext}
+                        canScrollPrev={canScrollPrev}
+                        canScrollNext={canScrollNext}
+                    />
                 </div>
 
                 {/* Carousel */}

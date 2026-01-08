@@ -7,6 +7,7 @@ import Image from 'next/image'
 import { space_grotesk } from '@/lib/redux/fonts'
 import { Icon } from '@iconify/react'
 import { demoFeaturedEvents } from '@/components-data/demo-data'
+import CarouselActionBtns from '../custom-utils/buttons/CarouselActionBtns'
 
 
 const dupliactedFeaturedEvents: FeaturedEvent[] = [...demoFeaturedEvents, ...demoFeaturedEvents, ...demoFeaturedEvents].map(
@@ -79,24 +80,12 @@ export default function FeaturedEventsSection() {
                         Featured events
                     </h2>
                     
-                    <div className="flex gap-3">
-                        <button
-                            onClick={scrollPrev}
-                            disabled={!canScrollPrev}
-                            className="w-10 h-10 rounded-full border border-secondary-6 flex items-center justify-center hover:bg-neutral-2 active:scale-95 transition-all disabled:opacity-40 disabled:cursor-not-allowed"
-                            aria-label="Previous slide"
-                        >
-                            <Icon icon="si:chevron-left-line" width="24" height="24" className='text-secondary-6' />
-                        </button>
-                        <button
-                            onClick={scrollNext}
-                            disabled={!canScrollNext}
-                            className="w-10 h-10 rounded-full bg-primary flex items-center justify-center hover:bg-primary-7 active:scale-95 transition-all disabled:opacity-40 disabled:cursor-not-allowed shadow-md"
-                            aria-label="Next slide"
-                        >
-                            <Icon icon="si:chevron-right-line" width="24" height="24" className='text-white' />
-                        </button>
-                    </div>
+                    <CarouselActionBtns
+                        scrollPrev={scrollPrev}
+                        scrollNext={scrollNext}
+                        canScrollPrev={canScrollPrev}
+                        canScrollNext={canScrollNext}
+                    />
                 </div>
 
                 {/* Carousel */}
@@ -107,7 +96,7 @@ export default function FeaturedEventsSection() {
                                 key={event.id}
                                 onMouseOver={() => pauseAutoPlay()}
                                 onMouseLeave={() => play()}
-                                className="flex-[0_0_85%] sm:flex-[0_0_45%] lg:flex-[0_0_20%] min-w-0"
+                                className="flex-[0_0_85%] sm:flex-[0_0_30%] lg:flex-[0_0_20%] min-w-0"
                             >
                                 <div className="group relative aspect-3/4 rounded-3xl overflow-hidden cursor-pointer">
                                     <Image

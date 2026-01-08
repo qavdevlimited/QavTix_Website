@@ -143,7 +143,7 @@ export const demoHosts: Host[] = [
     id: 99,
     followers: 1240,
     events: 12,
-    profile_img: "/images/hosts/host-1.jpg",
+    profile_img: "/images/demo-images/unsplash_vDmf4My-4k0.png",
     name: "Alex Morgan",
     username: "alexmorgan",
   },

@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 
 export interface PaginationResult<T> {
   currentPage: number
@@ -19,61 +19,65 @@ export interface PaginationResult<T> {
 
 export function usePagination<T>(
   data: T[],
-  initialPageSize: number = 12
+  pageSizeInput: number = 12
 ): PaginationResult<T> {
-    
-    const [currentPage, setCurrentPage] = useState(1)
-    const [pageSize, setPageSize] = useState(initialPageSize)
+  const [currentPage, setCurrentPage] = useState(1)
+  const [pageSize, setPageSize] = useState(pageSizeInput)
 
-    const paginationData = useMemo(() => {
-        const totalItems = data.length
-        const totalPages = Math.ceil(totalItems / pageSize)
-        const startIndex = (currentPage - 1) * pageSize
-        const endIndex = Math.min(startIndex + pageSize, totalItems)
-        const currentItems = data.slice(startIndex, endIndex)
-        const remainingItems = Math.max(0, totalItems - endIndex)
+  useEffect(() => {
+    setPageSize(pageSizeInput)
+    setCurrentPage(1)
+  }, [pageSizeInput])
 
-        return {
-            currentPage,
-            totalPages,
-            pageSize,
-            totalItems,
-            currentItems,
-            hasNextPage: currentPage < totalPages,
-            hasPreviousPage: currentPage > 1,
-            startIndex: startIndex + 1,
-            endIndex,
-            remainingItems
-        }
-    }, [data, currentPage, pageSize])
-
-    const nextPage = () => {
-        if (paginationData.hasNextPage) {
-        setCurrentPage(prev => prev + 1)
-        }
-    }
-
-    const previousPage = () => {
-        if (paginationData.hasPreviousPage) {
-        setCurrentPage(prev => prev - 1)
-        }
-    }
-
-    const goToPage = (page: number) => {
-        const validPage = Math.max(1, Math.min(page, paginationData.totalPages))
-        setCurrentPage(validPage)
-    }
-
-    const updatePageSize = (size: number) => {
-        setPageSize(size)
-        setCurrentPage(1)
-    }
+  const paginationData = useMemo(() => {
+    const totalItems = data.length
+    const totalPages = Math.max(1, Math.ceil(totalItems / pageSize))
+    const startIndex = (currentPage - 1) * pageSize
+    const endIndex = Math.min(startIndex + pageSize, totalItems)
+    const currentItems = data.slice(startIndex, endIndex)
+    const remainingItems = Math.max(0, totalItems - endIndex)
 
     return {
-        ...paginationData,
-        nextPage,
-        previousPage,
-        goToPage,
-        setPageSize: updatePageSize
+      currentPage,
+      totalPages,
+      pageSize,
+      totalItems,
+      currentItems,
+      hasNextPage: currentPage < totalPages,
+      hasPreviousPage: currentPage > 1,
+      startIndex: startIndex + 1,
+      endIndex,
+      remainingItems
     }
+  }, [data, currentPage, pageSize])
+
+  const nextPage = () => {
+    if (paginationData.hasNextPage) {
+      setCurrentPage(p => p + 1)
+    }
+  }
+
+  const previousPage = () => {
+    if (paginationData.hasPreviousPage) {
+      setCurrentPage(p => p - 1)
+    }
+  }
+
+  const goToPage = (page: number) => {
+    const validPage = Math.max(1, Math.min(page, paginationData.totalPages))
+    setCurrentPage(validPage)
+  }
+
+  const updatePageSize = (size: number) => {
+    setPageSize(size)
+    setCurrentPage(1)
+  }
+
+  return {
+    ...paginationData,
+    nextPage,
+    previousPage,
+    goToPage,
+    setPageSize: updatePageSize
+  }
 }

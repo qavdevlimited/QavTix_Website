@@ -10,9 +10,15 @@ import EventsCard1 from '../custom-utils/cards/EventCards'
 import { eventsMock } from '@/components-data/demo-data'
 import { useState } from 'react'
 import { countries, getStates } from '@/components-data/location'
+import { usePagination } from '@/lib/custom-hooks/PaginationHook'
+import PaginationControls from '../custom-utils/buttons/event-search/PaginationControl'
 
 
-export function TrendingEvents() {
+export function TrendingEvents({ className }:{ className?: string }) {
+
+    const [showAll,setShowAll] = useState(false)
+    const pagination = usePagination(eventsMock, showAll ? 12 : 8)
+    
     const [filters, setFilters] = useState<FilterValues>({
         categories: [],
         priceRange: null
@@ -23,8 +29,8 @@ export function TrendingEvents() {
     }
 
     return (
-        <section className="w-full py-8 mt-12 md:mt-20 global-px">
-            <div className='flex gap-4 mb-8'>
+        <section className={`w-full py-8 global-px ${className}`}>
+            <div className='flex flex-wrap gap-4 mb-8'>
                 <CategoryFilter
                     filterFor='eventPage'
                     value={filters.categories}
@@ -56,11 +62,14 @@ export function TrendingEvents() {
                         Trending events
                     </h2>
 
-                    <button className='text-sm font-medium text-primary-6 hover:underline'>View All</button>
+                    {
+                        !showAll &&
+                        <button onClick={() => setShowAll(true)} className='text-sm font-medium text-primary-6 hover:underline'>View All</button>
+                    }
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-7 mt-10 justify-items-center">
-                    {eventsMock.map((event) => (
+                    {pagination.currentItems.map((event) => (
                         <EventsCard1 
                             key={event.href}
                             {...event} 
@@ -68,6 +77,22 @@ export function TrendingEvents() {
                     ))}
                 </div>
             </div>
+
+
+            {/* Pagination Controls */}
+            {showAll && pagination.totalPages > 1 && (
+                <div className="mt-16">
+                    <PaginationControls
+                        startIndex={pagination.startIndex}
+                        endIndex={pagination.endIndex}
+                        totalItems={pagination.totalItems}
+                        hasNextPage={pagination.hasNextPage}
+                        hasPreviousPage={pagination.hasPreviousPage}
+                        onNextPage={pagination.nextPage}
+                        onPreviousPage={pagination.previousPage}
+                    />
+                </div>
+            )}
         </section>
     )
 }
