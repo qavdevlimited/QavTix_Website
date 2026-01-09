@@ -61,7 +61,7 @@ export default function ForgotPasswordPage(){
                                         <label className="text-sm font-medium text-neutral-10 mb-2 block">Confirm Password</label>
                                         <PasswordInput1 />
                                     </div>
-                                    <ActionButton1 buttonText="Create Password" className="mt-6 lg:mt-4" />
+                                    <ActionButton1 buttonText="Create Password" className="mt-6 lg:mt-4 w-full" />
                                 </>
                             }
                         </form>                

@@ -10,7 +10,7 @@ export default function ForgotPasswordForm(){
                 <label className="text-sm font-medium text-neutral-10 mb-2 block">Email Or Phone Number</label>
                 <TextInput1 placeholder="Enter Email or Phone number" />
             </div>
-            <ActionButton1 buttonText="Continue" className="mt-6" />
+            <ActionButton1 buttonText="Continue" className="mt-6 w-full" />
         </form>
     )
 }

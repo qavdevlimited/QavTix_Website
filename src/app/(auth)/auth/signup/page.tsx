@@ -1,6 +1,7 @@
 "use client"
 
 import { AccountTypes } from "@/components-data/auth-pages/enums";
+import { NAV_LINKS } from "@/components-data/navigation/navLinks";
 import AccountTypeBox from "@/components/auth-pages/AccountTypeBox";
 import AuthPageFlexWrapper from "@/components/auth-pages/AuthPageFlexWrapper";
 import ActionButton1 from "@/components/custom-utils/buttons/ActionButton1";
@@ -30,10 +31,10 @@ export default function SignUpPage(){
 
                 <div className="flex flex-col gap-4 mt-12">
                     <ActionButton2 buttonText="Cancel" action={() => router.push("/")}   />
-                    <ActionButton1 buttonText="Continue" action={() => router.push(`/auth/signup/${accountType}${accountType === "host" ? "?type=individual" : ""}`)} />
+                    <ActionButton1 buttonText="Continue" action={() => router.push(`${NAV_LINKS.SIGN_UP.href}/${accountType}${accountType === "host" ? "?type=individual" : ""}`)} />
                 </div>
 
-                <p className="text-sm text-neutral-7 mt-6 mb-8 text-center">Already have an account?<button onClick={() => router.push("/auth/forgot-password")} className="font-medium text-accent-6 ms-1">Sign In</button></p>
+                <p className="text-sm text-neutral-7 mt-6 mb-8 text-center">Already have an account?<button onClick={() => router.push(NAV_LINKS.SIGN_IN.href)} className="font-medium text-accent-6 ms-1">Sign In</button></p>
             </main>
         </AuthPageFlexWrapper>
     )

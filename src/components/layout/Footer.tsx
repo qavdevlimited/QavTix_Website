@@ -7,6 +7,7 @@ import Logo from './Logo'
 import { space_grotesk } from '@/lib/redux/fonts'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select'
 import { footerData } from '@/components-data/footer-data'
+import { usePathname } from 'next/navigation'
 
 interface FooterLink {
   label: string
@@ -17,6 +18,8 @@ interface FooterLink {
 
 
 export default function Footer() {
+
+    const pathName = usePathname()
     const [selectedCurrency, setSelectedCurrency] = useState('NG')
     const [selectedRegion, setSelectedRegion] = useState('Naira')
 
@@ -35,6 +38,7 @@ export default function Footer() {
     ]
 
     return (
+        !pathName.match("/auth") &&
         <footer className="w-full relative bg-primary-1 px-6 lg:px-16 py-12">
             <div className="max-w-7xl mx-auto">
                 {/* Main Footer Content */}

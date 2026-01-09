@@ -15,7 +15,7 @@ export default function SignInForm(){
                 <label className="text-sm font-medium text-neutral-10 mb-2 block">Password</label>
                 <PasswordInput1 />
             </div>
-            <ActionButton1 buttonText="Sign in" className="mt-6" />
+            <ActionButton1 buttonText="Sign in" className="mt-6 w-full" />
         </form>
     )
 }
