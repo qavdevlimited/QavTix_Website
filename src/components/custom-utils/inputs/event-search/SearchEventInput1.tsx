@@ -1,52 +1,100 @@
 'use client'
-
-import { useState } from 'react'
+import { useState, useEffect, useCallback } from 'react'
+import { useRouter } from 'next/navigation'
 import { Icon } from '@iconify/react'
-import { cn } from '@/lib/utils' // assuming you have this utility
+import { cn } from '@/lib/utils'
+import { EVENT_ROUTES } from '@/components-data/navigation/navLinks'
 
-interface SearchInputProps {
+interface SearchEventInputProps {
   placeholder?: string
   className?: string
+  minSearchLength?: number
+  debounceMs?: number
+  onSearch?: (query: string) => void
 }
 
 export default function SearchEventInput1({
   placeholder = 'Search event',
   className,
-}: SearchInputProps) {
+  minSearchLength = 3,
+  debounceMs = 500,
+  onSearch
+}: SearchEventInputProps) {
 
-    const [isFocused, setIsFocused] = useState(false)
+  const router = useRouter()
+  const [isFocused, setIsFocused] = useState(false)
+  const [searchValue, setSearchValue] = useState('')
+  const [isSearching, setIsSearching] = useState(false)
 
-    return (
-        <div className={cn('w-fit', className)}>
-            <div
-                className={cn(
-                'relative flex items-center gap-2 px-4 py-3.5',
-                'rounded-full border h-10 text-sm transition-all duration-200 bg-neutral-2',
-                isFocused
-                    ? 'border-primary-7 shadow-sm'
-                    : 'border-neutral-5 hover:border-neutral-4',
-                )}
-            >
-                <input
-                    type="text"
-                    placeholder={placeholder}
-                    onFocus={() => setIsFocused(true)}
-                    onBlur={() => setIsFocused(false)}
-                    className={cn(
-                        'flex-1 outline-none bg-transparent text-sm text-neutral-9',
-                        'placeholder:text-neutral-6',
-                    )}
-                />
+  useEffect(() => {
+    if (searchValue.length < minSearchLength) {
+      setIsSearching(false)
+      return
+    }
 
-                {/* Search icon on the right */}
-                <Icon
-                    icon="lucide:search"
-                    className={cn(
-                        'size-6 shrink-0 transition-colors',
-                        isFocused ? 'text-primary-6' : 'text-neutral-6',
-                    )}
-                />
-            </div>
-        </div>
-    )
+    setIsSearching(true)
+    const timer = setTimeout(() => {
+      handleSearch(searchValue)
+      setIsSearching(false)
+    }, debounceMs)
+
+    return () => clearTimeout(timer)
+  }, [searchValue, minSearchLength, debounceMs])
+
+  const handleSearch = useCallback((query: string) => {
+    if (onSearch) {
+      onSearch(query)
+    } else {
+      router.push(`${EVENT_ROUTES.SEARCH_EVENTS.href}?q=${encodeURIComponent(query)}`)
+    }
+  }, [onSearch, router])
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter' && searchValue.length >= minSearchLength) {
+      handleSearch(searchValue)
+    }
+  }
+
+  return (
+    <div className={cn('w-fit', className)}>
+      <div
+        className={cn(
+          'relative flex items-center gap-2 px-4 py-3.5',
+          'rounded-full border h-10 text-sm transition-all duration-200 bg-neutral-2',
+          isFocused
+            ? 'border-primary-7 shadow-sm'
+            : 'border-neutral-5 hover:border-neutral-4'
+        )}
+      >
+        <input
+          type="text"
+          value={searchValue}
+          onChange={(e) => setSearchValue(e.target.value)}
+          onKeyDown={handleKeyDown}
+          placeholder={placeholder}
+          onFocus={() => setIsFocused(true)}
+          onBlur={() => setIsFocused(false)}
+          className={cn(
+            'flex-1 outline-none bg-transparent text-sm text-neutral-9',
+            'placeholder:text-neutral-6'
+          )}
+        />
+
+        {isSearching ? (
+          <Icon
+            icon="lucide:loader-2"
+            className="size-6 shrink-0 text-primary-6 animate-spin"
+          />
+        ) : (
+          <Icon
+            icon="lucide:search"
+            className={cn(
+              'size-6 shrink-0 transition-colors',
+              isFocused ? 'text-primary-6' : 'text-neutral-6'
+            )}
+          />
+        )}
+      </div>
+    </div>
+  )
 }
