@@ -13,8 +13,7 @@ import { countries, getStates } from '@/components-data/location'
 import { usePagination } from '@/lib/custom-hooks/PaginationHook'
 import PaginationControls from '../custom-utils/buttons/event-search/PaginationControl'
 import { usePathname } from 'next/navigation'
-import { EventCategory } from '@/components-data/eventCategory'
-
+import { buildTrendingEventsHeading } from '@/helper-fns/buildHeading'
 
 export function TrendingEvents({ className }:{ className?: string }) {
 
@@ -77,8 +76,10 @@ export function TrendingEvents({ className }:{ className?: string }) {
 
             <div>
                 <div className="flex items-center justify-between gap-8">
-                    <h2 className={`text-2xl sm:text-3xl  md:text-[2rem] font-bold text-secondary-9 ${space_grotesk.className}`}>
-                        Trending events
+                    <h2
+                        className={`text-2xl sm:text-3xl md:text-[2rem] font-bold text-secondary-9 ${space_grotesk.className}`}
+                    >
+                        {buildTrendingEventsHeading(filters)}
                     </h2>
 
                     {

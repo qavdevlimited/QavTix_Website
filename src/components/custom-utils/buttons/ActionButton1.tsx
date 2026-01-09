@@ -57,13 +57,13 @@ export default function ActionButton1({
             ) : (
                 <>
                 {icon && iconPosition === "left" && (
-                    <Icon icon={icon} width="18" height="18" />
+                    <Icon icon={icon} width="18" height="18" className="size-5" />
                 )}
 
                 <span>{buttonText}</span>
 
                 {icon && iconPosition === "right" && (
-                    <Icon icon={icon} width="18" height="18" />
+                    <Icon icon={icon} width="18" height="18" className="size-5" />
                 )}
                 </>
             )}

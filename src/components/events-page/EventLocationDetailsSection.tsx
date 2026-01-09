@@ -9,7 +9,7 @@ import ErrorPara from '../custom-utils/ErrorPara'
 const emailSchema = z.string().email('Please enter a valid email address')
 
 interface EventLocationDetailsSectionProps {
-    location: string
+    location?: string
     subscribers: number
     events: number
     imageSrc?: string
@@ -54,7 +54,7 @@ export default function EventLocationDetailsSection({
     }
 
     return (
-        <section className="relative w-full overflow-hidden md:px-10">
+        <section className="relative w-full overflow-hidden md:px-10 lg:px-12 xl:px-16">
             {/* Mobile Background Image with Overlay */}
             <div className="md:hidden absolute inset-0">
                 <Image
@@ -68,11 +68,11 @@ export default function EventLocationDetailsSection({
             </div>
 
             <div className="md:flex gap-8 justify-between items-center">
-                <div className="relative z-10 flex flex-col justify-end min-h-screen md:min-h-0 px-4 md:px-0 pb-12 pt-20 md:py-0">
-                    <div className="space-y-6 max-w-2xl">
+                <div className="relative z-10 flex flex-col justify-end min-h-screen md:w-1/2 md:min-h-0 px-4 md:px-0 pb-12 pt-20 md:py-0">
+                    <div className="space-y-6 max-w-xl">
                         <div className="space-y-3">
                             <h2
-                                className={`text-2xl sm:text-3xl font-bold text-white md:text-secondary-9 leading-tight ${space_grotesk.className}`}
+                                className={`text-2xl max-w-[10em] capitalize sm:text-3xl font-medium md:font-bold text-white md:text-secondary-9 leading-tight ${space_grotesk.className}`}
                             >
                                 {heading}
                             </h2>
@@ -101,8 +101,8 @@ export default function EventLocationDetailsSection({
                             </div>
                         </div>
 
-                        <div className="space-y-2 md:mt-8">
-                            <div className="flex flex-col sm:flex-row gap-3">
+                        <div className="space-y-2 md:mt-8 max-w-xl">
+                            <div className="flex flex-wrap gap-3">
                                 <input
                                     type="email"
                                     value={email}

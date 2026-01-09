@@ -16,14 +16,16 @@ function ActionFeedback({ message }: { message: string }) {
     )
 }
 
-export function EventCardIconActionButton({
+export function EventIconActionButton({
     icon,
     onClick,
     feedback,
+    className
 }: {
     icon: string
     onClick: () => void
     feedback: string
+    className?: string
 }) {
     const [showFeedback, setShowFeedback] = useState(false)
 
@@ -40,11 +42,11 @@ export function EventCardIconActionButton({
             <motion.button
                 whileTap={{ scale: 0.85 }}
                 onClick={handleClick}
-                className="flex text-white items-center justify-center shadow"
+                className={`flex w-fit p-1 aspect-square rounded-full text-inherit items-center justify-center hover:bg-primary-5 ${className}`}
             >
             <Icon
                 icon={icon}
-                className="text-white"
+                className="text-inherit"
                 width="20"
             />
             </motion.button>

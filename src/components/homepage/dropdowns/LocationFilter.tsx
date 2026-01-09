@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useMemo, useCallback } from 'react'
 import { MobileBottomSheet } from '@/components/custom-utils/EventFilterDropdownMobileBottomSheet'
 import FilterButtonsActions1 from '@/components/custom-utils/buttons/event-search/FilterActionButtons1'
 import { LocationFilterSelect } from '@/components/custom-utils/inputs/event-search/LocationFilterSelect'
@@ -16,7 +16,7 @@ import { resolveCountryCode } from '@/helper-fns/resolveCountryCode'
 
 interface LocationFilterProps {
     value?: { country: string; state: string } | null
-    filterFor?: FilterFor
+    filterFor?: 'homepage' | 'eventPage'
     onChange: (value: { country: string; state: string } | null) => void
     countries: { value: string; label: string }[]
     getStates: (countryCode: string) => { value: string; label: string }[]
@@ -26,79 +26,78 @@ export default function LocationFilter({
     value,
     onChange,
     countries,
-    filterFor,
+    filterFor = 'eventPage',
     getStates
 }: LocationFilterProps) {
     const [isOpen, setIsOpen] = useState(false)
-    const [location, setLocation] = useState({
+    const [location, setLocation] = useState(() => ({
         country: value?.country || '',
         state: value?.state || ''
-    })
+    }))
 
-    const countryCode = location.country
-    ? resolveCountryCode(location.country)
-    : null;
+    const states = useMemo(() => {
+        if (!location.country) return []
+        const countryCode = resolveCountryCode(location.country)
+        return countryCode ? getStates(countryCode) : []
+    }, [location.country, getStates])
 
-    const states = countryCode
-    ? getStates(countryCode)
-    : [];
-    
-    const hasActiveFilter = value && (value.country || value.state)
-    
-    const getDisplayText = () => {
+    const displayText = useMemo(() => {
         if (!value?.country && !value?.state) return 'Location'
-        
+
         const countryName = countries.find(c => c.value === value.country)?.label
         const stateName = states.find(s => s.label.toLowerCase() === value.state.toLowerCase())?.label
-                
-        if (countryName && stateName) {
-            return `${stateName}, ${countryName}`
-        }
-        return countryName || stateName || 'Location'
-    }
 
-    const handleApply = () => {
+        return countryName && stateName
+            ? `${stateName}, ${countryName}`
+            : countryName || stateName || 'Location'
+    }, [value, countries, states])
+
+    const hasActiveFilter = !!value?.country || !!value?.state
+
+    const handleApply = useCallback(() => {
         onChange(location.country ? location : null)
         setIsOpen(false)
-    }
+    }, [onChange, location])
 
-    const handleClear = () => {
+    const handleClear = useCallback(() => {
         setLocation({ country: '', state: '' })
         onChange(null)
-    }
+    }, [onChange])
+
+    const handleCountryChange = useCallback((country: string) => {
+        setLocation({ country, state: '' })
+    }, [])
+
+    const handleStateChange = useCallback((state: string) => {
+        setLocation(prev => ({ ...prev, state }))
+    }, [])
+
+    const triggerVariant = filterFor === "homepage" ? 'default' : 'compact'
 
     return (
         <>
             {/* Mobile & Tablet - Bottom Sheet */}
-            <div className="lg:hidden relative">
-                {
-                    filterFor === "homepage" ?
-                    <EventFilterTypeBtn
-                        onClick={() => setIsOpen(true)}
-                        displayText={getDisplayText()} 
-                        hasActiveFilter={!!hasActiveFilter}
-                        variant='default' 
-                    />
-                    :
-                    <EventFilterTypeBtn 
-                        onClick={() => setIsOpen(true)}
-                        displayText={getDisplayText()} 
-                        hasActiveFilter={!!hasActiveFilter}
-                        variant='compact' 
-                    />
-                }
+            <div className="lg:hidden">
+                <EventFilterTypeBtn
+                    onClick={() => setIsOpen(true)}
+                    displayText={displayText}
+                    hasActiveFilter={hasActiveFilter}
+                    variant={triggerVariant}
+                />
 
-                <MobileBottomSheet isOpen={isOpen} onClose={() => setIsOpen(false)} title="Location">
-                    <div className="space-y-5">
+                <MobileBottomSheet
+                    isOpen={isOpen}
+                    onClose={() => setIsOpen(false)}
+                    title="Location"
+                >
+                    <div className="space-y-6">
                         <div>
                             <label className="block text-sm font-medium text-neutral-8 mb-2">
                                 Country
                             </label>
                             <LocationFilterSelect
                                 value={location.country}
-                                onValueChange={(value) => {
-                                    setLocation({ country: value, state: '' })
-                                }}
+                                onValueChange={handleCountryChange}
                                 options={countries}
                                 placeholder="Select country"
                             />
@@ -110,9 +109,7 @@ export default function LocationFilter({
                             </label>
                             <LocationFilterSelect
                                 value={location.state}
-                                onValueChange={(value) => {
-                                    setLocation(prev => ({ ...prev, state: value }))
-                                }}
+                                onValueChange={handleStateChange}
                                 options={states}
                                 placeholder="Select state"
                                 disabled={!location.country}
@@ -120,7 +117,10 @@ export default function LocationFilter({
                         </div>
                     </div>
 
-                    <FilterButtonsActions1 onApply={handleApply} onClear={handleClear} />
+                    <FilterButtonsActions1
+                        onApply={handleApply}
+                        onClear={handleClear}
+                    />
                 </MobileBottomSheet>
             </div>
 
@@ -128,27 +128,19 @@ export default function LocationFilter({
             <div className="hidden lg:block">
                 <Dialog open={isOpen} onOpenChange={setIsOpen}>
                     <DialogTrigger asChild>
-                        {
-                            filterFor === "homepage" ?
-                            <EventFilterTypeBtn 
-                                onClick={() => setIsOpen(true)}
-                                displayText={getDisplayText()} 
-                                hasActiveFilter={!!hasActiveFilter}
-                                variant='default' 
-                            />
-                            :
-                            <EventFilterTypeBtn 
-                                onClick={() => setIsOpen(true)}
-                                displayText={getDisplayText()} 
-                                hasActiveFilter={!!hasActiveFilter}
-                                variant='compact' 
-                            />
-                        }
+                        <EventFilterTypeBtn
+                            onClick={() => setIsOpen(true)}
+                            displayText={displayText}
+                            hasActiveFilter={hasActiveFilter}
+                            variant={triggerVariant}
+                        />
                     </DialogTrigger>
+
                     <DialogContent className="max-w-125 rounded-2xl">
                         <DialogHeader>
                             <DialogTitle className="text-xl">Location</DialogTitle>
                         </DialogHeader>
+
                         <div className="space-y-6">
                             <div className="space-y-5">
                                 <div>
@@ -157,9 +149,7 @@ export default function LocationFilter({
                                     </label>
                                     <LocationFilterSelect
                                         value={location.country}
-                                        onValueChange={(value) => {
-                                            setLocation({ country: value, state: '' })
-                                        }}
+                                        onValueChange={handleCountryChange}
                                         options={countries}
                                         placeholder="Select country"
                                     />
@@ -171,9 +161,7 @@ export default function LocationFilter({
                                     </label>
                                     <LocationFilterSelect
                                         value={location.state}
-                                        onValueChange={(value) => {
-                                            setLocation(prev => ({ ...prev, state: value }))
-                                        }}
+                                        onValueChange={handleStateChange}
                                         options={states}
                                         placeholder="Select state"
                                         disabled={!location.country}
@@ -181,7 +169,10 @@ export default function LocationFilter({
                                 </div>
                             </div>
 
-                            <FilterButtonsActions1 onApply={handleApply} onClear={handleClear} />
+                            <FilterButtonsActions1
+                                onApply={handleApply}
+                                onClear={handleClear}
+                            />
                         </div>
                     </DialogContent>
                 </Dialog>

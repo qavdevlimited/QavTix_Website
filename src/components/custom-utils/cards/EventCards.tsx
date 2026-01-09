@@ -2,51 +2,15 @@
 
 import { Icon } from "@iconify/react";
 import Image from "next/image";
-import { EventCardIconActionButton } from "../buttons/EventCardIconActionButton";
+import { EventIconActionButton } from "../../shared/EventIconActionButton";
 import { copyToClipboard } from "@/helper-fns/copyToClipboard";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { formatPrice } from "@/helper-fns/formatPrice";
 import { space_grotesk } from "@/lib/redux/fonts";
 import { getAvatarColor } from "@/helper-fns/getAvatarColor";
+import { getInitialsFromName } from "@/helper-fns/getInitialFromName";
+import { statusStyles, StatusStylesRecord } from "@/components-data/event-status-styles";
 
-type StatusStylesRecord = Record<
-  IEventStatus,
-  { bg: string; text: string; label: string }
->
-
-const statusStyles : StatusStylesRecord  = {
-  "filling-fast": {
-    bg: "bg-warning-tertiary",
-    text: "text-secondary-9",
-    label: "Filling fast",
-  },
-  "near-capacity": {
-    bg: "bg-danger-tertiary",
-    text: "text-secondary-9",
-    label: "Near capacity",
-  },
-  new: {
-    bg: "bg-positive-tertiary",
-    text: "text-secondary-9",
-    label: "New",
-  },
-  "sold-out": {
-    bg: "bg-white",
-    text: "text-red-600",
-    label: "Sold out",
-  },
-}
-
-const avatarColors = [
-  'bg-red-500',
-  'bg-blue-500',
-  'bg-green-500',
-  'bg-purple-500',
-  'bg-pink-500',
-  'bg-yellow-500',
-  'bg-indigo-500',
-  'bg-teal-500'
-]
 
 
 export default function EventsCard1(cardData : IEvent){
@@ -57,20 +21,23 @@ export default function EventsCard1(cardData : IEvent){
                     cardData.status &&
                     <span className={`absolute py-1 px-2 rounded-2xl text-center text-sm font-medium top-2 left-2 ${statusStyles[cardData.status as keyof StatusStylesRecord].bg} ${statusStyles[cardData.status as keyof StatusStylesRecord].text} capitalize`}>{cardData.status}</span>
                 }
-                <Image src={cardData.image} alt={cardData.title} width={400} height={400} className="rounded-4xl" />
 
-                <div className="flex justify-end gap-4 items-center absolute bottom-3 right-3">
-                    <EventCardIconActionButton 
+                <figure>
+                    <Image src={cardData.image} alt={cardData.title} width={400} height={400} className="rounded-4xl" />
+                </figure>
+
+                <div className="flex text-white justify-end gap-3 items-center absolute bottom-3 right-3">
+                    <EventIconActionButton 
                         icon="hugeicons:share-08" 
                         onClick={() => {}} 
                         feedback=""
                     />
-                    <EventCardIconActionButton 
+                    <EventIconActionButton 
                         icon="ph:link-bold" 
                         onClick={() => copyToClipboard(cardData.href)} 
                         feedback="Event link copied"
                     />
-                    <EventCardIconActionButton 
+                    <EventIconActionButton 
                         icon="hugeicons:favourite" 
                         onClick={() => {}} 
                         feedback="Added to favourites"
@@ -97,9 +64,9 @@ export default function EventsCard1(cardData : IEvent){
                     <div className="space-y-2 mb-2">
                         <div className="flex items-center gap-1">
                             <div className="flex items-center gap-0.5">
-                                <Icon icon="hugeicons:calendar-04" className="size-4 text-accent-6" />
+                                <Icon icon="hugeicons:calendar-04" className="size-4 shrink-0 text-accent-6" />
                                 <hr className="w-px h-2 border border-neutral-6" />
-                                <Icon icon="hugeicons:clock-01" className="size-4 text-accent-6" />
+                                <Icon icon="hugeicons:clock-01" className="size-4 shrink-0 text-accent-6" />
                             </div>
                             <span className="text-neutral-7 text-[11px] truncate flex-1">
                                 {cardData.date}
@@ -107,7 +74,7 @@ export default function EventsCard1(cardData : IEvent){
                         </div>
 
                         <div className="flex items-center gap-1">
-                            <Icon icon="hugeicons:location-01" className="size-4 text-accent-6" />
+                            <Icon icon="hugeicons:location-01" className="size-4 shrink-0 text-accent-6" />
                             <span className="text-neutral-7 text-[11px] truncate flex-1">
                                 {cardData.location}
                             </span>
@@ -121,11 +88,14 @@ export default function EventsCard1(cardData : IEvent){
                         <div className="flex -space-x-2">
                             {cardData.attendees.slice(0, 4).map((user) => (
                                 <Avatar key={user.id} className="ring-2 ring-background">
-                                    <AvatarImage src={user.image} />
+                                    {
+                                        user.profile_img &&
+                                        <AvatarImage src={user.profile_img} />
+                                    }
                                     <AvatarFallback
-                                        className={`${getAvatarColor(user.id)} text-white font-medium`}
+                                        className={`${getAvatarColor(user.id.toString())} text-white font-medium`}
                                     >
-                                        {user.initials}
+                                        {getInitialsFromName(user.name)}
                                     </AvatarFallback>
                                 </Avatar>
                             ))}

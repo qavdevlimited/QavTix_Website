@@ -1,3 +1,15 @@
+interface TicketTier {
+  id: string
+  name: string
+  price: number
+  currency: string
+  description?: string
+  features?: string[]
+  available: boolean
+  soldOut?: boolean
+}
+
+
 interface PriceRange {
     min: number
     max: number
@@ -41,7 +53,7 @@ interface IEvent {
     price: string
     originalPrice?: string
     href: string
-    attendees: EventCardUser[]
+    attendees: Attendee[]
 }
 
 interface FeaturedEvent {

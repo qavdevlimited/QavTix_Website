@@ -6,6 +6,7 @@ import { useState } from 'react'
 import Logo from './Logo'
 import { space_grotesk } from '@/lib/redux/fonts'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select'
+import { footerData } from '@/components-data/footer-data'
 
 interface FooterLink {
   label: string
@@ -13,46 +14,7 @@ interface FooterLink {
 }
 
 
-const footerData = {
-  sections: [
-    {
-      title: 'QavTix',
-      links: [
-        { label: 'About us', href: '/about' },
-        { label: 'Pricing', href: '/pricing' },
-        { label: 'How it works', href: '/how-it-works' },
-        { label: 'Explore event', href: '/events' },
-        { label: 'Sell ticket', href: '/sell-tickets' },
-        { label: 'Create event', href: '/create-event' },
-      ]
-    },
-    {
-      title: 'Support',
-      links: [
-        { label: 'FAQ', href: '/faq' },
-        { label: 'Help', href: '/help' },
-        { label: 'Contact', href: '/contact' },
-      ]
-    }
-  ],
-  contact: {
-    title: 'Get in touch',
-    info: [
-      { icon: "hugeicons:location-06", text: 'Lagos, Nigeria.', href: null },
-      { icon: 'mynaui:mail', text: 'info@qavtix.com', href: 'mailto:info@qavtix.com' },
-      { icon: 'fluent-mdl2:phone', text: '+234 812 345 6789', href: 'tel:+2348123456789' },
-    ]
-  },
-  social: [
-    { name: 'Facebook', icon: 'mdi:facebook', href: 'https://facebook.com', color: '#1877F2' },
-    { name: 'Twitter', icon: 'hugeicons:new-twitter', href: 'https://twitter.com', color: '#000000' },
-    { name: 'Instagram', icon: 'hugeicons:instagram', href: 'https://instagram.com', color: '#E4405F' },
-  ],
-  legal: [
-    { label: 'Privacy Policy', href: '/privacy-policy' },
-    { label: 'Terms of Use', href: '/terms-of-use' },
-  ]
-}
+
 
 export default function Footer() {
     const [selectedCurrency, setSelectedCurrency] = useState('NG')
@@ -149,14 +111,14 @@ export default function Footer() {
                         <div className="hidden md:flex gap-4 mt-6">
                             {footerData.social.map((social) => (
                                 <Link
-                                    key={social.name}
+                                    key={social.label}
                                     href={social.href}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="flex items-center justify-center hover:scale-110 transition-transform"
-                                    aria-label={social.name}
+                                    aria-label={social.label}
                                 >
-                                    <Icon icon={social.icon} width="24" height="24" className='text-primary-6 size-8' />
+                                    <Icon icon={social.icon} width="24" height="24" className='text-primary-6 size-9' />
                                 </Link>
                             ))}
                         </div>
@@ -167,14 +129,14 @@ export default function Footer() {
                 <div className="flex gap-4 mt-6 justify-center md:hidden">
                     {footerData.social.map((social) => (
                         <Link
-                            key={social.name}
+                            key={social.label}
                             href={social.href}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="flex items-center justify-center hover:scale-110 transition-transform"
-                            aria-label={social.name}
+                            aria-label={social.label}
                         >
-                            <Icon icon={social.icon} width="24" height="24" className='text-primary-6 size-8' />
+                            <Icon icon={social.icon} width="24" height="24" className='text-primary-6 size-9' />
                         </Link>
                     ))}
                 </div>

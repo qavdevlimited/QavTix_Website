@@ -12,7 +12,7 @@ import { eventsMock } from "@/components-data/demo-data"
 import EventsCard1 from "../custom-utils/cards/EventCards"
 import { DateRange } from "react-day-picker"
 import { space_grotesk } from "@/lib/redux/fonts"
-import { buildSearchResultsHeading } from "@/helper-fns/buildSearchResultsHeading"
+import { buildSearchResultsHeading } from "@/helper-fns/buildHeading"
 
 interface SearchResultSectionProps {
   data: IEvent[]

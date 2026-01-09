@@ -19,7 +19,10 @@ export const NAV_LINKS = {
   SEARCH_EVENTS: { label: '', href: '/events/search' },
   EVENT_LOCATION: { label: '', href: '/events/explore/location/' },
   EVENT_CATEGORY: { label: '', href: '/events/explore/category/' },
-  EVENT_TRAVEL_AND_TOUR: { label: '', href: '/events/explore/travel-and-tour/' },
+  EVENT_TRAVEL_AND_TOUR: { label: '', href: '/events/explore/travel-and-tours/' },
+
+
+  HOST_PROFILE: { label: '', href: '/host/[id]' }
 } as const satisfies Record<string, NavLink>
 
 export const navLinks: NavLink[] = [

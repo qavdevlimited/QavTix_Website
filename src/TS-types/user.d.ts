@@ -4,11 +4,20 @@ interface EventCardUser {
     initials: string
 }
 
+ // Havent confirmed Proper Type //
+
 type Host = {
-    id: number, // Havent confirmed Proper Type //
+    id: number,
     followers: number,
     events: number,
     profile_img: string,
     name: string,
+    username: string
+}
+
+type Attendee = {
+    id: number,
+    name: string,
+    profile_img: string,
     username: string
 }

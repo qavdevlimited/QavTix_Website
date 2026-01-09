@@ -1,4 +1,4 @@
-import { EVENT_CATEGORIES_ARRAY } from "@/components-data/eventCategory";
+import { EVENT_CATEGORIES_ARRAY } from "@/components-data/event-category";
 import EventCategoryBox from "../custom-utils/cards/EventCategoryBox";
 import { space_grotesk } from "@/lib/redux/fonts";
 

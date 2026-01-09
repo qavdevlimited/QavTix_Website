@@ -4,10 +4,11 @@ import { usePathname, useRouter } from "next/navigation"
 import Logo from "./Logo"
 import Link from "next/link"
 import { Icon } from "@iconify/react"
-import { EVENT_ROUTES, header2NavLinks, NAV_LINKS } from "@/components-data/navLinks"
+import { EVENT_ROUTES, header2NavLinks, NAV_LINKS } from "@/components-data/navigation/navLinks"
 import { useState } from "react"
 import MobileMenu from "./MobileMenu"
 import logoSrc from "@/public-assets/logo/qavtix-logo-white.svg"
+import { containsEventPage } from "@/helper-fns/pathNameResolvers"
 
 export default function Header2() {
 
@@ -27,7 +28,7 @@ export default function Header2() {
     // excluding the homepage and event location routes
 
     return (
-        !pathName.startsWith("/auth") && pathName !== "/" && !pathName.startsWith(NAV_LINKS.EVENT_LOCATION.href) && (
+        !pathName.startsWith("/auth") && pathName !== "/" && !containsEventPage(pathName) && (
             <header className="py-8 w-full absolute top-0 left-0 z-100">
                 <div className="global-px flex items-center justify-between">
                     <Logo logo={logoSrc} />
@@ -42,8 +43,8 @@ export default function Header2() {
                                     className={`
                                         px-4 py-2 rounded-lg text-sm transition-all duration-150
                                         ${active
-                                            ? 'text-white font-semibold'
-                                            : 'text-neutral-6 font-medium hover:text-neutral-5'
+                                            ? 'text-white'
+                                            : 'text-neutral-6 hover:text-neutral-5'
                                         }
                                         active:scale-[0.98]
                                         focus:outline-none focus:ring-2 focus:ring-neutral-4 focus:ring-offset-2
@@ -71,8 +72,8 @@ export default function Header2() {
                                             className={`
                                                 px-4 py-2 rounded-lg text-sm transition-all duration-150
                                                 ${active
-                                                    ? 'text-primary-7 font-semibold'
-                                                    : 'text-neutral-8 font-medium hover:text-primary-6'
+                                                    ? 'text-primary-7 font-medium'
+                                                    : 'text-neutral-8 hover:text-primary-6'
                                                 }
                                                 active:scale-[0.98]
                                                 focus:outline-none focus:ring-2 focus:ring-neutral-4 focus:ring-offset-2

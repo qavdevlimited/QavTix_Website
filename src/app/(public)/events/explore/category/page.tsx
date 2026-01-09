@@ -1,8 +1,6 @@
 import EventLocationDetailsSection from "@/components/events-page/EventLocationDetailsSection";
 
-export default async function EventCategoryPage({ params }:{ params: Promise<{location: string}>}){
-
-    const location = (await params).location;
+export default async function EventCategoryPage(){
 
     return (
         <main className="pt-24 md:pt-40">
@@ -10,9 +8,9 @@ export default async function EventCategoryPage({ params }:{ params: Promise<{lo
                 location="Lagos" 
                 events={30} 
                 subscribers={230}
-                heading={`Events Happening in ${location}`}
-                description={`From concerts and parties to conferences and pop-ups, ${location} is where experiences come alive. Discover what's happening next that bring  to life.`}
-            />
+                heading="Concerts & Music Events"
+                description="From chart-topping artists to underground acts, live performances, unforgettable nights, and the sounds you love. Discover concerts and music events that move you."
+            />   
         </main>
     )
 }

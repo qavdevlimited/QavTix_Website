@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { usePathname } from 'next/navigation'
 import Link from 'next/link'
-import { navLinks } from '@/components-data/navLinks'
+import { navLinks } from '@/components-data/navigation/navLinks'
 import SearchEventInput1 from '../custom-utils/inputs/event-search/SearchEventInput1'
 
 
