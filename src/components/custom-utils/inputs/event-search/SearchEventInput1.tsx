@@ -20,7 +20,7 @@ export default function SearchEventInput1({
         <div className={cn('w-fit', className)}>
             <div
                 className={cn(
-                'relative flex items-center gap-3 px-4 py-3.5',
+                'relative flex items-center gap-2 px-4 py-3.5',
                 'rounded-full border h-10 text-sm transition-all duration-200 bg-neutral-2',
                 isFocused
                     ? 'border-primary-7 shadow-sm'
@@ -42,7 +42,7 @@ export default function SearchEventInput1({
                 <Icon
                     icon="lucide:search"
                     className={cn(
-                        'size-5 shrink-0 transition-colors',
+                        'size-6 shrink-0 transition-colors',
                         isFocused ? 'text-primary-6' : 'text-neutral-6',
                     )}
                 />

@@ -69,9 +69,9 @@ export function EventSearchFilters() {
                 {/* Search Button */}
                 <Button
                     onClick={handleSearch}
-                    className="w-44 bg-primary hover:bg-primary-7 h-14 mt-5 md:mt-10 px-8 rounded-full"
+                    className="w-40 bg-primary hover:bg-primary-7 h-14 mt-5 md:mt-10 px-8 rounded-full"
                 >
-                    <Search className="mr-2 h-5 w-5" />
+                    <Search className="mr-2 size-6" />
                     Search event
                 </Button>
             </div>

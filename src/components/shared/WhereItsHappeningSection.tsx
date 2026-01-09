@@ -6,6 +6,7 @@ import { Icon } from "@iconify/react"
 import Link from "next/link"
 import { useRef } from "react"
 import { nigeriaStates } from "@/components-data/location"
+import { NAV_LINKS } from "@/components-data/navigation/navLinks"
 
 interface LocationLink {
   cityOrState: string
@@ -72,7 +73,7 @@ function InfiniteScrollRow({
         {duplicatedLocations.map((location, index) => (
           <Link
             key={`${location.slug}-${index}`}
-            href={`/events/${location.slug}`}
+            href={`${NAV_LINKS.EVENT_LOCATION.href}${location.slug}`}
             className="flex items-center gap-2 px-6 py-3 rounded-full border border-secondary-6 bg-white hover:bg-primary-1 hover:border-secondary-8 transition-colors whitespace-nowrap shrink-0"
           >
             <span className="text-sm text-secondary-8 font-medium">

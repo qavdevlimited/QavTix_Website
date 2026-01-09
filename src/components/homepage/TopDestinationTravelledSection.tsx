@@ -122,7 +122,7 @@ export default function TopDestinationTravelledSection() {
     }, [emblaApi, onSelect])
 
     return (
-        <section className="w-full py-14 mt-8 lg:mt-16 px-4 md:px-10 lg:px-16 bg-neutral-1">
+        <section className="w-full py-14 mt-8 lg:mt-16 px-4 sm:px-10 lg:px-16 bg-neutral-1">
             <div className="max-w-7xl mx-auto">
                 <div className="flex items-center justify-between mb-10 md:mb-14">
                     <h2 className={`text-2xl md:text-3xl font-bold text-secondary-9 ${space_grotesk.className}`}>

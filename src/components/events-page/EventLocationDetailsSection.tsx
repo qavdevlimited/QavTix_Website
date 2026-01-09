@@ -54,7 +54,7 @@ export default function EventLocationDetailsSection({
     }
 
     return (
-        <section className="relative w-full overflow-hidden md:px-10 lg:px-12 xl:px-16">
+        <section className="relative w-full overflow-hidden sm:px-10 lg:px-12 xl:px-16">
             {/* Mobile Background Image with Overlay */}
             <div className="md:hidden absolute inset-0">
                 <Image

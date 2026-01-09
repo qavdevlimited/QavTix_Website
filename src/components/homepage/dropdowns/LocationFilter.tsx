@@ -26,7 +26,7 @@ export default function LocationFilter({
     value,
     onChange,
     countries,
-    filterFor = 'eventPage',
+    filterFor = 'homepage',
     getStates
 }: LocationFilterProps) {
     const [isOpen, setIsOpen] = useState(false)
