@@ -8,6 +8,7 @@ import MusicConcertsIcon from "./MusicConcerts";
 import SportFitnessIcon from "./SportFitness";
 import TicketIcon from "./TicketIcon";
 import TravelIcon from "./Travel";
+import UserMultipleLock from "./UserMultipleLock";
 
 export const CustomIcons = {
     ticket: TicketIcon,
@@ -19,5 +20,6 @@ export const CustomIcons = {
     festival: FestivalIcon,
     foodAndDrink: FoodNDrinkIcon,
     sportAndFitness: SportFitnessIcon,
-    musicConcerts: MusicConcertsIcon
+    musicConcerts: MusicConcertsIcon,
+    userMultipleLock: UserMultipleLock
 }

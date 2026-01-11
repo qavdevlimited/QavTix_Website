@@ -28,6 +28,7 @@ export default function Header(){
     // Show header only on non-auth pages, homepage and event routes
     return (
         !pathName.startsWith("/auth") &&
+        !pathName.match("/checkout") &&
             (
                 pathName === "/" ||
                 containsEventPage(pathName)

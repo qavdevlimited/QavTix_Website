@@ -12,6 +12,7 @@ import {
     DialogTrigger,
 } from '@/components/ui/dialog'
 import EventFilterTypeBtn from '@/components/custom-utils/buttons/event-search/EventFilterTypeBtn'
+import { useMediaQuery } from '@/lib/custom-hooks/UseMediaQuery'
 
 interface Category {
     value: string
@@ -44,7 +45,11 @@ export default function CategoryFilter({
     filterFor = "homepage",
     categories = defaultCategories,
 }: CategoryFilterProps) {
+
+    
     const [isOpen, setIsOpen] = useState(false)
+    const isDesktop = useMediaQuery('(min-width: 1024px)')
+    
     const [selectedCategories, setSelectedCategories] = useState<string[]>(value)
 
     const handleToggle = (categoryValue: string) => {
@@ -74,104 +79,74 @@ export default function CategoryFilter({
     const displayText = hasActiveFilter
         ? `${selectedCategories.length} selected`
         : 'Event category'
+    
+    const triggerVariant = filterFor === "homepage" ? 'default' : 'compact'
+
+    const categoryList = (
+        <div className="space-y-2 max-h-[50vh] overflow-y-auto">
+            {categories.map((category, index) => {
+                const isSelected =
+                    category.value === 'all'
+                        ? selectedCategories.length === 0
+                        : selectedCategories.includes(category.value)
+
+                return (
+                    <CategoryItemBtn
+                        key={index}
+                        category={category}
+                        isSelected={isSelected}
+                        handleToggle={handleToggle}
+                    />
+                )
+            })}
+        </div>
+    )
 
     return (
         <>
             {/* Mobile & Tablet - Bottom Sheet */}
-            <div className="lg:hidden relative">
-                {
-                    filterFor === "homepage" ?
+            {!isDesktop && (
+                <>
                     <EventFilterTypeBtn 
                         onClick={() => setIsOpen(true)}
                         displayText={displayText} 
                         hasActiveFilter={hasActiveFilter}
-                        variant='default' 
+                        variant={triggerVariant}
                     />
-                    :
-                    <EventFilterTypeBtn 
-                        onClick={() => setIsOpen(true)}
-                        displayText={displayText} 
-                        hasActiveFilter={hasActiveFilter}
-                        variant='compact' 
-                    />
-                }
 
-                <MobileBottomSheet
-                    isOpen={isOpen}
-                    onClose={() => setIsOpen(false)}
-                    title="Event Category"
-                >
-                    <div className="space-y-2 max-h-[50vh] overflow-y-auto">
-                        {categories.map((category, index) => {
-                            const isSelected =
-                                category.value === 'all'
-                                    ? selectedCategories.length === 0
-                                    : selectedCategories.includes(category.value)
-
-                            return (
-                                <CategoryItemBtn
-                                    key={index}
-                                    category={category}
-                                    isSelected={isSelected}
-                                    handleToggle={handleToggle}
-                                />
-                            )
-                        })}
-                    </div>
-
-                    <FilterButtonsActions1 onApply={handleApply} onClear={handleClear} />
-                </MobileBottomSheet>
-            </div>
+                    <MobileBottomSheet
+                        isOpen={isOpen}
+                        onClose={() => setIsOpen(false)}
+                        title="Event Category"
+                    >
+                        {categoryList}
+                        <FilterButtonsActions1 onApply={handleApply} onClear={handleClear} />
+                    </MobileBottomSheet>
+                </>
+            )}
 
             {/* Desktop - Dialog */}
-            <div className="hidden lg:block">
+            {isDesktop && (
                 <Dialog open={isOpen} onOpenChange={setIsOpen}>
                     <DialogTrigger asChild>
-                        {
-                            filterFor === "homepage" ?
-                            <EventFilterTypeBtn 
-                                onClick={() => setIsOpen(true)}
-                                displayText={displayText} 
-                                hasActiveFilter={hasActiveFilter}
-                                variant='default' 
-                            />
-                            :
-                            <EventFilterTypeBtn 
-                                onClick={() => setIsOpen(true)}
-                                displayText={displayText} 
-                                hasActiveFilter={hasActiveFilter}
-                                variant='compact' 
-                            />
-                        }
+                        <EventFilterTypeBtn 
+                            onClick={() => setIsOpen(true)}
+                            displayText={displayText} 
+                            hasActiveFilter={hasActiveFilter}
+                            variant={triggerVariant}
+                        />
                     </DialogTrigger>
                     <DialogContent className="max-w-125 rounded-2xl">
                         <DialogHeader>
                             <DialogTitle className="text-xl">Event Category</DialogTitle>
                         </DialogHeader>
                         <div className="space-y-6">
-                            <div className="space-y-2 max-h-[50vh] overflow-y-auto">
-                                {categories.map((category, index) => {
-                                    const isSelected =
-                                        category.value === 'all'
-                                            ? selectedCategories.length === 0
-                                            : selectedCategories.includes(category.value)
-
-                                    return (
-                                        <CategoryItemBtn
-                                            key={index}
-                                            category={category}
-                                            isSelected={isSelected}
-                                            handleToggle={handleToggle}
-                                        />
-                                    )
-                                })}
-                            </div>
-
+                            {categoryList}
                             <FilterButtonsActions1 onApply={handleApply} onClear={handleClear} />
                         </div>
                     </DialogContent>
                 </Dialog>
-            </div>
+            )}
         </>
     )
 }

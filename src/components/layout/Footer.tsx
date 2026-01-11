@@ -39,6 +39,7 @@ export default function Footer() {
 
     return (
         !pathName.match("/auth") &&
+        !pathName.match("/checkout") &&
         <footer className="w-full relative bg-primary-1 px-6 lg:px-16 py-12">
             <div className="max-w-7xl mx-auto">
                 {/* Main Footer Content */}

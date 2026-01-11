@@ -100,14 +100,14 @@ export const mockAttendees = Array.from(
 
 
 export const ticketTiers: Partial<TicketTier>[] = [
-  { id: '1', name: 'Regular', price: 5000, currency: '₦' },
-  { id: '2', name: 'VIP', price: 25000, currency: '₦' },
-  { id: '3', name: 'VVIP', price: 35000, currency: '₦' },
-  { id: '4', name: 'Front Row', price: 50000, currency: '₦' },
-  { id: '5', name: 'Early Bird', price: 3500, currency: '₦' },
-  { id: '6', name: 'Student', price: 4000, currency: '₦' },
-  { id: '7', name: 'Group', price: 4500, currency: '₦' },
-  { id: '8', name: 'Platinum', price: 75000, currency: '₦' }
+  { id: '1', name: 'Regular', price: 5000, currency: '₦', description: "Regular access ticket admits one" },
+  { id: '2', name: 'VIP', price: 25000, currency: '₦', description: "Regular access ticket admits one" },
+  { id: '3', name: 'VVIP', price: 35000, currency: '₦', description: "Regular access ticket admits one" },
+  { id: '4', name: 'Front Row', price: 50000, currency: '₦', description: "Regular access ticket admits one" },
+  { id: '5', name: 'Early Bird', price: 3500, currency: '₦', description: "Regular access ticket admits one" },
+  { id: '6', name: 'Student', price: 4000, currency: '₦', description: "Regular access ticket admits one" },
+  { id: '7', name: 'Group', price: 4500, currency: '₦', description: "Regular access ticket admits one" },
+  { id: '8', name: 'Platinum', price: 75000, currency: '₦', description: "Regular access ticket admits one" }
 ]
 
 

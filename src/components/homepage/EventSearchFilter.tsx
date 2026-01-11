@@ -41,7 +41,7 @@ export function EventSearchFilters() {
                     {/* First Row */}
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <DateFilter
-                            value={filters.dateRange || { from: new Date(), to: new Date() }}
+                            value={filters.dateRange}
                             onChange={(v) => setFilters({...filters, dateRange: v || { from: new Date(), to: new Date()} as DateRange})}
                         />
                         <LocationFilterDropdown

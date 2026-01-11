@@ -13,6 +13,7 @@ import {
 } from '@/components/ui/dialog'
 import EventFilterTypeBtn from '@/components/custom-utils/buttons/event-search/EventFilterTypeBtn'
 import { resolveCountryCode } from '@/helper-fns/resolveCountryCode'
+import { useMediaQuery } from '@/lib/custom-hooks/UseMediaQuery'
 
 interface LocationFilterProps {
     value?: { country: string; state: string } | null
@@ -29,7 +30,11 @@ export default function LocationFilter({
     filterFor = 'homepage',
     getStates
 }: LocationFilterProps) {
+
+
     const [isOpen, setIsOpen] = useState(false)
+    const isDesktop = useMediaQuery('(min-width: 1024px)')
+    
     const [location, setLocation] = useState(() => ({
         country: value?.country || '',
         state: value?.state || ''
@@ -74,58 +79,63 @@ export default function LocationFilter({
 
     const triggerVariant = filterFor === "homepage" ? 'default' : 'compact'
 
+    const filterContent = (
+        <div className="space-y-5">
+            <div>
+                <label className="block text-sm font-medium text-neutral-8 mb-2">
+                    Country
+                </label>
+                <LocationFilterSelect
+                    value={location.country}
+                    onValueChange={handleCountryChange}
+                    options={countries}
+                    placeholder="Select country"
+                />
+            </div>
+
+            <div>
+                <label className="block text-sm font-medium text-neutral-8 mb-2">
+                    State / Region
+                </label>
+                <LocationFilterSelect
+                    value={location.state}
+                    onValueChange={handleStateChange}
+                    options={states}
+                    placeholder="Select state"
+                    disabled={!location.country}
+                />
+            </div>
+        </div>
+    )
+
     return (
         <>
             {/* Mobile & Tablet - Bottom Sheet */}
-            <div className="lg:hidden">
-                <EventFilterTypeBtn
-                    onClick={() => setIsOpen(true)}
-                    displayText={displayText}
-                    hasActiveFilter={hasActiveFilter}
-                    variant={triggerVariant}
-                />
-
-                <MobileBottomSheet
-                    isOpen={isOpen}
-                    onClose={() => setIsOpen(false)}
-                    title="Location"
-                >
-                    <div className="space-y-6">
-                        <div>
-                            <label className="block text-sm font-medium text-neutral-8 mb-2">
-                                Country
-                            </label>
-                            <LocationFilterSelect
-                                value={location.country}
-                                onValueChange={handleCountryChange}
-                                options={countries}
-                                placeholder="Select country"
-                            />
-                        </div>
-
-                        <div>
-                            <label className="block text-sm font-medium text-neutral-8 mb-2">
-                                State / Region
-                            </label>
-                            <LocationFilterSelect
-                                value={location.state}
-                                onValueChange={handleStateChange}
-                                options={states}
-                                placeholder="Select state"
-                                disabled={!location.country}
-                            />
-                        </div>
-                    </div>
-
-                    <FilterButtonsActions1
-                        onApply={handleApply}
-                        onClear={handleClear}
+            {!isDesktop && (
+                <>
+                    <EventFilterTypeBtn
+                        onClick={() => setIsOpen(true)}
+                        displayText={displayText}
+                        hasActiveFilter={hasActiveFilter}
+                        variant={triggerVariant}
                     />
-                </MobileBottomSheet>
-            </div>
+
+                    <MobileBottomSheet
+                        isOpen={isOpen}
+                        onClose={() => setIsOpen(false)}
+                        title="Location"
+                    >
+                        {filterContent}
+                        <FilterButtonsActions1
+                            onApply={handleApply}
+                            onClear={handleClear}
+                        />
+                    </MobileBottomSheet>
+                </>
+            )}
 
             {/* Desktop - Dialog */}
-            <div className="hidden lg:block">
+            {isDesktop && (
                 <Dialog open={isOpen} onOpenChange={setIsOpen}>
                     <DialogTrigger asChild>
                         <EventFilterTypeBtn
@@ -142,33 +152,7 @@ export default function LocationFilter({
                         </DialogHeader>
 
                         <div className="space-y-6">
-                            <div className="space-y-5">
-                                <div>
-                                    <label className="block text-sm font-medium text-neutral-8 mb-2">
-                                        Country
-                                    </label>
-                                    <LocationFilterSelect
-                                        value={location.country}
-                                        onValueChange={handleCountryChange}
-                                        options={countries}
-                                        placeholder="Select country"
-                                    />
-                                </div>
-
-                                <div>
-                                    <label className="block text-sm font-medium text-neutral-8 mb-2">
-                                        State / Region
-                                    </label>
-                                    <LocationFilterSelect
-                                        value={location.state}
-                                        onValueChange={handleStateChange}
-                                        options={states}
-                                        placeholder="Select state"
-                                        disabled={!location.country}
-                                    />
-                                </div>
-                            </div>
-
+                            {filterContent}
                             <FilterButtonsActions1
                                 onApply={handleApply}
                                 onClear={handleClear}
@@ -176,7 +160,7 @@ export default function LocationFilter({
                         </div>
                     </DialogContent>
                 </Dialog>
-            </div>
+            )}
         </>
     )
 }

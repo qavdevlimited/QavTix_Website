@@ -30,7 +30,7 @@ export default function EventCategoryBox({ value }: EventCategoryBoxProps) {
     const IconComponent = categoryIcons[value]
 
     return (
-        <div className="group relative bg-neutral-3 rounded-[18.4px] flex flex-col items-center justify-end h-52 sm:h-60 px-6 pt-4 pb-10 overflow-hidden">
+        <div className="group relative bg-neutral-3 rounded-[18.4px] flex flex-col items-center justify-end h-52 sm:h-60 px-6 pt-4 pb-10 overflow-hidden hover:scale-104 ease-in-out duration-150">
             <div className="absolute inset-0 bg-secondary-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-out rounded-[18.4px]" />
 
             <div className="relative z-10 flex flex-col items-center justify-center gap-6">

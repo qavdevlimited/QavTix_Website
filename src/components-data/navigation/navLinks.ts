@@ -20,6 +20,7 @@ export const NAV_LINKS = {
   EVENT_LOCATION: { label: '', href: '/events/explore/location/' },
   EVENT_CATEGORY: { label: '', href: '/events/explore/category/' },
   EVENT_TRAVEL_AND_TOUR: { label: '', href: '/events/explore/travel-and-tours/' },
+  EVENTS_DETAILS: { label: '', href: '/events/details/[event_id]' },
 
 
   HOST_PROFILE: { label: '', href: '/host/[id]' }
@@ -52,4 +53,5 @@ export const AUTH_ROUTES = {
 export const EVENT_ROUTES = {
   EVENTS: NAV_LINKS.EVENTS,
   SEARCH_EVENTS: NAV_LINKS.SEARCH_EVENTS,
+  EVENTS_DETAILS: NAV_LINKS.EVENTS_DETAILS,
 } as const

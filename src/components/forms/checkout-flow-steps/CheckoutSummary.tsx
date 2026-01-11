@@ -1,0 +1,260 @@
+'use client'
+
+import { AnimatePresence, motion } from 'framer-motion'
+import { Dispatch, SetStateAction } from 'react'
+import { cn } from '@/lib/utils'
+import { Icon } from '@iconify/react'
+import { space_grotesk } from '@/lib/redux/fonts'
+import PromoCode from '@/components/checkout/PromoCode'
+import CheckoutFlowActionBtns from '@/components/custom-utils/buttons/CheckoutFlowActionBtns'
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
+import { useCheckout } from '@/contexts/CheckoutFlowProvider'
+import { formatPrice } from '@/helper-fns/formatPrice'
+
+
+const mobileSummaryVariants = {
+  hidden: {
+    opacity: 0,
+    y: 240,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.35,
+      ease: "linear" as const,
+    },
+  },
+  exit: {
+    opacity: 0,
+    y: 240,
+    transition: {
+      duration: 0.4,
+      ease: "linear" as const,
+    },
+  },
+}
+
+
+
+
+export default function CheckoutSummary({ showMobileSummary, setShowMobileSummary }:{ showMobileSummary: boolean, setShowMobileSummary: Dispatch<SetStateAction<boolean>> }) {
+    const {
+        getSelectedTickets,
+        getSubtotal,
+        getDiscountAmount,
+        getTotal,
+    } = useCheckout()
+
+
+    const selectedTickets = getSelectedTickets()
+    const subtotal = getSubtotal()
+    const discountAmount = getDiscountAmount()
+    const total = getTotal()
+    const fixedFee = 2000
+
+    // Return nothing if no tickets selected
+    if (selectedTickets.length === 0) return null
+
+    
+    const TicketsList = () => (
+        <div className="space-y-4">
+            {selectedTickets.map((ticket) => (
+                <div key={ticket.id} className="flex items-center justify-between text-sm">
+                    <p className="text-neutral-8">
+                        {ticket.quantity} × {ticket.name}
+                    </p>
+                    <p className="text-neutral-8 font-medium">
+                        {formatPrice(ticket.price * ticket.quantity, 'NG')}
+                    </p>
+                </div>
+            ))}
+        </div>
+    )
+
+    const PriceBreakdown = ({ showTooltips = true }) => (
+        <div className="space-y-4 text-sm">
+            {/* Subtotal */}
+            <div className="flex items-center justify-between">
+                <p className="text-neutral-8">Subtotal</p>
+                <p className="text-neutral-8 font-medium">
+                    {formatPrice(subtotal, 'NG')}
+                </p>
+            </div>
+
+            {/* Membership Discount */}
+            <div className="flex items-center justify-between">
+                <div className="flex items-center gap-1.5">
+                    <p className="text-neutral-8">Membership discount</p>
+                    {showTooltips && (
+                        <Tooltip>
+                            <TooltipTrigger asChild>
+                                <button
+                                    type="button"
+                                    aria-label="Membership discount info"
+                                    className="text-neutral-6 hover:text-neutral-8 transition-colors"
+                                >
+                                    <Icon icon="carbon:information" className="size-4 text-accent-6" />
+                                </button>
+                            </TooltipTrigger>
+                            <TooltipContent>
+                                <p>Discount applied for QavTix members</p>
+                            </TooltipContent>
+                        </Tooltip>
+                    )}
+                </div>
+                <p className="text-neutral-8">—</p>
+            </div>
+
+            {/* Promo Discount */}
+            <div className="flex items-center justify-between">
+                <p className="text-neutral-8">Promo discount</p>
+                <p className="text-neutral-8 font-medium">
+                    {formatPrice(discountAmount, 'NG')}
+                </p>
+            </div>
+
+            {/* Fees */}
+            <div className="flex items-center justify-between">
+                <div className="flex items-center gap-1.5">
+                    <p className="text-neutral-8">Fees</p>
+                    {showTooltips && (
+                        <Tooltip>
+                            <TooltipTrigger asChild>
+                                <button
+                                    type="button"
+                                    aria-label="Fees information"
+                                    className="text-neutral-6 hover:text-neutral-8 transition-colors"
+                                >
+                                    <Icon icon="carbon:information" className="size-4 text-accent-6" />
+                                </button>
+                            </TooltipTrigger>
+                            <TooltipContent>
+                                <p>Non-refundable processing fee</p>
+                            </TooltipContent>
+                        </Tooltip>
+                    )}
+                </div>
+                <p className="text-neutral-8 font-medium">
+                    {formatPrice(fixedFee, 'NG')}
+                </p>
+            </div>
+        </div>
+    )
+
+    const TotalRow = ({ showChevron = false, onClick }: { showChevron?: boolean; onClick?: () => void }) => (
+        <div className="flex items-center justify-between">
+            <h3 className={cn('text-xl font-medium text-secondary-9', space_grotesk.className)}>
+                Total
+            </h3>
+            <button
+                onClick={onClick}
+                className={cn(
+                    'flex items-center gap-2',
+                    showChevron ? 'cursor-pointer' : 'cursor-default'
+                )}
+                aria-expanded={showChevron ? showMobileSummary : undefined}
+                aria-controls={showChevron ? 'mobile-summary-details' : undefined}
+                disabled={!showChevron}
+            >
+                <p className={cn('text-xl font-medium text-primary-6', space_grotesk.className)}>
+                    {formatPrice(total, 'NG')}
+                </p>
+                {showChevron && (
+                    <Icon
+                        icon={showMobileSummary ? 'mdi:chevron-up' : 'mdi:chevron-down'}
+                        className="size-6 text-neutral-7"
+                    />
+                )}
+            </button>
+        </div>
+    )
+
+    
+    const DesktopSummary = () => (
+        <section className="hidden lg:flex w-full min-h-screen flex-col justify-between">
+            <div className=''>
+                <h2 className={cn('text-2xl mt-10 font-medium text-secondary-9 mb-8', space_grotesk.className)}>
+                    Payment Summary
+                </h2>
+
+                <PromoCode />
+
+                <div className="mt-8">
+                    <TicketsList />
+                </div>
+
+                <div className="border-t-[1.4px] border-neutral-5 my-6" />
+
+                <PriceBreakdown showTooltips={true} />
+            </div>
+
+            <div className="mt-16 pt-6 border-t border-neutral-3">
+                <TotalRow />
+                <div className="mt-8">
+                    <CheckoutFlowActionBtns />
+                </div>
+            </div>
+        </section>
+    )
+
+    
+    const MobileSummary = () => (
+        <>
+            {/* Expanded Summary Details */}
+            <AnimatePresence>
+                {showMobileSummary && (
+                    <motion.div
+                    id="mobile-summary-details"
+                    key="mobile-summary"
+                    variants={mobileSummaryVariants}
+                    initial="hidden"
+                    animate="visible"
+                    exit="exit"
+                    className="lg:hidden bg-white global-px py-6"
+                    >
+                        <h2 className={cn('text-2xl font-bold text-secondary-9 mb-6 mt-5', space_grotesk.className)}>
+                            Payment Summary
+                        </h2>
+
+                        <TicketsList />
+
+                        <div className="border-t-[1.4px] border-neutral-5 my-6" />
+
+                        <PriceBreakdown showTooltips={false} />
+                    </motion.div>
+                )}
+            </AnimatePresence>
+
+            {/* Sticky/Relative Bottom Section */}
+            <div
+                className={cn(
+                    'lg:hidden left-0 right-0 bg-white border-t border-neutral-3 z-50',
+                    showMobileSummary ? 'relative' : 'fixed bottom-0'
+                )}
+            >
+                <div className="global-px py-4">
+                    <TotalRow 
+                        showChevron={true} 
+                        onClick={() => setShowMobileSummary(!showMobileSummary)} 
+                    />
+
+                    <div className="mt-6 space-y-4">
+                        <div className="md:hidden">
+                            <PromoCode />
+                        </div>
+                        <CheckoutFlowActionBtns />
+                    </div>
+                </div>
+            </div>
+        </>
+    )
+
+    
+    return (
+        <>
+            <DesktopSummary />
+            <MobileSummary />
+        </>
+    )
+}

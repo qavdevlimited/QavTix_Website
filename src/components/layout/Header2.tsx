@@ -25,10 +25,13 @@ export default function Header2() {
     const ctaLinks = header2NavLinks.filter(link => link.type === 'cta')
 
     // Show header only on non-auth pages,
-    // excluding the homepage and event location routes
+    // excluding the homepage, checkout page and event location routes
 
     return (
-        !pathName.startsWith("/auth") && pathName !== "/" && !containsEventPage(pathName) && (
+        pathName !== "/" && 
+        !pathName.startsWith("/auth") && 
+        !pathName.match("/checkout") && 
+        !containsEventPage(pathName) && (
             <header className="py-8 w-full absolute top-0 left-0 z-100">
                 <div className="global-px flex items-center justify-between">
                     <Logo logo={logoSrc} />

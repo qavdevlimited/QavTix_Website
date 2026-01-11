@@ -57,36 +57,34 @@ export function MobileBottomSheet({
                         damping: 30,
                         stiffness: 300,
                     }}
-                    className="fixed bottom-0 left-0 right-0 bg-white rounded-t-[32px] shadow-2xl z-95 max-h-[90vh] overflow-y-auto"
+                    className="fixed bottom-0 left-0 right-0 bg-white rounded-t-[32px] shadow-2xl z-100 max-h-[90vh] overflow-y-auto"
                 >
                     <div className={`p-6 space-y-6 ${className}`}>
                         {/* Header */}
                         {(title || true) && (
-                            <div className="flex items-center justify-between">
-                            {title && (
-                                <h3 className="font-medium text-xl text-secondary-9">
-                                {title}
-                                </h3>
-                            )}
-                            <button
-                                onClick={onClose}
-                                className="p-2 hover:bg-neutral-2 rounded-full transition-colors"
-                                aria-label="Close"
-                            >
-                                <Icon
-                                icon="flowbite:close-outline"
-                                width="24"
-                                height="24"
-                                className="text-[#1E1E1E]"
-                                />
-                            </button>
+                            <div className="flex items-center justify-between relative z-20">
+                                {title && (
+                                    <h3 className="font-medium text-xl text-secondary-9">
+                                        {title}
+                                    </h3>
+                                )}
+                                <button
+                                    onClick={onClose}
+                                    className="p-2 hover:bg-neutral-2 rounded-full transition-colors"
+                                    aria-label="Close"
+                                >
+                                    <Icon
+                                        icon="flowbite:close-outline"
+                                        width="24"
+                                        height="24"
+                                        className="text-[#1E1E1E]"
+                                    />
+                                </button>
                             </div>
                         )}
 
-                        {/* Content */}
                         {children}
 
-                        {/* Safe area bottom padding */}
                         <div className="pb-safe" />
                     </div>
                 </motion.div>
