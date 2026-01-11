@@ -1,11 +1,10 @@
-// hooks/useUserSettings.ts
 'use client'
 
 import { useAppDispatch, useAppSelector } from '@/lib/redux/hooks'
 import { setRegion, setCurrency, type Region, type Currency } from '@/lib/redux/slices/settingsSlice'
-import { updateUserCurrency, updateUserRegion } from '@/actions/update-user-settings'
 import { useState, useTransition } from 'react'
 import { showAlert } from '../redux/slices/alertSlice'
+import { setLocation } from '../location-utils'
 
 
 
@@ -25,22 +24,22 @@ export function useUserSettings() {
     
     startTransition(async () => {
 
-      const result = await updateUserRegion({ region })
+      const result = await setLocation({ region: newRegion })
       
-      if (result.success) {
+      if (result) {
         dispatch(showAlert({
           title: "Region Updated",
-          description: result.message,
+          description: "Your app region have been updated",
           variant: "default"
         }))
         
       } else {
         dispatch(showAlert({
-          title: "Action Failed",
-          description: result.message,
+          title: "Region Updated Failed",
+          description: "Failed to update app region",
           variant: "default"
         }))
-        setError(result.error || 'Failed to update region')
+        setError('Failed to update region')
       }
     })
   }
@@ -52,22 +51,22 @@ export function useUserSettings() {
     dispatch(setCurrency(newCurrency))
     
     startTransition(async () => {
-      const result = await updateUserCurrency({ currency: newCurrency })
+      const result = await setLocation({ currency: newCurrency })
       
-      if (result.success) {
+      if (result) {
         dispatch(showAlert({
           title: "Currency Updated",
-          description: result.message,
+          description: "Your app currency have been updated",
           variant: "default"
         }))
       } 
       else {
         dispatch(showAlert({
-          title: "Action Failed",
-          description: result.message,
+          title: "Currency Updated Failed",
+          description: "Failed to update app currency",
           variant: "default"
         }))
-        setError(result.error || 'Failed to update currency')
+        setError('Failed to update currency')
       }
     })
   }

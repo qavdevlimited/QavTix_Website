@@ -12,7 +12,7 @@ interface AlertState {
 }
 
 const initialState: AlertState = {
-    isOpen: false,
+    isOpen: true,
     title: '',
     description: '',
     variant: 'default',

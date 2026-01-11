@@ -24,7 +24,7 @@ export default function RegionSwitcher({ className }: { className?: string }) {
                 disabled={isPending}
                 className={cn(
                     className,
-                    "disabled:opacity-65 disabled:cursor-not-allowed w-28 bg-white rounded-lg border-neutral-3 hover:border-neutral-4 focus:border-primary-6"
+                    "disabled:opacity-65 text-xs disabled:cursor-not-allowed w-28 bg-white rounded-lg border-neutral-3 hover:border-neutral-4 focus:border-primary-6"
                 )}
             >
                 <SelectValue placeholder="Select Region" />
@@ -35,7 +35,7 @@ export default function RegionSwitcher({ className }: { className?: string }) {
                     <SelectItem key={r.code} value={r.code}>
                         <span className="flex items-center gap-2">
                             <span className="text-2xl">{r.flag}</span>
-                            <span>{r.label}</span>
+                            <span className="text-xs">{r.code}</span>
                         </span>
                     </SelectItem>
                 ))}

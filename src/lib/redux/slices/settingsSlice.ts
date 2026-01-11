@@ -12,6 +12,12 @@ export type Currency = {
     symbol: string
 }
 
+
+export type LocationData = {
+  region: Region,
+  currency: Currency
+}
+
 type SettingsState = {
     region: Region
     currency: Currency

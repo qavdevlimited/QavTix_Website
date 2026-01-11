@@ -5,9 +5,9 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import Header2 from "@/components/layout/Header2";
 import ReduxStoreProvider from "@/lib/redux/ReduxStoreProvider";
-import { getUserLocation } from "@/actions/get-user-location";
 import AuthPersistorClient from "@/components/custom-utils/persistors/AuthPersistorClient";
-
+import { getOrDetectLocation } from "@/lib/location-utils";
+import CustomGlobalAlert from "@/components/custom-utils/alerts/CustomGlobalAlert";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -20,9 +20,8 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
 
-  const { region, currency } = await getUserLocation()
-
-
+  const { region, currency } = await getOrDetectLocation()
+  
   return (
     <html lang="en">
       <ReduxStoreProvider>
@@ -30,6 +29,7 @@ export default async function RootLayout({
           className={`${inter.className}`}
         >
           <AuthPersistorClient currency={currency} region={region} />
+          <CustomGlobalAlert />
           <Header2 />
           <Header />
           {children}
