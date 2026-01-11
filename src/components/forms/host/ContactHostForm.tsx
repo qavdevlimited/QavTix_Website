@@ -3,14 +3,14 @@
 import { contactHostSchema, ContactHostSchema } from "@/schemas/contact-host.schema"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
-import FormInput2 from "../custom-utils/inputs/FormInput2"
-import FormTextarea1 from "../custom-utils/inputs/FormTextarea1"
-import ActionButton1 from "../custom-utils/buttons/ActionButton1"
 import Link from "next/link"
 import { SOCIAL_LINKS } from "@/components-data/navigation/contact-and-socials"
 import { Icon } from "@iconify/react"
 import { space_grotesk } from "@/lib/redux/fonts"
 import { cn } from "@/lib/utils"
+import FormInput2 from "@/components/custom-utils/inputs/FormInput2"
+import FormTextarea1 from "@/components/custom-utils/inputs/FormTextarea1"
+import ActionButton1 from "@/components/custom-utils/buttons/ActionButton1"
 
 
 export default function ContactHostForm(){
@@ -48,7 +48,7 @@ export default function ContactHostForm(){
                 ))}
             </div>
             <form className="space-y-5 mb-10 md:max-w-sm">
-                <div className="sm:grid grid-cols-2 gap-4 md:grid-cols-1">
+                <div className="space-y-5 sm:grid grid-cols-2 gap-4 md:grid-cols-1">
                     <FormInput2
                         label="Full name"
                         placeholder="Enter your first and last name"

@@ -8,6 +8,8 @@ import { space_grotesk } from '@/lib/redux/fonts'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select'
 import { footerData } from '@/components-data/footer-data'
 import { usePathname } from 'next/navigation'
+import { isHighlightedSocial } from '@/helper-fns/isHighlightedSocial'
+import { cn } from '@/lib/utils'
 
 interface FooterLink {
   label: string
@@ -114,18 +116,39 @@ export default function Footer() {
 
                         {/* Social Links */}
                         <div className="hidden md:flex gap-4 mt-6">
-                            {footerData.social.map((social) => (
-                                <Link
-                                    key={social.label}
-                                    href={social.href}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="flex items-center justify-center hover:scale-110 transition-transform"
-                                    aria-label={social.label}
-                                >
-                                    <Icon icon={social.icon} width="24" height="24" className='text-primary-6 size-9' />
-                                </Link>
-                            ))}
+                            {footerData.social.map((social) => {
+                                const isHighlighted =
+                                    isHighlightedSocial(social.label) ||
+                                    isHighlightedSocial(social.href)
+                                return (
+
+                                    <Link
+                                        href={social.href}
+                                        target="_blank"
+                                        key={social.href}
+                                        rel="noopener noreferrer"
+                                        aria-label={social.label}
+                                        className="flex items-center justify-center"
+                                    >
+                                        <div
+                                            className={cn(
+                                                'flex items-center py-2 justify-center transition-all',
+                                                isHighlighted
+                                                ? 'bg-primary-6 text-white rounded-full p-2'
+                                                : 'text-primary-6'
+                                            )}
+                                            >
+                                            <Icon
+                                                icon={social.icon}
+                                                width="24"
+                                                height="24"
+                                                className={cn(isHighlighted ? "size-7" : "size-9")}
+                                            />
+                                        </div>
+                                    </Link>
+                                )
+                            }
+                            )}
                         </div>
                     </div>
                 </div>

@@ -1,9 +1,9 @@
 'use client'
 
+import { useAppDispatch } from '@/lib/redux/hooks'
+import { showAlert } from '@/lib/redux/slices/alertSlice'
 import { AttendeeInformationData } from '@/schemas/checkout-flow.schema'
-import { createContext, useState, ReactNode, useEffect, useContext, useMemo } from 'react'
-
-
+import { createContext, useState, ReactNode, useEffect, useContext, useMemo, useCallback } from 'react'
 
 interface CheckoutState {
     currentStep: number
@@ -29,6 +29,11 @@ interface CheckoutContextType extends CheckoutState {
     decrementTicket: (ticketId: string) => void
     clearTickets: () => void
     
+    // Ticket validation
+    hasSelectedTickets: () => boolean
+    canProceedToCheckout: () => boolean
+    getTicketSelectionError: () => string | null
+    
     // Data updates
     updateAttendeeInfo: (data: Partial<AttendeeInformationData>) => void
     updatePaymentMethod: (method: string) => void
@@ -36,11 +41,11 @@ interface CheckoutContextType extends CheckoutState {
     // Discount management
     applyDiscount: (discount: Discount) => void
     removeDiscount: () => void
-    validateCoupon: (code: string) => Promise<Discount | null> // Simulate API
+    validateCoupon: (code: string) => Promise<Discount | null>
     
     // Reservation
     startReservation: () => void
-    getRemainingTime: () => number
+    getRemainingTime: () => number | null
     
     // Checkout actions
     processPayment: () => Promise<void>
@@ -52,7 +57,6 @@ interface CheckoutContextType extends CheckoutState {
     getTotal: () => number
     getTotalTickets: () => number
     getSelectedTickets: () => CheckoutTicket[]
-    hasSelectedTickets: () => boolean
 }
 
 const CheckoutContext = createContext<CheckoutContextType | undefined>(undefined)
@@ -87,56 +91,86 @@ export function CheckoutFlowProvider({ children }: { children: ReactNode }) {
     }, [reservationTime])
 
     // Initialize tickets
-    const initializeTickets = (ticketTiers: TicketTier[]) => {
+    const initializeTickets = useCallback((ticketTiers: TicketTier[]) => {
         const checkoutTickets = ticketTiers.map(ticket => ({
             ...ticket,
-            quantity: 0
+            quantity: 0 // Start with 0, let user select
         }))
         setTickets(checkoutTickets)
-        setDiscount(null) // Reset discount on new tickets
-    }
+        setDiscount(null)
+    }, [])
 
     // Ticket quantity updates
-    const updateTicketQuantity = (ticketId: string, quantity: number) => {
+    const updateTicketQuantity = useCallback((ticketId: string, quantity: number) => {
         setTickets(prev => prev.map(ticket => 
             ticket.id === ticketId 
                 ? { ...ticket, quantity: Math.max(0, quantity) }
                 : ticket
         ))
-    }
+    }, [])
 
-    const incrementTicket = (ticketId: string) => {
+    const incrementTicket = useCallback((ticketId: string) => {
         setTickets(prev => prev.map(ticket => 
             ticket.id === ticketId && ticket.available && !ticket.soldOut
                 ? { ...ticket, quantity: ticket.quantity + 1 }
                 : ticket
         ))
-    }
+    }, [])
 
-    const decrementTicket = (ticketId: string) => {
+    const decrementTicket = useCallback((ticketId: string) => {
         setTickets(prev => prev.map(ticket => 
             ticket.id === ticketId && ticket.quantity > 0
                 ? { ...ticket, quantity: ticket.quantity - 1 }
                 : ticket
         ))
-    }
+    }, [])
 
-    const clearTickets = () => {
+    const clearTickets = useCallback(() => {
         setTickets(prev => prev.map(ticket => ({ ...ticket, quantity: 0 })))
         setDiscount(null)
-    }
+    }, [])
+
+    // Ticket validation
+    const hasSelectedTickets = useCallback(() => {
+        return tickets.some(ticket => ticket.quantity > 0)
+    }, [tickets])
+
+    const canProceedToCheckout = useCallback(() => {
+        // Check if at least one ticket is selected
+        const hasTickets = tickets.some(ticket => ticket.quantity > 0)
+        
+        // Check if reservation hasn't expired
+        const hasValidReservation = reservationTime === null || reservationTime > 0
+        
+        return hasTickets && hasValidReservation
+    }, [tickets, reservationTime])
+
+    const getTicketSelectionError = useCallback(() => {
+        if (tickets.length === 0) {
+            return 'No tickets available'
+        }
+        
+        if (!tickets.some(ticket => ticket.quantity > 0)) {
+            return 'Please select at least one ticket to continue'
+        }
+        
+        if (reservationTime !== null && reservationTime <= 0) {
+            return 'Your ticket reservation has expired. Please select tickets again.'
+        }
+        
+        return null
+    }, [tickets, reservationTime])
 
     // Discount handling
-    const applyDiscount = (newDiscount: Discount) => {
+    const applyDiscount = useCallback((newDiscount: Discount) => {
         setDiscount(newDiscount)
-    }
+    }, [])
 
-    const removeDiscount = () => {
+    const removeDiscount = useCallback(() => {
         setDiscount(null)
-    }
+    }, [])
 
-    const validateCoupon = async (code: string): Promise<Discount | null> => {
-        // Example API simulation
+    const validateCoupon = useCallback(async (code: string): Promise<Discount | null> => {
         await new Promise(resolve => setTimeout(resolve, 800))
         
         if (code.toUpperCase() === 'WELCOME10') {
@@ -148,34 +182,50 @@ export function CheckoutFlowProvider({ children }: { children: ReactNode }) {
             }
         }
         return null
-    }
+    }, [])
 
     // Reservation
-    const startReservation = () => {
-        if (!reservationTime) {
+    const startReservation = useCallback(() => {
+        if (reservationTime === null || reservationTime === 0) {
             setReservationTime(RESERVATION_DURATION)
         }
-    }
+    }, [reservationTime])
 
-    const getRemainingTime = () => reservationTime || 0
+    const getRemainingTime = useCallback(() => reservationTime, [reservationTime])
 
     // Data updates
-    const updateAttendeeInfo = (data: Partial<AttendeeInformationData>) => {
+    const updateAttendeeInfo = useCallback((data: Partial<AttendeeInformationData>) => {
         setAttendeeInfo(prev => ({ ...prev, ...data }))
-    }
+    }, [])
 
-    const updatePaymentMethod = (method: string) => {
+    const updatePaymentMethod = useCallback((method: string) => {
         setPaymentMethod(method)
-    }
+    }, [])
 
     // Navigation
-    const nextStep = () => {
-        setCurrentStep(prev => Math.min(prev + 1, 4))
-    }
 
-    const prevStep = () => {
+    const dispatch = useAppDispatch()
+
+    const nextStep = useCallback(() => {
+        // Validate tickets before proceeding from step 1
+        if (currentStep === 1 && !canProceedToCheckout()) {
+            const error = getTicketSelectionError()
+            if (error) {
+                dispatch(showAlert({
+                    title: "",
+                    description: error,
+                    variant: "destructive"
+                }))
+                return
+            }
+        }
+        
+        setCurrentStep(prev => Math.min(prev + 1, 4))
+    }, [currentStep, canProceedToCheckout, getTicketSelectionError])
+
+    const prevStep = useCallback(() => {
         setCurrentStep(prev => Math.max(prev - 1, 1))
-    }
+    }, [])
 
     // Calculated values (memoized)
     const getSubtotal = useMemo(() => {
@@ -215,12 +265,13 @@ export function CheckoutFlowProvider({ children }: { children: ReactNode }) {
         return () => tickets.filter(ticket => ticket.quantity > 0)
     }, [tickets])
 
-    const hasSelectedTickets = useMemo(() => {
-        return () => tickets.some(ticket => ticket.quantity > 0)
-    }, [tickets])
-
     // Payment simulation
-    const processPayment = async () => {
+    const processPayment = useCallback(async () => {
+        // Final validation before payment
+        if (!canProceedToCheckout()) {
+            throw new Error(getTicketSelectionError() || 'Cannot proceed with payment')
+        }
+
         setIsProcessing(true)
         
         try {
@@ -248,9 +299,19 @@ export function CheckoutFlowProvider({ children }: { children: ReactNode }) {
         } finally {
             setIsProcessing(false)
         }
-    }
+    }, [
+        canProceedToCheckout, 
+        getTicketSelectionError, 
+        getSelectedTickets, 
+        getSubtotal, 
+        getDiscountAmount, 
+        getTotal,
+        attendeeInfo,
+        paymentMethod,
+        discount
+    ])
 
-    const resetCheckout = () => {
+    const resetCheckout = useCallback(() => {
         setCurrentStep(1)
         setTickets([])
         setAttendeeInfo({})
@@ -258,7 +319,7 @@ export function CheckoutFlowProvider({ children }: { children: ReactNode }) {
         setReservationTime(null)
         setCheckoutComplete(false)
         setDiscount(null)
-    }
+    }, [])
 
     return (
         <CheckoutContext.Provider
@@ -279,6 +340,9 @@ export function CheckoutFlowProvider({ children }: { children: ReactNode }) {
                 incrementTicket,
                 decrementTicket,
                 clearTickets,
+                hasSelectedTickets,
+                canProceedToCheckout,
+                getTicketSelectionError,
                 updateAttendeeInfo,
                 updatePaymentMethod,
                 applyDiscount,
@@ -293,7 +357,6 @@ export function CheckoutFlowProvider({ children }: { children: ReactNode }) {
                 getTotal,
                 getTotalTickets,
                 getSelectedTickets,
-                hasSelectedTickets
             }}
         >
             {children}

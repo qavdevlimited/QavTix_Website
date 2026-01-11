@@ -1,7 +1,7 @@
 "use client"
 
-import ActionButton1 from "../custom-utils/buttons/ActionButton1";
-import TextInput1 from "../custom-utils/inputs/TextInput1";
+import ActionButton1 from "../../custom-utils/buttons/ActionButton1";
+import TextInput1 from "../../custom-utils/inputs/TextInput1";
 
 export default function ForgotPasswordForm(){
     return (

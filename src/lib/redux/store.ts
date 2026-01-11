@@ -1,10 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit'
-import mobileNavReducer from "./slices/mobileNavSlice"
+import alertReducer from "./slices/alertSlice"
 
 export const makeStore = () => {
   return configureStore({
     reducer: {
-      mobileNav: mobileNavReducer,
+      alert: alertReducer
     }
   })
 }

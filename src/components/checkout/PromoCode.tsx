@@ -6,6 +6,7 @@ import { z } from 'zod'
 import { cn } from '@/lib/utils'
 import { useState } from 'react'
 import { Icon } from '@iconify/react'
+import { useCheckout } from '@/contexts/CheckoutFlowProvider'
 
 // Zod schema for promo code
 const promoCodeSchema = z.object({
@@ -18,6 +19,8 @@ const promoCodeSchema = z.object({
 type PromoCodeForm = z.infer<typeof promoCodeSchema>
 
 export default function PromoCode() {
+
+    const { currentStep } = useCheckout()
     const [isSubmitting, setIsSubmitting] = useState(false)
     const [success, setSuccess] = useState(false)
     const [serverError, setServerError] = useState<string | null>(null)
@@ -48,6 +51,7 @@ export default function PromoCode() {
     }
 
     return (
+        currentStep === 1 &&
         <div className="w-full max-w-md">
             <form onSubmit={handleSubmit(onSubmit)} className="flex flex-wrap gap-3 items-center">
                 <div className="relative flex-1">

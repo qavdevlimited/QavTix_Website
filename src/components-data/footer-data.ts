@@ -22,7 +22,7 @@ export const footerData = {
   ],
   contact: {
     title: 'Get in touch',
-    info: Object.values(CONTACT_LINKS)
+    info: Object.values(CONTACT_LINKS.LAGOS)
   },
   social: Object.values(SOCIAL_LINKS), 
   legal: Object.values(LEGAL_LINKS)

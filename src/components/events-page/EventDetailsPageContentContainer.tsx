@@ -2,10 +2,10 @@
 
 import SectionHeading from "@/components/shared/SectionHeading";
 import Image from "next/image";
-import ContactHostForm from "../forms/ContactHostForm";
 import EventOverviewSection from "./event-details/EventOverviewSection";
 import HostNAttendeeDetailsSection from "./event-details/HostNAttendeeSection";
 import RelatedEventsYouMightLike from "./event-details/RelatedEventsYouMightLike";
+import ContactHostForm from "../forms/host/ContactHostForm";
 
 
 export default function EventDetailsPageContentContainer(){

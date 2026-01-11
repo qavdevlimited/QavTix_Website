@@ -1,5 +1,5 @@
 import AuthPageFlexWrapper from "@/components/auth-pages/AuthPageFlexWrapper";
-import ForgotPasswordForm from "@/components/forms/ForgotPasswordForm";
+import ForgotPasswordForm from "@/components/forms/auth-pages/ForgotPasswordForm";
 import { space_grotesk } from "@/lib/redux/fonts";
 
 export default function ForgotPasswordPage(){

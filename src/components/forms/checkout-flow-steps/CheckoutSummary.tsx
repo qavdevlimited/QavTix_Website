@@ -10,6 +10,10 @@ import CheckoutFlowActionBtns from '@/components/custom-utils/buttons/CheckoutFl
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
 import { useCheckout } from '@/contexts/CheckoutFlowProvider'
 import { formatPrice } from '@/helper-fns/formatPrice'
+import { Controller } from 'react-hook-form'
+import FormCheckbox1 from '@/components/custom-utils/inputs/FormCheckbox1'
+import { useCheckoutAttendeeInfoForm } from '@/contexts/CheckoutAttendeeInfoFormContext'
+import Link from 'next/link'
 
 
 const mobileSummaryVariants = {
@@ -44,6 +48,7 @@ export default function CheckoutSummary({ showMobileSummary, setShowMobileSummar
         getSubtotal,
         getDiscountAmount,
         getTotal,
+        currentStep
     } = useCheckout()
 
 
@@ -52,6 +57,8 @@ export default function CheckoutSummary({ showMobileSummary, setShowMobileSummar
     const discountAmount = getDiscountAmount()
     const total = getTotal()
     const fixedFee = 2000
+
+    const { form : { control, formState: { errors } }} = useCheckoutAttendeeInfoForm()
 
     // Return nothing if no tickets selected
     if (selectedTickets.length === 0) return null
@@ -200,18 +207,19 @@ export default function CheckoutSummary({ showMobileSummary, setShowMobileSummar
 
     
     const MobileSummary = () => (
+
         <>
             {/* Expanded Summary Details */}
             <AnimatePresence>
                 {showMobileSummary && (
                     <motion.div
-                    id="mobile-summary-details"
-                    key="mobile-summary"
-                    variants={mobileSummaryVariants}
-                    initial="hidden"
-                    animate="visible"
-                    exit="exit"
-                    className="lg:hidden bg-white global-px py-6"
+                        id="mobile-summary-details"
+                        key="mobile-summary"
+                        variants={mobileSummaryVariants}
+                        initial="hidden"
+                        animate="visible"
+                        exit="exit"
+                        className="lg:hidden bg-white global-px py-4"
                     >
                         <h2 className={cn('text-2xl font-bold text-secondary-9 mb-6 mt-5', space_grotesk.className)}>
                             Payment Summary
@@ -239,10 +247,39 @@ export default function CheckoutSummary({ showMobileSummary, setShowMobileSummar
                         onClick={() => setShowMobileSummary(!showMobileSummary)} 
                     />
 
-                    <div className="mt-6 space-y-4">
-                        <div className="md:hidden">
-                            <PromoCode />
-                        </div>
+
+                    {
+                        currentStep === 2 &&
+                        <Controller
+                            name="agreeToTerms"
+                            control={control}
+                            render={({ field }) => (
+                                <FormCheckbox1
+                                    id="agreed-to-terms"
+                                    {...field}
+                                    checked={field.value}
+                                    onCheckedChange={field.onChange}
+                                    error={errors.agreeToTerms?.message}
+                                    className='mt-6'
+                                    label={
+                                        <span className='font-normal'>
+                                            I agree to QavTix{' '}
+                                            <Link href="/terms" className="text-accent-6 font-medium hover:underline">
+                                                Terms & Conditions
+                                            </Link>
+                                            {' '}and{' '}
+                                            <Link href="/commission" className="text-accent-6 font-medium hover:underline">
+                                                Refund Policy
+                                            </Link>.
+                                        </span>
+                                    }
+                                />
+                            )}
+                        />
+                    }
+
+                    <div className="mt-4 space-y-4">
+                        <PromoCode />
                         <CheckoutFlowActionBtns />
                     </div>
                 </div>

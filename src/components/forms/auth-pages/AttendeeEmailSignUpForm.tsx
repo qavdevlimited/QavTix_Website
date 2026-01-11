@@ -1,6 +1,6 @@
-import ActionButton1 from "../custom-utils/buttons/ActionButton1";
-import PasswordInput1 from "../custom-utils/inputs/PasswordInput1";
-import TextInput1 from "../custom-utils/inputs/TextInput1";
+import ActionButton1 from "../../custom-utils/buttons/ActionButton1";
+import PasswordInput1 from "../../custom-utils/inputs/PasswordInput1";
+import TextInput1 from "../../custom-utils/inputs/TextInput1";
 
 export default function AttendeeEmailSignUpForm(){
     return (

@@ -111,6 +111,39 @@ export const ticketTiers: Partial<TicketTier>[] = [
 ]
 
 
+export const mockAvailableTickets: TicketTier[] = [
+  {
+      id: '1',
+      name: 'Regular',
+      price: 0,
+      originalPrice: 0,
+      currency: '₦',
+      description: 'Regular access ticket admits one',
+      available: true,
+  },
+  {
+    id: '2',
+    name: 'VIP',
+    price: 25000,
+    originalPrice: 42000,
+    currency: '₦',
+    description: 'VIP access ticket admits one',
+    features: ['Priority seating', 'Backstage access'],
+    available: true,
+  },
+  {
+    id: '3',
+    name: 'VVIP',
+    price: 35000,
+    originalPrice: 42000,
+    currency: '₦',
+    description: 'Front Row access ticket admits one',
+    available: true,
+    soldOut: true,
+  }
+]
+
+
 
 
 export const demoHosts: Host[] = [

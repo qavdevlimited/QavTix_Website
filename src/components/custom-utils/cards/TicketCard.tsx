@@ -49,18 +49,18 @@ export function TicketCard({
             <div className="flex flex-col xsm:flex-row sm:items-start sm:justify-between gap-4 sm:gap-6 mb-4">
                 <div className="flex-1 space-y-2">
                     <h3
-                        className={`${space_grotesk.className} text-xl font-semibold text-secondary-9`}
+                        className={`${space_grotesk.className} text-xl text-secondary-9`}
                     >
                         {ticket.name}
                     </h3>
 
                     {ticket.price === 0 ? (
-                        <p className={`${space_grotesk.className} font-bold text-xl text-primary-6`}>
+                        <p className={`${space_grotesk.className} font-medium text-xl text-primary-6`}>
                             Free
                         </p>
                     ) : (
                         <div className="flex items-baseline gap-2">
-                            <p className={`${space_grotesk.className} font-bold text-xl text-primary-6`}>
+                            <p className={`${space_grotesk.className} font-medium text-xl text-primary-6`}>
                                 {ticket.currency}{ticket.price.toLocaleString()}
                             </p>
                             {ticket.originalPrice && (
@@ -75,6 +75,7 @@ export function TicketCard({
                 {!ticket.soldOut ? (
                     <div className="flex items-center gap-3 self-start">
                         <button
+                            type="button"
                             onClick={() => decrementTicket(id)}
                             disabled={ticket.quantity === 0}
                             className="w-8 h-8 rounded-lg bg-secondary-6 text-white flex items-center justify-center hover:bg-secondary-7 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
@@ -85,6 +86,7 @@ export function TicketCard({
                             {ticket.quantity}
                         </span>
                         <button
+                            type="button"
                             onClick={() => incrementTicket(id)}
                             disabled={!ticket.available || ticket.soldOut}
                             className="w-8 h-8 rounded-lg bg-secondary-6 text-white flex items-center justify-center hover:bg-secondary-7 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"

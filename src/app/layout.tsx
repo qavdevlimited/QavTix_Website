@@ -4,6 +4,7 @@ import { inter } from "@/lib/redux/fonts";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import Header2 from "@/components/layout/Header2";
+import ReduxStoreProvider from "@/lib/redux/ReduxStoreProvider";
 
 
 export const metadata: Metadata = {
@@ -18,14 +19,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${inter.className}`}
-      >
-        <Header2 />
-        <Header />
-        {children}
-        <Footer />
-      </body>
+      <ReduxStoreProvider>
+        <body
+          className={`${inter.className}`}
+        >
+          <Header2 />
+          <Header />
+          {children}
+          <Footer />
+        </body>
+      </ReduxStoreProvider>
     </html>
   )
 }
