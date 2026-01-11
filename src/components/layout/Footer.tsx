@@ -5,39 +5,17 @@ import { Icon } from '@iconify/react'
 import { useState } from 'react'
 import Logo from './Logo'
 import { space_grotesk } from '@/lib/redux/fonts'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select'
 import { footerData } from '@/components-data/footer-data'
 import { usePathname } from 'next/navigation'
 import { isHighlightedSocial } from '@/helper-fns/isHighlightedSocial'
 import { cn } from '@/lib/utils'
-
-interface FooterLink {
-  label: string
-  href: string
-}
-
-
+import CurrencySwitcher from '../settings/CurrencySwitcher'
+import RegionSwitcher from '../settings/RegionSwitcher'
 
 
 export default function Footer() {
 
     const pathName = usePathname()
-    const [selectedCurrency, setSelectedCurrency] = useState('NG')
-    const [selectedRegion, setSelectedRegion] = useState('Naira')
-
-
-    // Featuring Only Nigeria Region
-    const currencies = [
-        { code: 'NG', label: 'NG', flag: '🇳🇬' },
-        // { code: 'US', label: 'US', flag: '🇺🇸' },
-        // { code: 'GB', label: 'GB', flag: '🇬🇧' },
-    ]
-
-    const regions = [
-        { code: 'Naira', label: 'Naira', symbol: '₦' },
-        // { code: 'Dollar', label: 'Dollar', symbol: '$' },
-        // { code: 'Pound', label: 'Pound', symbol: '£' },
-    ]
 
     return (
         !pathName.match("/auth") &&
@@ -191,39 +169,11 @@ export default function Footer() {
                     </div>
 
                     <div className="flex relative z-10 items-center gap-3 order-3 md:order-[unset]">
-                        {/* Currency Selector */}
-                        <Select value={selectedCurrency} onValueChange={setSelectedCurrency}>
-                            <SelectTrigger className="w-28 bg-white rounded-lg border-neutral-3 hover:border-neutral-4 focus:border-primary-6">
-                                <SelectValue placeholder="Select currency" />
-                            </SelectTrigger>
-                            <SelectContent>
-                                {currencies.map((currency) => (
-                                    <SelectItem key={currency.code} value={currency.code}>
-                                        <span className="flex items-center gap-2">
-                                            <span className='text-2xl'>{currency.flag}</span>
-                                            <span>{currency.label}</span>
-                                        </span>
-                                    </SelectItem>
-                                ))}
-                            </SelectContent>
-                        </Select>
-
                         {/* Region Selector */}
-                        <Select value={selectedRegion} onValueChange={setSelectedRegion}>
-                            <SelectTrigger className="w-28 bg-white rounded-lg border-neutral-3 hover:border-neutral-4 focus:border-primary-6">
-                                <SelectValue placeholder="Select region" />
-                            </SelectTrigger>
-                            <SelectContent>
-                                {regions.map((region) => (
-                                    <SelectItem key={region.code} value={region.code}>
-                                        <span className="flex items-center gap-2">
-                                            <span>{region.symbol}</span>
-                                            <span>{region.label}</span>
-                                        </span>
-                                    </SelectItem>
-                                ))}
-                            </SelectContent>
-                        </Select>
+                        <RegionSwitcher />
+
+                        {/* Currency Selector */}
+                        <CurrencySwitcher  />
                     </div>
                 </div>
             </div>

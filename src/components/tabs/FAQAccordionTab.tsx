@@ -63,17 +63,13 @@ const FAQ = ({ data }:{ data: typeof hostFaqData }) => {
 }
 
 
-
-type Tab = "attendee" | "host"
-
-
 function FAQAccordionTab(){
 
-    const [activeTab, setActiveTab] = useState<Tab>("host")
+    const [activeTab, setActiveTab] = useState<AccountType>("host")
 
     return (
         <div>
-            <Tabs value={activeTab} onValueChange={(v) => setActiveTab(v as Tab)} className="w-full md:flex md:flex-row md:items-start md:justify-between md:gap-8 lg:gap-16">
+            <Tabs value={activeTab} onValueChange={(v) => setActiveTab(v as AccountType)} className="w-full md:flex md:flex-row md:items-start md:justify-between md:gap-8 lg:gap-16">
                 
                 <div className="hidden md:flex flex-col justify-center gap-12 mt-10 text-secondary-9">
                     <button
