@@ -97,16 +97,16 @@ const OfficeLocationTabs = () => {
     return (
         <div className="w-full">
             <Tabs value={activeTab} onValueChange={(v) => setActiveTab(v as Tab)} className="w-full">
-                <TabsList className="grid w-full grid-cols-2 mb-8 bg-gray-50 h-12 p-1 rounded-lg">
+                <TabsList className="grid w-full grid-cols-2 mb-8 gap-2 bg-gray-50 h-12 p-1 rounded-lg">
                     <TabsTrigger 
                         value="lagos" 
-                        className="data-[state=active]:bg-primary-1 data-[state=active]:text-primary-7 text-secondary-9 shadow-none drop-shadow-none font-medium rounded-md transition-all"
+                        className="data-[state=active]:bg-primary-1 data-[state=active]:border-0 border border-neutral-5 data-[state=active]:text-primary-7 text-secondary-9 shadow-none drop-shadow-none font-medium rounded-md transition-all"
                     >
                         Lagos office
                     </TabsTrigger>
                     <TabsTrigger 
                         value="abuja"
-                        className="data-[state=active]:bg-primary-1 data-[state=active]:text-primary-7 text-secondary-9 shadow-none drop-shadow-none font-medium rounded-md transition-all"
+                        className="data-[state=active]:bg-primary-1 data-[state=active]:border-0 border border-neutral-5 data-[state=active]:text-primary-7 text-secondary-9 shadow-none drop-shadow-none font-medium rounded-md transition-all"
                     >
                         Abuja office
                     </TabsTrigger>

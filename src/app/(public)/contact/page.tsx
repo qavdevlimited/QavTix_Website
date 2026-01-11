@@ -10,7 +10,7 @@ export default function ContactPage(){
 
             <div className="global-px pb-20">
                 <section className="my-14 max-w-xl md:mb-20">
-                    <h2 className={`${space_grotesk.className} font-bold text-2xl text-secondary-9 leading-8`}>We are always ready to help you, and answer your questions</h2>
+                    <h2 className={`${space_grotesk.className} font-bold text-2xl md:text-3xl lg:text-[2.5rem] text-secondary-9`}>We are always ready to help you, and answer your questions</h2>
                     <p className="text-neutral-8 mt-4">Do you have a question? A complaint? Or need any help regarding QavTix services. Feel free to reach out to us.</p>
                 </section>
 

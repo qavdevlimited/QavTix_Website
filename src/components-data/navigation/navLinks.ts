@@ -8,6 +8,7 @@ export const NAV_LINKS = {
   HOME: { label: 'Home', href: '/' },
   ABOUT: { label: 'About', href: '/about-us' },
   HOW_IT_WORKS: { label: 'How it works', href: '/faq' },
+  CONTACT_US: { label: 'Contact Us', href: '/contact' },
   PRICING: { label: 'Pricing', href: '/pricing' },
   EVENTS: { label: 'Events', href: '/events' },
 
