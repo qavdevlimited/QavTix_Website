@@ -8,7 +8,7 @@ import { EVENT_ROUTES, header2NavLinks, NAV_LINKS } from "@/components-data/navi
 import { useState } from "react"
 import MobileMenu from "./MobileMenu"
 import logoSrc from "@/public-assets/logo/qavtix-logo-white.svg"
-import { containsEventPage } from "@/helper-fns/pathNameResolvers"
+import { pathsForHeader2 } from "@/helper-fns/pathNameResolvers"
 
 export default function Header2() {
 
@@ -24,14 +24,11 @@ export default function Header2() {
     const mainNavLinks = header2NavLinks.filter(link => link.type !== 'cta' && link.type !== "auth")
     const ctaLinks = header2NavLinks.filter(link => link.type === 'cta')
 
-    // Show header only on non-auth pages,
-    // excluding the homepage, checkout page and event location routes
-
     return (
         pathName !== "/" && 
         !pathName.startsWith("/auth") && 
         !pathName.match("/checkout") && 
-        !containsEventPage(pathName) && (
+        pathsForHeader2(pathName) && (
             <header className="py-8 w-full absolute top-0 left-0 z-100">
                 <div className="global-px flex items-center justify-between">
                     <Logo logo={logoSrc} />

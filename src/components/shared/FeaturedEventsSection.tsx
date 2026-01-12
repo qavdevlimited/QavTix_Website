@@ -18,17 +18,19 @@ const dupliactedFeaturedEvents: FeaturedEvent[] = [...demoFeaturedEvents, ...dem
 
 export default function FeaturedEventsSection() {
     const [emblaRef, emblaApi] = useEmblaCarousel(
-        { 
-            loop: true,
-            align: 'start',
-            skipSnaps: false,
-            dragFree: false
+        {
+        loop: true,
+        align: 'start',
+        skipSnaps: false,
+        dragFree: false,
         },
         [
-            Autoplay({ 
-                delay: 2000,
-                stopOnInteraction: true
-            })
+        Autoplay({
+            delay: 2000,
+            stopOnInteraction: false,
+            stopOnMouseEnter: true,
+            stopOnFocusIn: false,
+        }),
         ]
     )
 

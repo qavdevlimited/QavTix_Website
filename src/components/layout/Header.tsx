@@ -5,11 +5,11 @@ import SearchEventInput1 from "../custom-utils/inputs/event-search/SearchEventIn
 import Logo from "./Logo";
 import Link from "next/link";
 import { Icon } from "@iconify/react";
-import { NAV_LINKS, navLinks } from "@/components-data/navigation/navLinks";
+import { navLinks } from "@/components-data/navigation/navLinks";
 import { useState } from "react";
 import MobileMenu from "./MobileMenu";
 import logoSrc from "@/public-assets/logo/qavtix-logo.svg"
-import { containsEventPage } from "@/helper-fns/pathNameResolvers";
+import { pathsForHeader1 } from "@/helper-fns/pathNameResolvers";
 
 export default function Header(){
 
@@ -24,15 +24,10 @@ export default function Header(){
     }
 
 
-
-    // Show header only on non-auth pages, homepage and event routes
     return (
         !pathName.startsWith("/auth") &&
         !pathName.match("/checkout") &&
-            (
-                pathName === "/" ||
-                containsEventPage(pathName)
-            )
+        pathsForHeader1(pathName)
         ) && (
         <header className="py-8 w-full absolute top-0 left-0 z-100 flex justify-between items-center global-px">
             <div className="flex items-center gap-8">

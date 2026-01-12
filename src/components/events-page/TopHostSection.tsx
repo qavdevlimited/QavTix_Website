@@ -104,7 +104,7 @@ export default function TopHostsSection() {
                                 />
                                 <div>
                                     <h3 className={`${space_grotesk.className} text-center text-lg font-medium text-secondary-9 mb-1`}>{host.name}</h3>
-                                    <div className="flex gap-3 text-xs font-medium text-neutral-8 items-center">
+                                    <div className={`${space_grotesk.className} flex gap-3 text-xs font-medium text-neutral-8 items-center`}>
                                         <span>
                                             <span className='text-neutral-7'>{host.followers}</span> Followers
                                         </span>
