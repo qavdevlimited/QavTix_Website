@@ -20,7 +20,7 @@ export default function CurrencySwitcher({ className }:{ className?: string }){
                 disabled={isPending} 
                 className={cn(
                     className,
-                    "disabled:-65 disabled:cursor-not-allowed w-28 bg-white rounded-lg border-neutral-3 hover:border-neutral-4 focus:border-primary-6",
+                    "disabled:-65 text-neutral-8 font-medium disabled:cursor-not-allowed w-28 bg-white rounded-lg border-neutral-3 hover:border-neutral-4 focus:border-primary-6",
                 )}>
                 <SelectValue placeholder="Select Currency" />
             </SelectTrigger>

@@ -1,10 +1,4 @@
-type faqData = {
-    id: string,
-    question: string,
-    answer: string
-}
-
-export const hostFaqData : faqData[] = [
+export const hostFaqData : FaqData[] = [
     {
         id: 'payment',
         question: 'When do I get paid?',
@@ -53,7 +47,7 @@ export const hostFaqData : faqData[] = [
 ]
 
 
-export const attendeesFaq: faqData[] = [
+export const attendeesFaq: FaqData[] = [
     {
         id: 'buy-ticket',
         question: 'How do I buy a ticket?',

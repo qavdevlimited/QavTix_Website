@@ -14,7 +14,7 @@ export default function PricingPage(){
             <SectionHeading title="Pricing" />
 
             <div className="global-px pb-20 mt-16">
-                <Tabs value={activePricingTab} onValueChange={(v) => setActivePricingTab(v as AccountType)} className="w-full">
+                <Tabs value={activePricingTab} onValueChange={(v) => setActivePricingTab(v as AccountType)} className="w-full max-w-7xl mx-auto">
                     <TabsList className="grid max-w-full w-[14em] h-16 mx-auto border border-secondary-9 rounded-full grid-cols-2 mb-8 gap-2 bg-gray-50 p-1">
                         <TabsTrigger 
                             value="host" 

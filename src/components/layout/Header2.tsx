@@ -44,13 +44,13 @@ export default function Header2() {
                                     key={link.href}
                                     href={link.href}
                                     className={`
-                                        px-4 py-2 rounded-lg text-sm transition-all duration-150
+                                        px-4 py-2 text-sm transition-all duration-150
                                         ${active
                                             ? 'text-white'
                                             : 'text-neutral-6 hover:text-neutral-5'
                                         }
                                         active:scale-[0.98]
-                                        focus:outline-none focus:ring-2 focus:ring-neutral-4 focus:ring-offset-2
+                                        focus:outline-none focus:border-b-2 focus:border-neutral-4
                                     `}
                                 >
                                     {link.label}

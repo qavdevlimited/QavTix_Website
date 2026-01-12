@@ -7,7 +7,8 @@ export interface NavLink {
 export const NAV_LINKS = {
   HOME: { label: 'Home', href: '/' },
   ABOUT: { label: 'About', href: '/about-us' },
-  HOW_IT_WORKS: { label: 'How it works', href: '/faq' },
+  HOW_IT_WORKS: { label: 'How it works', href: '/how-it-works' },
+  FAQ: { label: 'FAQ', href: '/faq' },
   CONTACT_US: { label: 'Contact Us', href: '/contact' },
   PRICING: { label: 'Pricing', href: '/pricing' },
   EVENTS: { label: 'Events', href: '/events' },

@@ -1,8 +1,12 @@
 import { space_grotesk } from "@/lib/redux/fonts";
 import CurrencySwitcher from "../settings/CurrencySwitcher";
-import { hostPricingData } from "@/components-data/demo-data";
+import { hostPricingData } from "@/components-data/pricing-plans";
 import PricingCard from "../custom-utils/cards/PricingCard";
 import { TabsContent } from "../ui/tabs";
+import MobileFeatureComparison from "./MobileFeatureComparison";
+import { hostFaqData } from "@/components-data/faq-data";
+import DesktopFeatureComparison from "./DesktopFeatureComparison";
+import PricingFAQs from "./PricingFAQs";
 
 export default function HostPricingContent(){
     return (
@@ -12,17 +16,27 @@ export default function HostPricingContent(){
                 Start free and upgrade anytime. Whether you’re hosting your first event or managing hundreds, QavTix offers flexible, fair pricing designed for organizers at every level.
             </p>
 
-            <CurrencySwitcher className="bg-primary-1!" />
+            <div className="my-12 flex justify-center items-center">
+                <CurrencySwitcher className="bg-primary-1!" />
+            </div>
 
-            <div>
+            <div className="grid grid-cols-1 gap-y-32 gap-x-10 sm:grid-cols-2 md:grid-cols-3">
                 {
-                    hostPricingData.plans.map((v) => {
+                    hostPricingData.plans.map((v,i) => {
                         return (
-                            <PricingCard key={v.id} plan={v} />
+                            <PricingCard index={i} key={v.id} plan={v} />
                         )
                     })
                 }
             </div>
+
+            <div className="mt-24 md:mt-32">
+                <h2 className={`${space_grotesk.className} text-center text-xl md:text-2xl lg:text-[2rem] font-medium text-secondary-9 mb-6`}>Feature comparison</h2>
+                <MobileFeatureComparison data={hostPricingData} />
+                <DesktopFeatureComparison data={hostPricingData}  />
+            </div>
+
+            <PricingFAQs data={hostFaqData} />
         </TabsContent>
     )
 }

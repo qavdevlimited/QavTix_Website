@@ -32,7 +32,7 @@ export default function ContactUsForm(){
             <div className="rounded-3xl p-6 bg-accent-1">
                 <h3 className={`text-secondary-9 text-2xl font-medium leading-8 ${space_grotesk.className}`}>Send us a message</h3>
                 <p className="text-neutral-8 mt-5">
-                    Before getting in touch see some <Link href={NAV_LINKS.HOW_IT_WORKS.href} className="text-accent-6 font-medium">frequently asked questions</Link> to clarify your objections and get answers to your questions.
+                    Before getting in touch see some <Link href={NAV_LINKS.FAQ.href} className="text-accent-6 font-medium">frequently asked questions</Link> to clarify your objections and get answers to your questions.
                 </p>
             </div>
 

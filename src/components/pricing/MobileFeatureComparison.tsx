@@ -1,19 +1,23 @@
+import { space_grotesk } from "@/lib/redux/fonts"
 import { Icon } from "@iconify/react"
 
 interface MobileFeatureComparisonProps {
-  data: PricingData
+  data: PricingData,
 }
 
 export default function MobileFeatureComparison({ data }: MobileFeatureComparisonProps) {
+
+
     return (
-        <div className="lg:hidden">
-            <h2 className="text-xl font-bold text-neutral-9 mb-6">Feature comparison</h2>
-            
-            <div className="space-y-6">
+        <div className="lg:hidden">            
+            <div className="space-y-14">
                 {data.plans.map((plan) => (
-                    <div key={plan.id} className="border-2 border-neutral-3 rounded-xl p-4">
-                        <div className="bg-neutral-7 text-white px-4 py-2 rounded-lg font-semibold mb-4 text-center">
-                            {plan.name}
+                    <div key={plan.id} className="mt-12">
+
+                        <div className="flex justify-end">
+                            <span className="bg-secondary-9 min-w-[10em] text-white px-4 py-3 rounded-xl font-medium text-xs mb-4 text-center">
+                                {plan.name}
+                            </span>
                         </div>
                         
                         <div className="space-y-2">
@@ -24,13 +28,13 @@ export default function MobileFeatureComparison({ data }: MobileFeatureCompariso
                                 return (
                                     <div
                                         key={index}
-                                        className="flex items-center justify-between py-2"
+                                        className="flex items-center justify-between py-2 px-8"
                                     >
-                                        <span className="text-sm text-neutral-8">{feature.name}</span>
+                                        <span className="text-sm text-neutral-10 font-medium">{feature.name}</span>
                                         <div>
                                             {isBoolean ? (
                                                 value ? (
-                                                <Icon icon="mdi:check" className="w-5 h-5 text-green-500" />
+                                                <Icon icon="hugeicons:checkmark-square-01" width="24" height="24" className="text-postive-default" />
                                                 ) : (
                                                 <Icon icon="mdi:close" className="w-5 h-5 text-red-500" />
                                                 )
