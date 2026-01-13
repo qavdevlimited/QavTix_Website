@@ -8,6 +8,9 @@ import ReduxStoreProvider from "@/lib/redux/ReduxStoreProvider";
 import AuthPersistorClient from "@/components/custom-utils/persistors/AuthPersistorClient";
 import { getOrDetectLocation } from "@/lib/location-utils";
 import CustomGlobalAlert from "@/components/custom-utils/alerts/CustomGlobalAlert";
+import { TicketUserProvider } from "@/contexts/TicketUserProvider";
+import { getCurrentUser } from "@/actions/get-auth-userdata";
+import { getTicketSession } from "@/actions/get-ticket-session";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -20,21 +23,28 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
 
-  const { region, currency } = await getOrDetectLocation()
+  const [locationData, user, ticketSession] = await Promise.all([
+    getOrDetectLocation(),
+    getCurrentUser(),
+    getTicketSession()
+  ])
+
   
   return (
     <html lang="en">
       <ReduxStoreProvider>
-        <body
-          className={`${inter.className}`}
-        >
-          <AuthPersistorClient currency={currency} region={region} />
-          <CustomGlobalAlert />
-          <Header2 />
-          <Header />
-          {children}
-          <Footer />
-        </body>
+        <TicketUserProvider user={user} ticketSession={ticketSession}>
+          <body
+            className={`${inter.className}`}
+          >
+            <AuthPersistorClient currency={locationData.currency} region={locationData.region} />
+            <CustomGlobalAlert />
+            <Header2 />
+            <Header />
+            {children}
+            <Footer />
+          </body>
+        </TicketUserProvider>
       </ReduxStoreProvider>
     </html>
   )

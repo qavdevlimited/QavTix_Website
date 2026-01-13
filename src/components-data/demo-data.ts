@@ -278,3 +278,12 @@ export const attendeePricingData: PricingData = {
     { name: 'Priority support', free: false, professional: true, enterprise: true }
   ]
 }
+
+
+
+
+export const userTickets: TicketTier[] = [
+  { id: '1', name: 'Ticket 1 (Regular)', price: 5000, originalPrice: 5000, currency: '₦', available: true },
+  { id: '2', name: 'Ticket 2 (Regular)', price: 5000, originalPrice: 5000, currency: '₦', available: true },
+  { id: '3', name: 'Ticket 3 (VIP)', price: 15000, originalPrice: 15000, currency: '₦', available: true },
+]

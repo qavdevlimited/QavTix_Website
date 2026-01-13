@@ -2,13 +2,13 @@ import { EventIconActionButton } from "@/components/shared/EventIconActionButton
 import { Badge } from "@/components/ui/badge";
 import { Icon } from "@iconify/react";
 import Link from "next/link";
-import TicketPricingSection from "../TicketPricingSection";
 import MapEmbed from "@/components/custom-utils/MapEmbed";
 import { copyToClipboard } from "@/helper-fns/copyToClipboard";
 import { statusStyles, StatusStylesRecord } from "@/components-data/event-status-styles";
 import { cn } from "@/lib/utils";
 import { space_grotesk } from "@/lib/redux/fonts";
 import HostNAttendeeDetailsSection from "./HostNAttendeeSection";
+import TicketStatusSection from "./TicketStatusSection";
 
 export default function EventOverviewSection({ className }:{ className?: string }){
     return (
@@ -75,7 +75,7 @@ export default function EventOverviewSection({ className }:{ className?: string 
             </div>
 
 
-            <TicketPricingSection />
+            <TicketStatusSection eventId={"123"} />
 
 
 

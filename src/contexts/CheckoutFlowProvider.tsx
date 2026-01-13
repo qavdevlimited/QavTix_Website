@@ -90,6 +90,13 @@ export function CheckoutFlowProvider({ children }: { children: ReactNode }) {
         return () => clearInterval(interval)
     }, [reservationTime])
 
+    useEffect(() => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        })
+    }, [currentStep])
+
     // Initialize tickets
     const initializeTickets = useCallback((ticketTiers: TicketTier[]) => {
         const checkoutTickets = ticketTiers.map(ticket => ({

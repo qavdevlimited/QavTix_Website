@@ -23,12 +23,11 @@ export default function AttendeesModal() {
     const handleGetTicket = () => {
         router.push('/checkout')
     }
-    
 
     return (
         <Dialog open={true} onOpenChange={() => router.back()}>
             <DialogOverlay className='bg-black/40 z-200' />
-            <DialogContent showCloseButton={false} className="z-200 w-102.5 max-h-[85vh] rounded-[2.5em] overflow-hidden flex flex-col">
+            <DialogContent showCloseButton={false} className="z-200 w-102.5 max-h-[80vh] rounded-[2.5em] overflow-hidden flex flex-col">
                 {!isRegistered ? (
                     // Unauthenticated/Unregistered View
                     <div className="py-4">
@@ -71,12 +70,12 @@ export default function AttendeesModal() {
                     <>
                         <DialogHeader>
                             <div className='flex justify-between'>
-                                <div className="w-14 h-14 bg-primary-1 rounded-full flex items-center justify-center">
+                                <div className="w-14 h-14 bg-primary-1 rounded-full flex items-center justify-center mb-4">
                                     <CustomIcons.userMultipleListIcon className='size-8' />
                                 </div>
                                 <CloseBtn action={() => router.back()} />
                             </div>
-                            <div className='flex justify-between items-start mt-6'>
+                            <div className='flex justify-between items-start'>
                                 <div>
                                     <DialogTitle className={cn(space_grotesk.className, "text-2xl font-medium mb-1")}>
                                         {attendees.length} Attendee
@@ -88,7 +87,7 @@ export default function AttendeesModal() {
                             </div>
                         </DialogHeader>
 
-                        <div className="flex-1 overflow-y-auto">
+                        <div className="mt-6 flex-1 overflow-y-auto">
                             <div className="space-y-1">
                                 {attendees.map((attendee) => (
                                     <div 

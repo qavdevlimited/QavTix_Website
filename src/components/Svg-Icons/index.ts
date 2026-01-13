@@ -9,6 +9,7 @@ import SportFitnessIcon from "./SportFitness";
 import TicketIcon from "./TicketIcon";
 import Timer02 from "./Timer02";
 import TravelIcon from "./Travel";
+import UserMultipleListIcon from "./UserMultipleListIcon";
 import UserMultipleLock from "./UserMultipleLock";
 
 export const CustomIcons = {
@@ -23,5 +24,6 @@ export const CustomIcons = {
     sportAndFitness: SportFitnessIcon,
     musicConcerts: MusicConcertsIcon,
     timer02: Timer02,
-    userMultipleLock: UserMultipleLock
+    userMultipleLock: UserMultipleLock,
+    userMultipleListIcon: UserMultipleListIcon
 }

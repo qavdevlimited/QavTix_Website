@@ -33,7 +33,7 @@ const HostNAttendeeDetailsSection = ({ className }:{ className?: string }) => {
                         <p className="text-xs text-neutral-7">Hosted by</p>
                         <Link 
                             className="flex items-center text-secondary-9 text-sm"
-                            href={NAV_LINKS.HOST_PROFILE.href.replace('[id]', "3636273")}
+                            href={NAV_LINKS.HOST_PROFILE.href.replace('[host_id]', "3636273")}
                             >
                             <strong className="font-normal whitespace-nowrap">Qavdev Limited</strong>
                             <Icon icon="line-md:chevron-right" width="20" height="20" />

@@ -1,3 +1,10 @@
+type AuthUser = {
+    tickets: TicketTier[],
+    profile_img: string,
+    full_name: string,
+    id: string
+}
+
 interface EventCardUser {
     id: string
     image?: string
@@ -19,5 +26,10 @@ type Attendee = {
     id: number,
     name: string,
     profile_img: string,
-    username: string
+    username: string,
+    socials?: {
+        href: string,
+        text: string,
+        icon: string
+    }[]
 }
