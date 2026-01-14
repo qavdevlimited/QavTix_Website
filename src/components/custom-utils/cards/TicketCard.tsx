@@ -1,7 +1,5 @@
 'use client'
 
-import { useEffect, useState } from 'react'
-import { Minus, Plus } from 'lucide-react'
 import { space_grotesk } from '@/lib/redux/fonts'
 import { useCheckout } from '@/contexts/CheckoutFlowProvider'
 import { cn } from '@/lib/utils'
@@ -9,33 +7,19 @@ import { Icon } from '@iconify/react'
 
 interface TicketCardProps {
     id: string
-    onQuantityChange: (quantity: number) => void
 }
 
 export function TicketCard({
     id,
-    onQuantityChange
 }: TicketCardProps) {
 
     const { 
         tickets, 
-        initializeTickets, 
         incrementTicket, 
         decrementTicket,
-        getTotalTickets,
-        hasSelectedTickets,
-        nextStep,
-        startReservation
     } = useCheckout()
 
     const ticket  = tickets.find(v => v.id === id)
-
-    const handleContinue = () => {
-        if (hasSelectedTickets()) {
-            startReservation()
-            nextStep()
-        }
-    }
 
     if (!ticket) return null;
 

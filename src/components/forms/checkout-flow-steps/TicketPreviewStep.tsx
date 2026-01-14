@@ -23,7 +23,6 @@ export default function TicketPreviewStep(){
                         return (
                             <TicketCard 
                                 key={`${v.id}-${i}`} 
-                                onQuantityChange={() => {}}
                                 id={v.id}
                             />
                         )
