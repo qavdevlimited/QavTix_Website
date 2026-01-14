@@ -1,4 +1,4 @@
-import { space_grotesk } from "@/lib/redux/fonts";
+import { space_grotesk } from "@/lib/fonts";
 import MobileInfiniteScroll from "../homepage/MobileInfiniteScrollImages";
 import { slides_onlyImages } from "@/components-data/auth-pages/slides";
 

@@ -1,4 +1,4 @@
-import { space_grotesk } from "@/lib/redux/fonts";
+import { space_grotesk } from "@/lib/fonts";
 import Image from "next/image";
 import Link from "next/link";
 

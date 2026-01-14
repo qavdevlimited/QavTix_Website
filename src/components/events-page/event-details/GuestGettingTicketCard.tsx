@@ -3,7 +3,7 @@
 import { Icon } from '@iconify/react'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
-import { space_grotesk } from '@/lib/redux/fonts'
+import { space_grotesk } from '@/lib/fonts'
 import Link from 'next/link'
 import { AUTH_ROUTES } from '@/components-data/navigation/navLinks'
 import CancelTicketPrompt from '@/components/modals/CancelTicketPrompt'

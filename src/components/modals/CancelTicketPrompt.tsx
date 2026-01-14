@@ -2,7 +2,7 @@
 
 import { DialogHeader, DialogTitle } from '@/components/ui/dialog'
 import { Button } from '@/components/ui/button'
-import { space_grotesk } from '@/lib/redux/fonts'
+import { space_grotesk } from '@/lib/fonts'
 import { Dispatch, SetStateAction, useState } from 'react'
 import { Icon } from '@iconify/react'
 import FormCheckbox1 from '../custom-utils/inputs/FormCheckbox1'

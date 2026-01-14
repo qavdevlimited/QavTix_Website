@@ -6,7 +6,7 @@ import EventDetailsPreview from "@/components/forms/checkout-flow-steps/EventDet
 import { CheckoutAttendeeInfoFormProvider } from "@/contexts/CheckoutAttendeeInfoFormContext";
 import { CheckoutFlowProvider } from "@/contexts/CheckoutFlowProvider";
 import { SplitPaymentProvider } from "@/contexts/SplitPaymentContextProvider";
-import { space_grotesk } from "@/lib/redux/fonts";
+import { space_grotesk } from "@/lib/fonts";
 import { useState } from "react";
 
 export default function EventTicketCheckoutPage(){

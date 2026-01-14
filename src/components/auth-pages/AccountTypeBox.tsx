@@ -1,7 +1,7 @@
 import { RadioGroupItem } from "../ui/radio-group";
 import { CustomIcons } from "../Svg-Icons";
 import { Label } from "../ui/label";
-import { space_grotesk } from "@/lib/redux/fonts";
+import { space_grotesk } from "@/lib/fonts";
 
 export default function AccountTypeBox({ value }: { value: AccountType }) {
 

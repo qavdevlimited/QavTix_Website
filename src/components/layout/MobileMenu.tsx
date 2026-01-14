@@ -9,7 +9,7 @@ import SearchEventInput1 from '../custom-utils/inputs/event-search/SearchEventIn
 import Logo from './Logo'
 import logoSrc from "@/public-assets/logo/qavtix-logo.svg"
 import { Icon } from '@iconify/react'
-import { space_grotesk } from '@/lib/redux/fonts'
+import { space_grotesk } from '@/lib/fonts'
 
 export default function MobileMenu({ 
     openMobileMenu, 

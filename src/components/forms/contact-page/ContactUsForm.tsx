@@ -4,7 +4,7 @@ import { NAV_LINKS } from "@/components-data/navigation/navLinks";
 import ActionButton1 from "@/components/custom-utils/buttons/ActionButton1";
 import FormInput2 from "@/components/custom-utils/inputs/FormInput2";
 import FormTextarea1 from "@/components/custom-utils/inputs/FormTextarea1";
-import { space_grotesk } from "@/lib/redux/fonts";
+import { space_grotesk } from "@/lib/fonts";
 import { contactUsSchema, ContactUsSchema } from "@/schemas/contact-us.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";

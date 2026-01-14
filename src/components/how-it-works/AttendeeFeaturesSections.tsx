@@ -1,4 +1,4 @@
-import { space_grotesk } from "@/lib/redux/fonts";
+import { space_grotesk } from "@/lib/fonts";
 import HowItWorksFeatureFilledCard from "../custom-utils/cards/HowItWorksFeatureFilledCard";
 import { attendeesFeatures } from "@/components-data/howItWorks-data";
 

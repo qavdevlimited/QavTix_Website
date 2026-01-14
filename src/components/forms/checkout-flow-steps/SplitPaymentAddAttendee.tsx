@@ -9,7 +9,7 @@ import { useTicketUser } from '@/contexts/TicketUserProvider'
 import { AttendeeFormData } from '@/schemas/checkout-flow.schema'
 import { useSplitPayment } from '@/contexts/SplitPaymentContextProvider'
 import { mockUserGroups } from '@/components-data/demo-data'
-import { space_grotesk } from '@/lib/redux/fonts'
+import { space_grotesk } from '@/lib/fonts'
 import { cn } from '@/lib/utils'
 
 interface AttendeeCardProps {

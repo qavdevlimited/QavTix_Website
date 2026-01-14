@@ -1,4 +1,4 @@
-import { space_grotesk } from "@/lib/redux/fonts";
+import { space_grotesk } from "@/lib/fonts";
 
 type SectionHeadingProps = {
   title: string;

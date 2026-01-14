@@ -6,7 +6,7 @@ import { attendeesFaq, hostFaqData } from '@/components-data/faq-data';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '../ui/accordion';
 import { Tabs, TabsList, TabsTrigger } from '../ui/tabs';
 import { TabsContent } from '@radix-ui/react-tabs';
-import { space_grotesk } from '@/lib/redux/fonts';
+import { space_grotesk } from '@/lib/fonts';
 
 
 const containerVariants = {

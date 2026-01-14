@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import Image from 'next/image'
 import { z } from 'zod'
-import { space_grotesk } from '@/lib/redux/fonts'
+import { space_grotesk } from '@/lib/fonts'
 import ErrorPara from '../custom-utils/ErrorPara'
 
 const emailSchema = z.string().email('Please enter a valid email address')

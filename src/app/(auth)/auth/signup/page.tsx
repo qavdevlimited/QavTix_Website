@@ -7,7 +7,7 @@ import AuthPageFlexWrapper from "@/components/auth-pages/AuthPageFlexWrapper";
 import ActionButton1 from "@/components/custom-utils/buttons/ActionButton1";
 import ActionButton2 from "@/components/custom-utils/buttons/ActionButton2";
 import { RadioGroup } from "@/components/ui/radio-group";
-import { space_grotesk } from "@/lib/redux/fonts";
+import { space_grotesk } from "@/lib/fonts";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 

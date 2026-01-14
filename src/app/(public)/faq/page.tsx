@@ -1,7 +1,7 @@
 import { NAV_LINKS } from "@/components-data/navigation/navLinks";
 import SectionHeading from "@/components/shared/SectionHeading";
 import FAQAccordionTab from "@/components/tabs/FAQAccordionTab";
-import { space_grotesk } from "@/lib/redux/fonts";
+import { space_grotesk } from "@/lib/fonts";
 import Link from "next/link";
 
 export default function FAQPage(){

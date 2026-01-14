@@ -1,7 +1,7 @@
 'use client'
 
 import { CustomIcons } from "../../Svg-Icons"
-import { space_grotesk } from "@/lib/redux/fonts"
+import { space_grotesk } from "@/lib/fonts"
 import { EventCategory, getEventCategoryLabel } from "@/components-data/event-category"
 import { cn } from "@/lib/utils"
 

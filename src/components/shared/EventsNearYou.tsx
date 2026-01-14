@@ -1,6 +1,6 @@
 "use client"
 
-import { space_grotesk } from "@/lib/redux/fonts";
+import { space_grotesk } from "@/lib/fonts";
 import ActionButton1 from "../custom-utils/buttons/ActionButton1";
 import { useRouter } from "next/navigation";
 import EventsCard1 from "../custom-utils/cards/EventCards";

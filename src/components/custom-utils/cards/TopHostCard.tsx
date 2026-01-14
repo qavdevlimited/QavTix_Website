@@ -2,7 +2,7 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
-import { space_grotesk } from '@/lib/redux/fonts'
+import { space_grotesk } from '@/lib/fonts'
 import FollowHostBtn1 from '@/components/custom-utils/buttons/FollowHostBtn1'
 import { NAV_LINKS } from '@/components-data/navigation/navLinks'
 

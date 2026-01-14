@@ -5,7 +5,7 @@ import useEmblaCarousel from 'embla-carousel-react'
 import Autoplay from 'embla-carousel-autoplay'
 import Image from 'next/image'
 import { Icon } from '@iconify/react'
-import { space_grotesk } from '@/lib/redux/fonts'
+import { space_grotesk } from '@/lib/fonts'
 import { motion } from 'framer-motion'
 import CarouselActionBtns from '../custom-utils/buttons/CarouselActionBtns'
 

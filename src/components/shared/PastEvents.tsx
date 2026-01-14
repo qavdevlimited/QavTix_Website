@@ -1,7 +1,7 @@
 'use client'
 
 
-import { space_grotesk } from '@/lib/redux/fonts'
+import { space_grotesk } from '@/lib/fonts'
 import EventsCard1 from '../custom-utils/cards/EventCards'
 import { useState } from 'react'
 import { usePagination } from '@/lib/custom-hooks/PaginationHook'

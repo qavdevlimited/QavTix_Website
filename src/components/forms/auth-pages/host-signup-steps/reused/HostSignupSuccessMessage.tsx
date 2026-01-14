@@ -3,7 +3,7 @@
 import ActionButton1 from "@/components/custom-utils/buttons/ActionButton1";
 import ActionButton2 from "@/components/custom-utils/buttons/ActionButton2";
 import Logo from "@/components/layout/Logo";
-import { space_grotesk } from "@/lib/redux/fonts";
+import { space_grotesk } from "@/lib/fonts";
 import Image from "next/image";import { useRouter } from "next/navigation";
 
 export default function HostSignUpSuccessMessage() {

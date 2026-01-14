@@ -1,6 +1,6 @@
 'use client'
 
-import { space_grotesk } from '@/lib/redux/fonts'
+import { space_grotesk } from '@/lib/fonts'
 import { useCheckout } from '@/contexts/CheckoutFlowProvider'
 import { cn } from '@/lib/utils'
 import { Icon } from '@iconify/react'

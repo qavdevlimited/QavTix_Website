@@ -2,7 +2,7 @@
 
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../ui/accordion";
 import { motion } from "framer-motion"
-import { space_grotesk } from "@/lib/redux/fonts";
+import { space_grotesk } from "@/lib/fonts";
 import Link from "next/link";
 import { NAV_LINKS } from "@/components-data/navigation/navLinks";
 

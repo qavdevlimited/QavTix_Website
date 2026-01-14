@@ -6,7 +6,7 @@ import MapEmbed from "@/components/custom-utils/MapEmbed";
 import { copyToClipboard } from "@/helper-fns/copyToClipboard";
 import { statusStyles, StatusStylesRecord } from "@/components-data/event-status-styles";
 import { cn } from "@/lib/utils";
-import { space_grotesk } from "@/lib/redux/fonts";
+import { space_grotesk } from "@/lib/fonts";
 import HostNAttendeeDetailsSection from "./HostNAttendeeSection";
 import TicketStatusSection from "./TicketStatusSection";
 

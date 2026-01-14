@@ -5,7 +5,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { getAvatarColor } from "@/helper-fns/getAvatarColor";
 import { getInitialsFromName } from "@/helper-fns/getInitialFromName";
-import { space_grotesk } from "@/lib/redux/fonts";
+import { space_grotesk } from "@/lib/fonts";
 import { cn } from "@/lib/utils";
 import { Icon } from "@iconify/react";
 import Link from "next/link";

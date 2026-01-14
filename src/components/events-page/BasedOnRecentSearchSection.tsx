@@ -1,6 +1,6 @@
 import { eventsMock } from "@/components-data/demo-data";
 import EventsCard1 from "../custom-utils/cards/EventCards";
-import { space_grotesk } from "@/lib/redux/fonts";
+import { space_grotesk } from "@/lib/fonts";
 
 export default function BasedOnRecentSearchSection(){
     return (

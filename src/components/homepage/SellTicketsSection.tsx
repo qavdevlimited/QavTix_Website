@@ -1,6 +1,6 @@
 "use client"
 
-import { space_grotesk } from "@/lib/redux/fonts";
+import { space_grotesk } from "@/lib/fonts";
 import { useRouter } from "next/navigation";
 
 export default function SellTicketsSection(){

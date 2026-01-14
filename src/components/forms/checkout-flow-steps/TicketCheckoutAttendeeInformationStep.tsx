@@ -16,7 +16,7 @@ import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip
 import { useCheckoutAttendeeInfoForm } from '@/contexts/CheckoutAttendeeInfoFormContext'
 import { useCheckout } from '@/contexts/CheckoutFlowProvider'
 import { useTicketUser } from '@/contexts/TicketUserProvider'
-import { space_grotesk } from '@/lib/redux/fonts'
+import { space_grotesk } from '@/lib/fonts'
 import { useSplitPayment } from '@/contexts/SplitPaymentContextProvider'
 import SplitPaymentAddAttendee from './SplitPaymentAddAttendee'
 import { SplitMode } from '@/schemas/checkout-flow.schema'

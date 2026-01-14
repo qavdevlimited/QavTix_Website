@@ -2,7 +2,7 @@
 
 import { useSignup } from "@/contexts/HostSignupProvider"
 import HostSignUpSuccessMessage from "../forms/auth-pages/host-signup-steps/reused/HostSignupSuccessMessage"
-import { space_grotesk } from "@/lib/redux/fonts"
+import { space_grotesk } from "@/lib/fonts"
 import { HostAccountTypeSelector } from "../custom-utils/HostAccountTypeSelector"
 import IndividualHostSignupSection from "../forms/auth-pages/host-signup-steps/individual"
 import OrganizationHostSignupSection from "../forms/auth-pages/host-signup-steps/organization"

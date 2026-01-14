@@ -1,4 +1,4 @@
-import { space_grotesk } from "@/lib/redux/fonts";
+import { space_grotesk } from "@/lib/fonts";
 import CurrencySwitcher from "../settings/CurrencySwitcher";
 import { hostPricingData } from "@/components-data/pricing-plans";
 import PricingCard from "../custom-utils/cards/PricingCard";

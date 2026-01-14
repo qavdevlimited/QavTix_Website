@@ -1,6 +1,6 @@
 import TicketReservationTimer from "@/components/custom-utils/TicketReservationTimer";
 import { useCheckout } from "@/contexts/CheckoutFlowProvider";
-import { space_grotesk } from "@/lib/redux/fonts";
+import { space_grotesk } from "@/lib/fonts";
 import { cn } from "@/lib/utils";
 import { ReactNode } from "react";
 

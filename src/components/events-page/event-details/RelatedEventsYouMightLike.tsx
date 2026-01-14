@@ -2,7 +2,7 @@
 import { useCallback, useEffect, useState } from 'react'
 import useEmblaCarousel from 'embla-carousel-react'
 import Autoplay from 'embla-carousel-autoplay'
-import { space_grotesk } from '@/lib/redux/fonts'
+import { space_grotesk } from '@/lib/fonts'
 import { eventsMock } from '@/components-data/demo-data'
 import CarouselActionBtns from '@/components/custom-utils/buttons/CarouselActionBtns'
 import EventsCard1 from '@/components/custom-utils/cards/EventCards'

@@ -1,6 +1,6 @@
 'use client'
 
-import { space_grotesk } from '@/lib/redux/fonts'
+import { space_grotesk } from '@/lib/fonts'
 import { Icon } from '@iconify/react'
 
 interface FeatureCardProps {

@@ -1,7 +1,7 @@
 import { useRouter } from 'next/navigation'
 import { Dialog, DialogContent, DialogHeader, DialogOverlay, DialogTitle } from '@/components/ui/dialog'
 import { Button } from '@/components/ui/button'
-import { space_grotesk } from '@/lib/redux/fonts'
+import { space_grotesk } from '@/lib/fonts'
 import { CustomIcons } from '@/components/Svg-Icons'
 import { Dispatch, SetStateAction } from 'react'
 import { EVENT_ROUTES } from '@/components-data/navigation/navLinks'

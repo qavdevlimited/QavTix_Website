@@ -1,6 +1,6 @@
 "use client"
 
-import { space_grotesk } from "@/lib/redux/fonts";
+import { space_grotesk } from "@/lib/fonts";
 import Image from "next/image";
 import ActionButton2 from "../custom-utils/buttons/ActionButton2";
 import ActionButton1 from "../custom-utils/buttons/ActionButton1";

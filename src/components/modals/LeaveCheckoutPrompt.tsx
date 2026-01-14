@@ -1,7 +1,7 @@
 import { useRouter } from 'next/navigation'
 import { Dialog, DialogContent, DialogHeader, DialogOverlay, DialogTitle } from '@/components/ui/dialog'
 import { Button } from '@/components/ui/button'
-import { space_grotesk } from '@/lib/redux/fonts'
+import { space_grotesk } from '@/lib/fonts'
 import { Dispatch, SetStateAction } from 'react'
 import { Icon } from '@iconify/react'
 import { AnimatedDialogForPrompt } from '../custom-utils/AnimatedDialogForPrompts'

@@ -5,7 +5,7 @@ import { Dialog, DialogContent, DialogHeader, DialogOverlay, DialogTitle } from 
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import { Icon } from '@iconify/react'
-import { space_grotesk } from '@/lib/redux/fonts'
+import { space_grotesk } from '@/lib/fonts'
 import { cn } from '@/lib/utils'
 import { useState } from 'react'
 import { getAvatarColor } from '@/helper-fns/getAvatarColor'

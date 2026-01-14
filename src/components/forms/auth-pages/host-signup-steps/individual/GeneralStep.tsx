@@ -6,7 +6,7 @@ import { useSignup } from '@/contexts/HostSignupProvider'
 import { individualGeneralSchema, type IndividualGeneralData } from '@/schemas/host-signup.schema'
 import FormInput2 from '@/components/custom-utils/inputs/FormInput2'
 import FormSelect1 from '@/components/custom-utils/inputs/FormSelect1'
-import { space_grotesk } from '@/lib/redux/fonts'
+import { space_grotesk } from '@/lib/fonts'
 import { Country, State } from 'country-state-city';
 import FormCheckbox1 from '@/components/custom-utils/inputs/FormCheckbox1'
 import Link from 'next/link'

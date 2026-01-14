@@ -4,7 +4,7 @@ import { EVENT_ROUTES } from "@/components-data/navigation/navLinks";
 import AttendeeFeaturesSections from "@/components/how-it-works/AttendeeFeaturesSections";
 import HostFeaturesSections from "@/components/how-it-works/HostFeaturesSection";
 import SectionHeading from "@/components/shared/SectionHeading";
-import { space_grotesk } from "@/lib/redux/fonts";
+import { space_grotesk } from "@/lib/fonts";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 

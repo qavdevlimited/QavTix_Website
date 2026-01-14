@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion"
 import { cn } from "@/lib/utils"
 import { Icon } from "@iconify/react"
 import Image from "next/image"
-import { space_grotesk } from "@/lib/redux/fonts"
+import { space_grotesk } from "@/lib/fonts"
 
 interface FeatureCardProps {
     feature: HowItWorkFeatureCard

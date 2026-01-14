@@ -1,7 +1,7 @@
 import ContactUsForm from "@/components/forms/contact-page/ContactUsForm";
 import SectionHeading from "@/components/shared/SectionHeading";
 import OfficeLocationTabs from "@/components/tabs/OfficeLocationTabs";
-import { space_grotesk } from "@/lib/redux/fonts";
+import { space_grotesk } from "@/lib/fonts";
 
 export default function ContactPage(){
     return (

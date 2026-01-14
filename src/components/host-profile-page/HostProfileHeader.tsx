@@ -1,4 +1,4 @@
-import { space_grotesk } from "@/lib/redux/fonts";
+import { space_grotesk } from "@/lib/fonts";
 import { cn } from "@/lib/utils";
 import { Icon } from "@iconify/react";
 import Image from "next/image";

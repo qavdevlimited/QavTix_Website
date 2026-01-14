@@ -6,7 +6,7 @@ import EventsNearYouSection from "@/components/shared/EventsNearYou";
 import FeaturedEventsSection from "@/components/shared/FeaturedEventsSection";
 import SectionHeading from "@/components/shared/SectionHeading";
 import WhereItsHappeningSection from "@/components/shared/WhereItsHappeningSection";
-import { space_grotesk } from "@/lib/redux/fonts";
+import { space_grotesk } from "@/lib/fonts";
 
 export default function EventsPage(){
     return (
