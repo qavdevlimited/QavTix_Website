@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export default function EventDetailsPreview(){
     return (
-        <div className="flex gap-3 rounded-[27px] p-2 border border-neutral-5">
+        <div className="flex gap-3 w-full rounded-[27px] p-2 border border-neutral-5">
             <figure>
                 <Image 
                     src="/images/demo-images/event-detail-img.png" 

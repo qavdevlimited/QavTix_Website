@@ -1,5 +1,17 @@
 import { z } from 'zod'
 
+export type AttendeeFormData = {
+    readonly id: number
+    name: string
+    email: string
+    phone: string
+    amount: number
+}
+
+export type SplitMode = 'equal' | 'manual'
+
+
+
 export const ticketSelectionSchema = z.object({
     tickets: z.array(z.object({
         ticketTypeId: z.string(),
@@ -21,7 +33,6 @@ export const attendeeInformationSchema = z.object({
     keepInLoop: z.boolean().optional(),
     shareWithGroup: z.boolean().optional(),
     splitPayment: z.boolean().optional(),
-    
     agreeToTerms: z.boolean().refine(val => val === true, {
         message: 'You must agree to the terms and conditions'
     })
@@ -51,3 +62,5 @@ export type CheckoutFormData =
     | AttendeeInformationData
     | PaymentMethodData
     | Record<string, never>
+
+    

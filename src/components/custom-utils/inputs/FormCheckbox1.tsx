@@ -11,6 +11,7 @@ interface FormCheckboxProps {
     checked?: boolean
     onCheckedChange?: (checked: boolean) => void
     [key: string]: any
+    flexDirection?: string // e.g flex-row-reverse
 }
 
 const FormCheckbox1 = ({
@@ -18,6 +19,7 @@ const FormCheckbox1 = ({
     error,
     id,
     className = '',
+    flexDirection,
     checked,
     onCheckedChange,
     ...props
@@ -26,7 +28,7 @@ const FormCheckbox1 = ({
 
     return (
         <div className={`w-full ${className}`}>
-            <div className="flex items-start gap-3">
+            <div className={`flex items-start gap-3 ${flexDirection}`}>
                 <Checkbox
                     id={inputId}
                     checked={checked}

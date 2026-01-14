@@ -106,7 +106,7 @@ export default function Footer() {
                                         key={social.href}
                                         rel="noopener noreferrer"
                                         aria-label={social.label}
-                                        className="flex items-center justify-center"
+                                        className="flex items-center justify-center hover:scale-105 ease-linear duration-150"
                                     >
                                         <div
                                             className={cn(

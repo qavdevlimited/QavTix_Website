@@ -15,8 +15,6 @@ export default function ContactUsForm(){
     const {
         register,
         handleSubmit,
-        watch,
-        control,
         formState: { errors, isSubmitting }
     } = useForm<ContactUsSchema>({
         resolver: zodResolver(contactUsSchema),

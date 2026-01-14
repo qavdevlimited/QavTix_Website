@@ -1,36 +1,43 @@
 'use client'
 
 import { useCheckout } from '@/contexts/CheckoutFlowProvider'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { cn } from '@/lib/utils'
 import { useRouter } from 'next/navigation'
 import ReservationTimeExpiredPrompt from '../modals/ReservationTimeExpiredPrompt'
 
+const RESERVATION_DURATION = 50 * 60 // 10 minutes in seconds
+
 export default function TicketReservationTimer() {
-    const { getRemainingTime, resetCheckout } = useCheckout()
+    const { resetCheckout } = useCheckout()
     const router = useRouter()
-    const [timeLeft, setTimeLeft] = useState(getRemainingTime())
+    const [timeLeft, setTimeLeft] = useState<number | null>(null)
     const [hasExpired, setHasExpired] = useState(false)
+    const hasStarted = useRef(false)
+
+    // Start reservation on mount
+    useEffect(() => {
+        if (!hasStarted.current) {
+            setTimeLeft(RESERVATION_DURATION)
+            hasStarted.current = true
+        }
+    }, [])
 
     useEffect(() => {
-        const remaining = getRemainingTime()
-        setTimeLeft(remaining)
-        if (remaining !== null && remaining <= 0) {
-            setHasExpired(true)
-        }
+        if (timeLeft === null || timeLeft <= 0) return
 
         const interval = setInterval(() => {
-            const remaining = getRemainingTime()
-            setTimeLeft(remaining)
-            
-            // Check if just expired
-            if (remaining !== null && remaining <= 0 && !hasExpired) {
-                setHasExpired(true)
-            }
+            setTimeLeft(prev => {
+                if (prev === null || prev <= 0) {
+                    setHasExpired(true)
+                    return 0
+                }
+                return prev - 1
+            })
         }, 1000)
 
         return () => clearInterval(interval)
-    }, [getRemainingTime, hasExpired])
+    }, [timeLeft])
 
     const handleBackToTickets = () => {
         resetCheckout()
@@ -38,15 +45,13 @@ export default function TicketReservationTimer() {
     }
 
     // Don't show if no reservation started
-    if (timeLeft === null || (timeLeft === 0 && !hasExpired)) {
+    if (timeLeft === null) {
         return null
     }
 
     // Expired state
     if (hasExpired || timeLeft <= 0) {
-        return (
-            <ReservationTimeExpiredPrompt open={true}  />
-        )
+        return <ReservationTimeExpiredPrompt open={true} />
     }
 
     const minutes = Math.floor(timeLeft / 60)
@@ -63,16 +68,11 @@ export default function TicketReservationTimer() {
             )}
         >
             <div className="flex flex-col items-start gap-1">
-                {
-                    isUrgent &&
-                    <h3 
-                        className={cn(
-                            'font-medium text-accent-8'
-                        )}
-                        >
+                {isUrgent && (
+                    <h3 className="font-medium text-accent-8">
                         Hurry! Time Running Out
                     </h3>
-                }
+                )}
                 <p className='text-sm text-neutral-7'>
                     Your ticket is temporarily reserved. Please complete checkout in 
                     {' '}

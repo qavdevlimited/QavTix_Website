@@ -2,13 +2,20 @@ type AuthUser = {
     tickets: TicketTier[],
     profile_img: string,
     full_name: string,
-    id: string
+    id: string,
+    email: string,
+    phone: string
 }
 
-interface EventCardUser {
+
+type UserGroup = {
     id: string
-    image?: string
-    initials: string
+    name: string
+    members: {
+        name: string
+        email: string
+        phone: string
+    }[]
 }
 
  // Havent confirmed Proper Type //

@@ -44,18 +44,14 @@ const mobileSummaryVariants = {
 
 export default function CheckoutSummary({ showMobileSummary, setShowMobileSummary }:{ showMobileSummary: boolean, setShowMobileSummary: Dispatch<SetStateAction<boolean>> }) {
     const {
-        getSelectedTickets,
-        getSubtotal,
-        getDiscountAmount,
-        getTotal,
+        selectedTickets,
+        subtotal,
+        discountAmount,
+        total,
         currentStep
     } = useCheckout()
 
 
-    const selectedTickets = getSelectedTickets()
-    const subtotal = getSubtotal()
-    const discountAmount = getDiscountAmount()
-    const total = getTotal()
     const fixedFee = 2000
 
     const { form : { control, formState: { errors } }} = useCheckoutAttendeeInfoForm()
@@ -80,7 +76,7 @@ export default function CheckoutSummary({ showMobileSummary, setShowMobileSummar
     )
 
     const PriceBreakdown = ({ showTooltips = true }) => (
-        <div className="space-y-4 text-sm">
+        <div className="space-y-4 text-sm w-full">
             {/* Subtotal */}
             <div className="flex items-center justify-between">
                 <p className="text-neutral-8">Subtotal</p>
@@ -179,7 +175,7 @@ export default function CheckoutSummary({ showMobileSummary, setShowMobileSummar
 
     
     const DesktopSummary = () => (
-        <section className="hidden lg:flex w-full min-h-screen flex-col justify-between">
+        <section className="hidden md:flex w-full min-h-screen flex-col justify-between">
             <div className=''>
                 <h2 className={cn('text-2xl mt-10 font-medium text-secondary-9 mb-8', space_grotesk.className)}>
                     Payment Summary
@@ -208,7 +204,7 @@ export default function CheckoutSummary({ showMobileSummary, setShowMobileSummar
     
     const MobileSummary = () => (
 
-        <>
+        <div className='w-full md:hidden'>
             {/* Expanded Summary Details */}
             <AnimatePresence>
                 {showMobileSummary && (
@@ -219,7 +215,7 @@ export default function CheckoutSummary({ showMobileSummary, setShowMobileSummar
                         initial="hidden"
                         animate="visible"
                         exit="exit"
-                        className="lg:hidden bg-white global-px py-4"
+                        className="md:hidden bg-white py-4"
                     >
                         <h2 className={cn('text-2xl font-bold text-secondary-9 mb-6 mt-5', space_grotesk.className)}>
                             Payment Summary
@@ -237,8 +233,7 @@ export default function CheckoutSummary({ showMobileSummary, setShowMobileSummar
             {/* Sticky/Relative Bottom Section */}
             <div
                 className={cn(
-                    'lg:hidden left-0 right-0 bg-white border-t border-neutral-3 z-50',
-                    showMobileSummary ? 'relative' : 'fixed bottom-0'
+                    'md:hidden left-0 right-0 bg-white border-t border-neutral-3 z-50 fixed bottom-0'
                 )}
             >
                 <div className="global-px py-4">
@@ -284,7 +279,7 @@ export default function CheckoutSummary({ showMobileSummary, setShowMobileSummar
                     </div>
                 </div>
             </div>
-        </>
+        </div>
     )
 
     

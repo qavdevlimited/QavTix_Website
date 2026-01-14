@@ -97,9 +97,9 @@ export default function FeaturedEventsSection() {
                                 key={event.id}
                                 onMouseOver={() => pauseAutoPlay()}
                                 onMouseLeave={() => play()}
-                                className="flex-[0_0_85%] sm:flex-[0_0_30%] lg:flex-[0_0_20%] min-w-0"
+                                className="flex-[0_0_85%] sm:flex-[0_0_30%] md:w-[23.75]"
                             >
-                                <div className="group relative aspect-3/4 rounded-3xl overflow-hidden cursor-pointer">
+                                <div className="group relative aspect-3/4 rounded-4xl overflow-hidden cursor-pointer">
                                     <Image
                                         src={event.image}
                                         alt={event.title}
