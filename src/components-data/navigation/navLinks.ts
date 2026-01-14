@@ -38,6 +38,15 @@ export const navLinks: NavLink[] = [
   NAV_LINKS.SIGN_UP,
 ]
 
+export const navLinksMobileMenu: NavLink[] = [
+  NAV_LINKS.ABOUT,
+  NAV_LINKS.CONTACT_US,
+  NAV_LINKS.HOW_IT_WORKS,
+  NAV_LINKS.EVENTS,
+  NAV_LINKS.PRICING,
+  NAV_LINKS.FAQ
+]
+
 export const header2NavLinks: NavLink[] = [
   NAV_LINKS.ABOUT,
   NAV_LINKS.HOW_IT_WORKS,

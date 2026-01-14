@@ -106,20 +106,16 @@ export default function Header2() {
                                 aria-label="Toggle menu"
                             >
                                 <Icon
-                                    icon={showMobileMenu ? "codicon:close" : "lineicons:menu-hamburger-1"}
+                                    icon="lineicons:menu-hamburger-1"
                                     width="30"
                                     height="30"
-                                    className="size-9"
+                                    className="size-8"
                                 />
                             </button>
                         </div>
                     </div>
                 </div>
-
-                {
-                    showMobileMenu &&
-                    <MobileMenu openMobileMenu={showMobileMenu} setOpenMobileMenu={setShowMobileMenu} />
-                }
+                <MobileMenu openMobileMenu={showMobileMenu} setOpenMobileMenu={setShowMobileMenu} />
             </header>
         )
     )

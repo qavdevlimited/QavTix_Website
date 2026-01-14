@@ -78,17 +78,14 @@ export default function Header(){
                     <Icon icon="lineicons:search-1" width="24" height="25" className="size-7" />
                     <span className="sr-only">Search</span>
                 </button>
-                <button>
-                    <Icon icon={!showMobileMenu ? "lineicons:menu-hamburger-1" : "codicon:close"} width="25" height="30" className="size-9" />
+                <button onClick={() => setShowMobileMenu(true)}>
+                    <Icon icon="lineicons:menu-hamburger-1" width="25" height="30" className="size-9" />
                     <span className="sr-only">Toggle Menu</span>
                 </button>
             </div>
 
 
-            {
-                showMobileMenu &&
-                <MobileMenu openMobileMenu={showMobileMenu} setOpenMobileMenu={setShowMobileMenu} />
-            }
+            <MobileMenu openMobileMenu={showMobileMenu} setOpenMobileMenu={setShowMobileMenu} />
         </header>
     )
 }

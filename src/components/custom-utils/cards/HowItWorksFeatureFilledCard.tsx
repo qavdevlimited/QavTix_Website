@@ -15,19 +15,19 @@ export default function HowItWorksFeatureFilledCard({ feature, index }: FeatureC
 
     // Handle both hover (desktop) and click/tap (mobile)
     const handleMouseEnter = () => {
-        if (window.innerWidth >= 768) { // Only hover on desktop
+        if (window.innerWidth >= 640) {
             setIsActive(true)
         }
     }
 
     const handleMouseLeave = () => {
-        if (window.innerWidth >= 768) {
+        if (window.innerWidth >= 640) {
             setIsActive(false)
         }
     }
 
     const handleClick = () => {
-        if (window.innerWidth < 768) { // Only toggle on mobile
+        if (window.innerWidth < 640) { // Only toggle on mobile
             setIsActive(!isActive)
         }
     }
@@ -58,7 +58,7 @@ export default function HowItWorksFeatureFilledCard({ feature, index }: FeatureC
                 "md:max-w-none",
                 // Active state: full width on mobile
                 isActive && "max-w-none",
-                isActive ? "h-125 md:h-130 md:-translate-y-10" : "h-100 md:h-110"
+                isActive ? "h-125 xl:h-130 md:-translate-y-10" : "h-100 lg:h-110"
             )}
   
         >
@@ -75,7 +75,7 @@ export default function HowItWorksFeatureFilledCard({ feature, index }: FeatureC
                         animate={{ opacity: 1, scale: 1 }}
                         exit={{ opacity: 0, scale: 1.1 }}
                         transition={{ duration: 0.5, ease: "easeOut" }}
-                        className="absolute top-0 left-0 right-0 h-[45%] rounded-t-[24px] overflow-hidden"
+                        className="absolute top-0 left-0 right-0 h-[35%] lg:h-[38%] rounded-t-[24px] overflow-hidden"
                     >
                         <Image
                             src={feature.image}
