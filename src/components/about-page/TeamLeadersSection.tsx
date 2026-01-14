@@ -90,7 +90,7 @@ export default function TeamLeadersCarousel() {
 
     return (
         <section className="pt-20 pb-24">
-            <div className="max-w-7xl mx-auto">
+            <div className="max-w-8xl mx-auto">
                 {/* Header */}
                 <div className="mb-8 lg:mb-12 global-px">
                     <h2
@@ -110,9 +110,9 @@ export default function TeamLeadersCarousel() {
                         {/* Small preview image - LEFT */}
                        <div className="w-[27%] flex flex-row-reverse items-center justify-end overflow-hidden">
                             <div className="flex gap-4 h-full items-center">
-                                {teamMembers.map((_,i) => {
+                                {teamMembers.map((v,i) => {
                                     return (
-                                        <div className="relative w-[10.5em] h-[12em] my-auto aspect-3/4 rounded-3xl overflow-hidden">
+                                        <div key={`${v.id}-${i}`} className="relative w-[10.5em] h-[12em] my-auto aspect-3/4 rounded-3xl overflow-hidden">
                                             <button onClick={() => scrollNext()}>
                                                 <Image
                                                     src={teamMembers[(selectedIndex + i + 3) % teamMembers.length].image}
@@ -188,9 +188,9 @@ export default function TeamLeadersCarousel() {
                     <div className="flex gap-4 lg:gap-8 items-end">
                         <div className="w-[24%] lg:w-[25%] flex items-center justify-end overflow-hidden">
                             <div className="flex gap-4 h-full items-center">
-                                {teamMembers.map((_,i) => {
+                                {teamMembers.map((v,i) => {
                                     return (
-                                        <div className="relative w-[10.5em] h-[12em] my-auto aspect-3/4 rounded-3xl overflow-hidden">
+                                        <div key={`${v.id}-${i}`} className="relative w-[10.5em] h-[12em] my-auto aspect-3/4 rounded-3xl overflow-hidden">
                                             <Image
                                                 src={teamMembers[(selectedIndex + i + 2) % teamMembers.length].image}
                                                 alt="Next member"

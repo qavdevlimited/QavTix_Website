@@ -13,6 +13,7 @@ import {
 } from '@/components/ui/dialog'
 import EventFilterTypeBtn from '@/components/custom-utils/buttons/event-search/EventFilterTypeBtn'
 import { useMediaQuery } from '@/lib/custom-hooks/UseMediaQuery'
+import { AnimatedDialog } from '@/components/custom-utils/AnimatedDialog'
 
 interface Category {
     value: string
@@ -127,25 +128,25 @@ export default function CategoryFilter({
 
             {/* Desktop - Dialog */}
             {isDesktop && (
-                <Dialog open={isOpen} onOpenChange={setIsOpen}>
-                    <DialogTrigger asChild>
+                <AnimatedDialog 
+                    onOpenChange={setIsOpen}
+                    open={isOpen}
+                    className=''
+                    title='Category'
+                    trigger={
                         <EventFilterTypeBtn 
                             onClick={() => setIsOpen(true)}
                             displayText={displayText} 
                             hasActiveFilter={hasActiveFilter}
                             variant={triggerVariant}
                         />
-                    </DialogTrigger>
-                    <DialogContent className="max-w-125 rounded-2xl">
-                        <DialogHeader>
-                            <DialogTitle className="text-xl">Event Category</DialogTitle>
-                        </DialogHeader>
-                        <div className="space-y-6">
-                            {categoryList}
-                            <FilterButtonsActions1 onApply={handleApply} onClear={handleClear} />
-                        </div>
-                    </DialogContent>
-                </Dialog>
+                    }
+                    >
+                    <div className="space-y-6">
+                        {categoryList}
+                        <FilterButtonsActions1 onApply={handleApply} onClear={handleClear} />
+                    </div>
+                </AnimatedDialog>
             )}
         </>
     )

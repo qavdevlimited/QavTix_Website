@@ -16,19 +16,21 @@ export default function HowItWorksPage(){
         <main className="pb-24">
             <SectionHeading title="How It Works" headerClassName="max-w-sm" />
 
-            <div className="global-px">
+            <div className="global-px max-w-[95em] mx-auto">
                 <div className="mt-10 md:mt-20 md:flex justify-between gap-7 items-center">
                     <div className="md:w-[45%]">
-                        <h2 className={`${space_grotesk.className} font-bold text-2xl md:text-3xl lg:text-[2.5rem] text-secondary-9`}>Your all-in-one ticketing platform</h2>
-                        <p className="text-neutral-7 mt-4">
-                            QavTix makes event ticketing simple for both organizers and attendees.  Browse or sell tickets in three easy steps, with a seamless, secure experience from start to finish. Ready to jump in?
-                        </p>
-                        <button
-                            onClick={() => router.push("/event/create")}
-                            className="w-fit mt-10 md:mt-14 p-4 h-[4em] rounded-[30px] bg-primary hover:bg-primary-7 active:bg-primary-8 hover:shadow-md active:scale-[0.98] disabled:bg-neutral-5 disabled:cursor-not-allowed disabled:opacity-60 text-white font-medium text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-all duration-150 flex items-center justify-center gap-2"
-                        >
-                            Get started for free
-                        </button>
+                        <div className="max-w-xl">
+                            <h2 className={`${space_grotesk.className} font-bold text-2xl md:text-3xl lg:text-[2.5rem] text-secondary-9`}>Your all-in-one ticketing platform</h2>
+                            <p className="text-neutral-7 mt-4">
+                                QavTix makes event ticketing simple for both organizers and attendees.  Browse or sell tickets in three easy steps, with a seamless, secure experience from start to finish. Ready to jump in?
+                            </p>
+                            <button
+                                onClick={() => router.push("/event/create")}
+                                className="w-fit mt-10 md:mt-14 p-4 h-[4em] rounded-[30px] bg-primary hover:bg-primary-7 active:bg-primary-8 hover:shadow-md active:scale-[0.98] disabled:bg-neutral-5 disabled:cursor-not-allowed disabled:opacity-60 text-white font-medium text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-all duration-150 flex items-center justify-center gap-2"
+                            >
+                                Get started for free
+                            </button>
+                        </div>
                     </div>
 
                     <div className="max-w-[98%] mt-20 md:mt-0 sm:max-w-[30em] mx-auto md:mx-0 md:max-w-[unset] md:w-[45%]">

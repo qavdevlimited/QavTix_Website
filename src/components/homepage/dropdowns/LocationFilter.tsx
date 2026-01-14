@@ -14,6 +14,7 @@ import {
 import EventFilterTypeBtn from '@/components/custom-utils/buttons/event-search/EventFilterTypeBtn'
 import { resolveCountryCode } from '@/helper-fns/resolveCountryCode'
 import { useMediaQuery } from '@/lib/custom-hooks/UseMediaQuery'
+import { AnimatedDialog } from '@/components/custom-utils/AnimatedDialog'
 
 interface LocationFilterProps {
     value?: { country: string; state: string } | null
@@ -136,30 +137,28 @@ export default function LocationFilter({
 
             {/* Desktop - Dialog */}
             {isDesktop && (
-                <Dialog open={isOpen} onOpenChange={setIsOpen}>
-                    <DialogTrigger asChild>
+                <AnimatedDialog 
+                    onOpenChange={setIsOpen}
+                    open={isOpen}
+                    className=''
+                    title='Location'
+                    trigger={
                         <EventFilterTypeBtn
                             onClick={() => setIsOpen(true)}
                             displayText={displayText}
                             hasActiveFilter={hasActiveFilter}
                             variant={triggerVariant}
                         />
-                    </DialogTrigger>
-
-                    <DialogContent className="max-w-125 rounded-2xl">
-                        <DialogHeader>
-                            <DialogTitle className="text-xl">Location</DialogTitle>
-                        </DialogHeader>
-
-                        <div className="space-y-6">
-                            {filterContent}
-                            <FilterButtonsActions1
-                                onApply={handleApply}
-                                onClear={handleClear}
-                            />
-                        </div>
-                    </DialogContent>
-                </Dialog>
+                    }
+                    >
+                    <div className="space-y-6">
+                        {filterContent}
+                        <FilterButtonsActions1
+                            onApply={handleApply}
+                            onClear={handleClear}
+                        />
+                    </div>
+                </AnimatedDialog>
             )}
         </>
     )

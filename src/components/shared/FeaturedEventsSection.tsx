@@ -75,7 +75,7 @@ export default function FeaturedEventsSection() {
 
     return (
         <section className="w-full py-10 px-4 md:ps-10 lg:ps-16 md:pe-0">
-            <div className="max-w-7xl mx-auto">
+            <div className="max-w-8xl mx-auto">
                 <div className="flex items-center gap-6 justify-between mb-8 md:pe-16">
                     <h2 className={`text-2xl sm:text-3xl  md:text-[2rem] font-bold text-secondary-9 ${space_grotesk.className}`}>
                         Featured events

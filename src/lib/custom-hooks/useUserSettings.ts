@@ -29,7 +29,7 @@ export function useUserSettings() {
       if (result) {
         dispatch(showAlert({
           title: "Region Updated",
-          description: "Your app region have been updated",
+          description: "Your app region  is now updated!",
           variant: "default"
         }))
         
@@ -56,7 +56,7 @@ export function useUserSettings() {
       if (result) {
         dispatch(showAlert({
           title: "Currency Updated",
-          description: "Your app currency have been updated",
+          description: "Your app currency is now updated!",
           variant: "default"
         }))
       } 

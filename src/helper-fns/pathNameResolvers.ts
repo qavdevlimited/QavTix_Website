@@ -1,6 +1,7 @@
 import { NAV_LINKS } from "@/components-data/navigation/navLinks";
 
 export const pathsForHeader1 = (pathName: string) => (
+  pathName === "/" ||
   pathName.startsWith(
     NAV_LINKS.EVENT_LOCATION.href.replace(/\/$/, '')
   ) ||

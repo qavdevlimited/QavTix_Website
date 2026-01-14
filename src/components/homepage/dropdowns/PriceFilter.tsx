@@ -17,6 +17,7 @@ import {
 } from '@/components/ui/dialog'
 import EventFilterTypeBtn from '@/components/custom-utils/buttons/event-search/EventFilterTypeBtn'
 import { useMediaQuery } from '@/lib/custom-hooks/UseMediaQuery'
+import { AnimatedDialog } from '@/components/custom-utils/AnimatedDialog'
 
 interface PriceRange {
     min: number
@@ -132,9 +133,13 @@ export default function PriceFilter({
 
             {/* Desktop - Dialog */}
             {isDesktop && (
-                <Dialog open={isOpen} onOpenChange={setIsOpen}>
-                    <DialogTrigger asChild>
-                        {filterFor === "homepage" ? (
+                <AnimatedDialog 
+                    onOpenChange={setIsOpen}
+                    open={isOpen}
+                    className=''
+                    title='Price'
+                    trigger= {
+                        filterFor === "homepage" ? (
                             <EventFilterTypeBtn
                                 onClick={() => setIsOpen(true)}
                                 displayText={displayText} 
@@ -149,16 +154,11 @@ export default function PriceFilter({
                                 variant='compact' 
                             />
                         )}
-                    </DialogTrigger>
-                    <DialogContent className="max-w-125 rounded-2xl">
-                        <DialogHeader>
-                            <DialogTitle className="text-xl">Price</DialogTitle>
-                        </DialogHeader>
-                        <div className="space-y-6">
-                            {filterContent}
-                        </div>
-                    </DialogContent>
-                </Dialog>
+                    >
+                    <div className="space-y-6">
+                        {filterContent}
+                    </div>
+                </AnimatedDialog>
             )}
         </>
     )

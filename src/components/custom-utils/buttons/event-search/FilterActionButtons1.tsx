@@ -27,7 +27,7 @@ export default function FilterButtonsActions1({
             <button
                 type="button"
                 onClick={onClear}
-                className="flex-1 text-secondary-6 text-sm font-medium active:scale-[0.98] transition-transform"
+                className="flex-1 h-12 max-w-36 border border-neutral-6 rounded-full font-medium text-sm transition-all hover:bg-neutral-2 hover:shadow-sm active:scale-[0.98]"
                 disabled={isApplying}
             >
                 {clearLabel}

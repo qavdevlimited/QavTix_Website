@@ -15,8 +15,8 @@ export default function TicketStatusSection({ eventId }: { eventId: string }) {
     const hasTicket = useHasTicketForEvent(eventId)
     
     // Authenticated user with ticket
-    if (true) {
-        !ticketCancelled ? <AuthUserGettingTicketCard /> : <CancelledTicketCard />
+    if (isAuthenticated && user && hasTicket) {
+        return  !ticketCancelled ? <AuthUserGettingTicketCard /> : <CancelledTicketCard />
     }
     
     // Guest user with ticket session
