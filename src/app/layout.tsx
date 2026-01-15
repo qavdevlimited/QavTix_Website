@@ -28,7 +28,6 @@ export default async function RootLayout({
     getCurrentUser(),
     getTicketSession()
   ])
-
   
   return (
     <html lang="en">

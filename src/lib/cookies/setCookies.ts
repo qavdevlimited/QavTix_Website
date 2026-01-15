@@ -1,3 +1,7 @@
+"use server"
+
+import { cookies } from "next/headers"
+
 export async function setCookie(
   name: string,
   value: string,
@@ -9,17 +13,14 @@ export async function setCookie(
     secure?: boolean
   }
 ) {
-    const res = await fetch('http://localhost:3000/api/cookies', {
-        method: 'POST',
-        headers: {
-        'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ name, value, options }),
-    })
+  const cookieStore = await cookies()
 
-    if (!res.ok) {
-        throw new Error('Failed to set cookie')
-    }
-
-    return true
+  cookieStore.set(name, value, {
+    maxAge: options?.maxAge || undefined,
+    path: options?.path || '/',
+    sameSite: options?.sameSite || 'lax',
+    httpOnly: options?.httpOnly ?? true,
+    secure: options?.secure ?? (process.env.NODE_ENV === 'production'),
+    ...options
+  })
 }

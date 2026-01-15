@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from '@/lib/redux/hooks'
 import { setRegion, setCurrency, type Region, type Currency } from '@/lib/redux/slices/settingsSlice'
 import { useState, useTransition } from 'react'
 import { showAlert } from '../redux/slices/alertSlice'
-// import { setLocation } from '@/app/actions'
+import { setLocationAction } from '../location-utils'
 
 
 
@@ -22,26 +22,26 @@ export function useUserSettings() {
     
     dispatch(setRegion(newRegion))
     
-    // startTransition(async () => {
+    startTransition(async () => {
 
-    //   // const result = await setLocation({ region: newRegion })
+      const result = await setLocationAction({ region: newRegion })
       
-    //   if (result) {
-    //     dispatch(showAlert({
-    //       title: "Region Updated",
-    //       description: "Your app region  is now updated!",
-    //       variant: "default"
-    //     }))
+      if (result) {
+        dispatch(showAlert({
+          title: "Region Updated",
+          description: "Your app region  is now updated!",
+          variant: "default"
+        }))
         
-    //   } else {
-    //     dispatch(showAlert({
-    //       title: "Region Updated Failed",
-    //       description: "Failed to update app region",
-    //       variant: "default"
-    //     }))
-    //     setError('Failed to update region')
-    //   }
-    // })
+      } else {
+        dispatch(showAlert({
+          title: "Region Updated Failed",
+          description: "Failed to update app region",
+          variant: "default"
+        }))
+        setError('Failed to update region')
+      }
+    })
   }
 
   const updateCurrency = async (newCurrency: Currency) => {
@@ -50,25 +50,25 @@ export function useUserSettings() {
     // Optimistic update
     dispatch(setCurrency(newCurrency))
     
-    // startTransition(async () => {
-    //   const result = await setLocation({ currency: newCurrency })
+    startTransition(async () => {
+      const result = await setLocationAction({ currency: newCurrency })
       
-    //   if (result) {
-    //     dispatch(showAlert({
-    //       title: "Currency Updated",
-    //       description: "Your app currency is now updated!",
-    //       variant: "default"
-    //     }))
-    //   } 
-    //   else {
-    //     dispatch(showAlert({
-    //       title: "Currency Updated Failed",
-    //       description: "Failed to update app currency",
-    //       variant: "default"
-    //     }))
-    //     setError('Failed to update currency')
-    //   }
-    // })
+      if (result) {
+        dispatch(showAlert({
+          title: "Currency Updated",
+          description: "Your app currency is now updated!",
+          variant: "default"
+        }))
+      } 
+      else {
+        dispatch(showAlert({
+          title: "Currency Updated Failed",
+          description: "Failed to update app currency",
+          variant: "default"
+        }))
+        setError('Failed to update currency')
+      }
+    })
   }
 
   return {

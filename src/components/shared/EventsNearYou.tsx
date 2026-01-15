@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import EventsCard1 from "../custom-utils/cards/EventCards";
 import { Icon } from "@iconify/react";
 import { eventsMock } from "@/components-data/demo-data";
+import { NAV_LINKS } from "@/components-data/navigation/navLinks";
 
 
 
@@ -22,7 +23,7 @@ export default function EventsNearYouSection(){
         Events near you
       </h2>
 
-      <ActionButton1 buttonText="Explore Events" className="hidden! md:flex!" iconPosition="right" icon="iconoir:arrow-right" action={() => router.push("/explore-events")} />
+      <ActionButton1 buttonText="Explore Events" className="hidden! md:flex!" iconPosition="right" icon="iconoir:arrow-right" action={() => router.push(NAV_LINKS.EVENTS.href)} />
           <button 
             className="
               text-sm
