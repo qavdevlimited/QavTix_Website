@@ -41,7 +41,7 @@ interface Location {
 
 
 interface FilterValues {
-    dateRange?: DateRange
+    dateRange?: DateRange | null
     location?: {
         country: string,
         state: string
