@@ -194,7 +194,7 @@ export default function TicketCheckoutAttendeeInformationStep() {
                     control={control}
                     render={({ field: { value, onChange, ...field } }) => (
                         <div>
-                            <div className='flex justify-between items-center'>
+                            <div className='flex gap-3 justify-between items-center'>
                                 <div className="flex items-center gap-3">
                                     <Switch
                                         id="split-payment"
@@ -228,12 +228,12 @@ export default function TicketCheckoutAttendeeInformationStep() {
                                 {/* Split Mode Selector - Shows when split payment is ON */}
                                 {value && (
                                     <Select value={splitMode} onValueChange={(v) => setSplitMode(v as SplitMode)}>
-                                        <SelectTrigger className="w-fit h-9 font-normal text-secondary-9">
+                                        <SelectTrigger className="w-fit h-9 font-normal text-secondary-9 text-xs md:text-sm">
                                             <SelectValue />
                                         </SelectTrigger>
                                         <SelectContent className='font-normal space-y-2 text-secondary-7'>
-                                            <SelectItem value="equal">Equal Split</SelectItem>
-                                            <SelectItem value="manual">Manual Input</SelectItem>
+                                            <SelectItem value="equal" className='hover:bg-accent-4! text-xs'>Equal Split</SelectItem>
+                                            <SelectItem value="manual" className='hover:bg-accent-4! text-xs'>Manual Input</SelectItem>
                                         </SelectContent>
                                     </Select>
                                 )}
