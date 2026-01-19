@@ -27,7 +27,6 @@ export default function CheckoutPageContent({
         
         const handleBeforeUnload = (e: BeforeUnloadEvent) => {
             e.preventDefault()
-            e.returnValue = ''
         }
 
         window.addEventListener('beforeunload', handleBeforeUnload)
@@ -35,20 +34,25 @@ export default function CheckoutPageContent({
     }, [canProceedToCheckout])
 
     useEffect(() => {
-        if (!canProceedToCheckout()) return
+        if (!canProceedToCheckout() || showCloseLeaveCheckoutPrompt) return;
 
-        const handlePopState = () => {
+        const handlePopState = (e: PopStateEvent) => {
+            e.preventDefault()
+            
             window.history.pushState(null, '', window.location.href)
+            
+            // Show the confirmation modal
             setShowCloseLeaveCheckoutPrompt(true)
         }
 
         window.history.pushState(null, '', window.location.href)
+        
         window.addEventListener('popstate', handlePopState)
 
         return () => {
             window.removeEventListener('popstate', handlePopState)
         }
-    }, [canProceedToCheckout, setShowCloseLeaveCheckoutPrompt])
+    }, [canProceedToCheckout])
 
     return (
         <section className="md:flex w-full min-h-screen gap-6 lg:gap-16 items-stretch pb-56 md:pb-24">

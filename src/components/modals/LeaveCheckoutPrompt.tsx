@@ -1,15 +1,17 @@
-import { useRouter } from 'next/navigation'
-import { Dialog, DialogContent, DialogHeader, DialogOverlay, DialogTitle } from '@/components/ui/dialog'
+import { useParams, useRouter } from 'next/navigation'
+import { DialogHeader, DialogTitle } from '@/components/ui/dialog'
 import { Button } from '@/components/ui/button'
 import { space_grotesk } from '@/lib/fonts'
 import { Dispatch, SetStateAction } from 'react'
 import { Icon } from '@iconify/react'
 import { AnimatedDialogForPrompt } from '../custom-utils/AnimatedDialogForPrompts'
+import { EVENT_ROUTES } from '@/components-data/navigation/navLinks'
 
 
 export default function LeaveCheckoutPrompt({ open, setOpen }:{ open: boolean, setOpen: Dispatch<SetStateAction<boolean>> }) {
     
     const router = useRouter()
+    const { event_id } : { event_id: string } = useParams()
 
     return (
         <AnimatedDialogForPrompt open={open} onOpenChange={(v) => setOpen(v)}>
@@ -32,7 +34,7 @@ export default function LeaveCheckoutPrompt({ open, setOpen }:{ open: boolean, s
                 
                 <div className="flex gap-3 justify-center">
                     <Button
-                        onClick={() => router.back()}
+                        onClick={() => router.replace(EVENT_ROUTES.EVENTS_DETAILS.href.replace("[event_id]", event_id))}
                         className="h-14 flex-1 text-secondary-8 bg-white hover:shadow flex items-center gap-2 justify-center px-6 py-3 rounded-[30px] border-2 border-secondary-3 font-medium text-sm hover:bg-neutral-2 hover:border-secondary-5 active:bg-neutral-3 active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-neutral-4 focus:ring-offset-2 transition-all duration-150"
                     >
                         Release ticket
