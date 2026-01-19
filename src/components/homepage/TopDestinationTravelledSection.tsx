@@ -1,10 +1,9 @@
-'use client'
+"use client"
 
-import { useCallback, useEffect, useState, useRef } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import useEmblaCarousel from 'embla-carousel-react'
 import Autoplay from 'embla-carousel-autoplay'
 import Image from 'next/image'
-import { Icon } from '@iconify/react'
 import { space_grotesk } from '@/lib/fonts'
 import { motion } from 'framer-motion'
 import CarouselActionBtns from '../custom-utils/buttons/CarouselActionBtns'
@@ -62,12 +61,10 @@ const destinations: TopDestination[] = [
     }
 ]
 
-const duplicatedDestinations = [...destinations, ...destinations, ...destinations].map(
-    (dest, index) => ({
-        ...dest,
-        id: index + 1
-    })
-)
+const duplicatedDestinations = [...destinations, ...destinations].map((dest, index) => ({
+    ...dest,
+    id: `dest-${index}`
+}))
 
 export default function TopDestinationTravelledSection() {
     const [emblaRef, emblaApi] = useEmblaCarousel(
@@ -79,10 +76,9 @@ export default function TopDestinationTravelledSection() {
         },
         [
             Autoplay({
-                delay: 2000,
+                delay: 2500,
                 stopOnInteraction: false,
-                stopOnMouseEnter: true,
-                stopOnFocusIn: false
+                stopOnMouseEnter: true
             })
         ]
     )
@@ -90,16 +86,14 @@ export default function TopDestinationTravelledSection() {
     const autoplay = emblaApi?.plugins()?.autoplay
 
     const scrollPrev = useCallback(() => {
-        const autoplayPlugin = emblaApi?.plugins()?.autoplay
-        autoplayPlugin?.stop()
+        autoplay?.stop()
         emblaApi?.scrollPrev()
-    }, [emblaApi])
+    }, [emblaApi, autoplay])
 
     const scrollNext = useCallback(() => {
-        const autoplayPlugin = emblaApi?.plugins()?.autoplay
-        autoplayPlugin?.stop()
+        autoplay?.stop()
         emblaApi?.scrollNext()
-    }, [emblaApi])
+    }, [emblaApi, autoplay])
 
     const [canScrollPrev, setCanScrollPrev] = useState(false)
     const [canScrollNext, setCanScrollNext] = useState(false)
@@ -122,80 +116,67 @@ export default function TopDestinationTravelledSection() {
     }, [emblaApi, onSelect])
 
     return (
-        <section className="w-full py-14 mt-8 lg:mt-16 px-4 sm:px-10 lg:px-16 bg-neutral-1">
-            <div className="">
-                <div className="flex items-center justify-between mb-10 md:mb-14">
+        <section className="w-full py-8 mt-8 bg-neutral-1 ps-4 sm:ps-10 lg:ps-14 xl:ps-20 lg:min-h-[25em] lg:h-[25em]">
+            <div>
+                <div className="flex items-center justify-between mb-10 pe-4 sm:pe-10 lg:pe-14 xl:pe-20">
                     <h2 className={`text-2xl md:text-3xl font-bold text-secondary-9 ${space_grotesk.className}`}>
-                        Top traveled destinations
+                      Top traveled destinations
                     </h2>
-
                     <CarouselActionBtns
-                        scrollPrev={scrollPrev}
-                        scrollNext={scrollNext}
-                        canScrollPrev={canScrollPrev}
-                        canScrollNext={canScrollNext}
+                      scrollPrev={scrollPrev}
+                      scrollNext={scrollNext}
+                      canScrollPrev={canScrollPrev}
+                      canScrollNext={canScrollNext}
                     />
                 </div>
 
-                {/* Carousel */}
                 <div className="overflow-hidden" ref={emblaRef}>
-                    <div className="flex gap-6 px-3">
-                        {duplicatedDestinations.map((dest) => (
-                            <div
-                                key={dest.id}
-                                className="relative flex-[0_0_90%] sm:flex-[0_0_50%] md:flex-[0_0_40%] lg:flex-[0_0_25%] min-w-0 aspect-square"
-                                onMouseEnter={() => autoplay?.stop()}
-                                onMouseLeave={() => autoplay?.play()}
-                                >
-                                <motion.div
-                                    className="group relative aspect-square rounded-3xl overflow-hidden cursor-pointer"
-                                    initial="rest"
-                                    whileHover="hover"
-                                    animate="rest"
-                                >
-                                    <Image
-                                        src={dest.image}
-                                        alt={dest.title}
-                                        width={400}
-                                        height={400}
-                                        className="object-cover rounded-3xl"
-                                    />
+                  <div className="flex gap-6 px-3 py-1">
+                    {duplicatedDestinations.map((dest) => (
+                      <div
+                        key={dest.id}
+                        className="relative flex-[0_0_85%] sm:flex-[0_0_45%] md:flex-[0_0_30%] xl:flex-[0_0_22%] min-w-0"
+                        onMouseEnter={() => autoplay?.stop()}
+                        onMouseLeave={() => autoplay?.play()}
+                      >
+                        <div className="group relative rounded-3xl overflow-hidden min-h-56 hover:h-70 flex flex-col">
+                            
+                          <div className="relative min-h-[8em] lg:min-h-0 group-hover:min-h-[7em] transition-all duration-300 ease-linear group-hover:rounded-3xl flex-1 overflow-hidden">
+                            <Image
+                              src={dest.image}
+                              alt={dest.title}
+                              fill
+                              className="object-cover transition-transform h-full duration-500 group-hover:scale-105"
+                            />
 
-                                    <motion.h3
-                                        variants={{
-                                            rest: { opacity: 1, y: 0 },
-                                            hover: { opacity: 0, y: 10 },
-                                        }}
-                                        transition={{ duration: 0.3 }}
-                                        className={`absolute left-6 bottom-6 z-10 text-lg md:text-xl text-white font-medium ${space_grotesk.className}`}
-                                    >
-                                        {dest.title}
-                                    </motion.h3>
-
-                                    {/* Info panel */}
-                                    <motion.div
-                                        variants={{
-                                            rest: { y: "100%" },
-                                            hover: { y: "0%" },
-                                        }}
-                                        transition={{ duration: 0.45, ease: "easeOut" }}
-                                        className="absolute inset-x-0 bottom-0 h-[55%] bg-white backdrop-blur-sm p-6 flex items-end"
-                                    >
-                                        <div>
-                                            <h3
-                                            className={`text-lg text-secondary-9 font-medium mb-2 ${space_grotesk.className}`}
-                                            >
-                                            {dest.title}
-                                            </h3>
-                                            <p className="text-sm leading-relaxed text-secondary-7 line-clamp-3">
-                                            {dest.description}
-                                            </p>
-                                        </div>
-                                    </motion.div>
-                                </motion.div>
+                            {/* Title overlay - fades out on hover */}
+                            <div className="absolute hidden lg:block inset-0 bg-linear-to-t from-black/60 via-black/20 to-transparent transition-opacity duration-500 group-hover:opacity-0">
+                              <h3
+                                className={`absolute left-5 bottom-5 z-10 text-lg md:text-xl text-white font-medium drop-shadow-md ${space_grotesk.className}`}
+                              >
+                                {dest.title}
+                              </h3>
                             </div>
-                        ))}
-                    </div>
+                          </div>
+
+                          <div className="bg-white h-70 max-h-70 lg:h-0 group-hover:h-70 group-hover:max-h-70 transition-all duration-300 ease-linear relative z-10 overflow-hidden">
+                            <div className="p-5">
+                              <h3 className={`text-lg text-secondary-9 font-medium mb-2 ${space_grotesk.className}`}>
+                                {dest.title}
+                              </h3>
+                              <p className="text-sm leading-relaxed text-secondary-7 line-clamp-3">
+                                {dest.description}
+                              </p>
+                              <p className="text-xs text-neutral-6 mt-2 flex items-center gap-1">
+                                <span>📍</span>
+                                {dest.location}
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
                 </div>
             </div>
         </section>

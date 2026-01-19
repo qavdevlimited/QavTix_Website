@@ -6,7 +6,7 @@ import { useEffect, forwardRef, useImperativeHandle, useRef } from 'react'
 
 interface MobileInfiniteScrollProps {
     images: string[]
-    duration?: number // seconds for one full loop
+    duration?: number 
     autoPlay?: boolean
     className?: string
 }
@@ -72,7 +72,7 @@ const MobileInfiniteScroll = forwardRef<MobileInfiniteScrollRef, MobileInfiniteS
         return (
             <div className={`overflow-hidden my-12 ${className}`}>
                 <motion.div
-                    className="flex gap-6"
+                    className="flex gap-3"
                     animate={controls}
                     style={{ x: 0 }}
                 >
@@ -83,7 +83,7 @@ const MobileInfiniteScroll = forwardRef<MobileInfiniteScrollRef, MobileInfiniteS
                                 alt={`carousel image ${index % images.length + 1}`}
                                 width={400}
                                 height={400}
-                                className="rounded-3xl md:rounded-4xl h-60 max-w-[90%] w-80 object-cover"
+                                className="rounded-3xl md:rounded-4xl h-60 max-w-[98%] w-80 object-cover"
                             />
                         </div>
                     ))}

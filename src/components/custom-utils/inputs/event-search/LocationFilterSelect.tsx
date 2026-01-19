@@ -35,7 +35,7 @@ export function LocationFilterSelect({
             >
                 <SelectValue placeholder={placeholder} />
             </SelectTrigger>
-            <SelectContent className="max-h-75">
+            <SelectContent className="max-h-75 relative z-100">
                 {options.length === 0 ? (
                     <div className="px-4 py-3 text-sm text-neutral-6 text-center">
                         No options available
@@ -45,7 +45,7 @@ export function LocationFilterSelect({
                         <SelectItem 
                             key={option.value} 
                             value={option.value}
-                            className="hover:bg-primary-1 hover:text-primary-8 cursor-pointer"
+                            className="hover:bg-accent-2! hover:text-secondary-9 cursor-pointer"
                         >
                             {option.label}
                         </SelectItem>

@@ -13,7 +13,7 @@ interface SearchEventInputProps {
   onSearch?: (query: string) => void
 }
 
-export default function SearchEventInput1({
+export default function SearchInput1({
   placeholder = 'Search event',
   className,
   minSearchLength = 3,

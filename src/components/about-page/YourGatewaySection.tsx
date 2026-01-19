@@ -1,6 +1,6 @@
 import { space_grotesk } from "@/lib/fonts";
-import MobileInfiniteScroll from "../homepage/MobileInfiniteScrollImages";
 import { slides_onlyImages } from "@/components-data/auth-pages/slides";
+import MobileInfiniteScroll from "../shared/MobileInfiniteScrollCarousel";
 
 export default function YourGatewaySection(){
     return (
@@ -15,7 +15,7 @@ export default function YourGatewaySection(){
             </div>
 
 
-            <div className="mt-8 global-px pe-0!">
+            <div className="mt-8 pe-0!">
                 <MobileInfiniteScroll images={slides_onlyImages} />
             </div>
         </section>

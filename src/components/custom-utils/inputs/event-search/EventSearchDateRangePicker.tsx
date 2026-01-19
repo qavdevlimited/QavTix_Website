@@ -71,7 +71,7 @@ export function DatePickerInput({
                     </PopoverTrigger>
 
                     <PopoverContent
-                        className="w-auto p-0 overflow-hidden z-98"
+                        className="w-auto p-0 overflow-hidden text-xs z-100"
                         align="start"
                         sideOffset={8}
                     >
@@ -93,7 +93,7 @@ export function DatePickerInput({
                     onFocus={() => setOpen(true)}
                     readOnly
                     placeholder={placeholder}
-                    className="pl-9 h-12 text-xs rounded-2xl border border-neutral-6 focus:border-primary bg-background"
+                    className="pl-9 h-12 text-xs! placeholder:text-xs! rounded-2xl border border-neutral-6 focus:border-primary bg-background"
                     onKeyDown={(e) => {
                         if (e.key === "ArrowDown") {
                             e.preventDefault()
@@ -124,7 +124,7 @@ export function EventSearchDateRangePicker({
     toPlaceholder = "Select end date"
 }: DateRangePickerProps) {
     return (
-        <div className="flex flex-col sm:flex-row sm:items-center gap-2">
+        <div className="flex flex-col text-xs sm:flex-row sm:items-center gap-2">
             <DatePickerInput
                 label={fromLabel}
                 value={value.from}
@@ -133,7 +133,7 @@ export function EventSearchDateRangePicker({
                 id="from-date"
             />
 
-            <div className="flex text-xs items-center justify-center gap-1 text-neutral-6 pb-2 sm:pb-0">
+            <div className="flex items-center justify-center gap-1 text-neutral-6 pb-2 sm:pb-0">
                 <span aria-hidden="true">—</span>
                 <span className="">to</span>
                 <span aria-hidden="true">—</span>

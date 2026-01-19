@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { usePathname, useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { NAV_LINKS, navLinksMobileMenu } from '@/components-data/navigation/navLinks'
-import SearchEventInput1 from '../custom-utils/inputs/event-search/SearchEventInput1'
+import SearchInput1 from '../custom-utils/inputs/event-search/SearchInput1'
 import Logo from './Logo'
 import logoSrc from "@/public-assets/logo/qavtix-logo.svg"
 import { Icon } from '@iconify/react'
@@ -98,7 +98,7 @@ export default function MobileMenu({
                                     }}
                                     className="hidden md:block"
                                 >
-                                    <SearchEventInput1 />
+                                    <SearchInput1 />
                                 </motion.div>
 
 
@@ -126,7 +126,7 @@ export default function MobileMenu({
                                 }}
                                 className="flex justify-center items-center mt-12 md:hidden"
                             >
-                                <SearchEventInput1 />
+                                <SearchInput1 />
                             </motion.div>
 
                             {/* Navigation Links */}

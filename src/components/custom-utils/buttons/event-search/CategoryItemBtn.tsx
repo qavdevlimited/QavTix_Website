@@ -12,7 +12,7 @@ export default function CategoryItemBtn({ category, handleToggle, isSelected }: 
             key={category.value}
             onClick={() => handleToggle(category.value)}
             className={cn(
-                'w-full flex items-center gap-5 text-secondary-9 px-4 py-3 rounded-md text-xs transition-colors',
+                'w-full flex items-center gap-3 text-secondary-9 px-4 py-3 rounded-md text-xs transition-colors',
                 isSelected
                     ? 'bg-neutral-3 font-medium'
                     : ''

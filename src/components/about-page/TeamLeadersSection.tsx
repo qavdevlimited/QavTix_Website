@@ -206,11 +206,11 @@ export default function TeamLeadersCarousel() {
                         {/* Right Column - Large Image + Content */}
                         <div className="w-[75%] lg:w-[70%] grid grid-cols-2 gap-6 lg:gap-16 items-center">
                             {/* Large current image */}
-                            <div className="overflow-hidden min-h-[40em]" ref={desktopEmblaRef}>
-                                <div className="flex h-full min-h-[40em]">
+                            <div className="overflow-hidden min-h-[35]" ref={desktopEmblaRef}>
+                                <div className="flex h-full min-h-[35]">
                                     {teamMembers.map((member) => (
                                         <div key={member.id} className="flex-[0_0_100%] min-w-0 h-full rounded-[40px] overflow-hidden">
-                                            <div className="relative aspect-3/4 h-full min-h-[40em]">
+                                            <div className="relative aspect-3/4 h-full min-h-[35em]">
                                                 <Image
                                                     src={member.image}
                                                     alt={member.name}

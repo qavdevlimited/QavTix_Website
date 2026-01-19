@@ -50,8 +50,8 @@ export const navLinksMobileMenu: NavLink[] = [
 export const header2NavLinks: NavLink[] = [
   NAV_LINKS.ABOUT,
   NAV_LINKS.HOW_IT_WORKS,
-  NAV_LINKS.PRICING,
   NAV_LINKS.EVENTS,
+  NAV_LINKS.PRICING,
   NAV_LINKS.SIGN_IN,
   NAV_LINKS.SIGN_UP,
 ]

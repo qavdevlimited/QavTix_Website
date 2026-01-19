@@ -50,7 +50,7 @@ export default function DesktopFeatureComparison({ data }: { data: PricingData }
                             {typeof value === 'boolean' ? (
                                 value ? (
                                 <Icon
-                                    icon="mdi:check"
+                                    icon="hugeicons:checkmark-square-01"
                                     className="inline-block text-green-600 size-6"
                                 />
                                 ) : (

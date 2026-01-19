@@ -58,7 +58,7 @@ export default function HowItWorksFeatureFilledCard({ feature, index }: FeatureC
                 "md:max-w-none",
                 // Active state: full width on mobile
                 isActive && "max-w-none",
-                isActive ? "h-125 xl:h-130 md:-translate-y-10" : "h-100 lg:h-110"
+                isActive ? "h-100 md:h-120 md:-translate-y-10" : "h-90 md:h-100"
             )}
   
         >

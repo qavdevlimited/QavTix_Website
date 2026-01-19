@@ -1,23 +1,15 @@
 'use client'
 
 import { useState } from 'react'
-import { cn } from '@/lib/utils'
 import { Slider } from '@/components/ui/slider'
-import { Icon } from '@iconify/react'
 import FilterButtonsActions1 from '@/components/custom-utils/buttons/event-search/FilterActionButtons1'
 import { MobileBottomSheet } from '@/components/custom-utils/EventFilterDropdownMobileBottomSheet'
 import { QuickPriceButtons } from '@/components/custom-utils/buttons/event-search/QuickPriceButtons'
 import { PriceRangeInputs } from '@/components/custom-utils/inputs/event-search/PriceRangeInputs'
-import {
-    Dialog,
-    DialogContent,
-    DialogHeader,
-    DialogTitle,
-    DialogTrigger,
-} from '@/components/ui/dialog'
 import EventFilterTypeBtn from '@/components/custom-utils/buttons/event-search/EventFilterTypeBtn'
 import { useMediaQuery } from '@/lib/custom-hooks/UseMediaQuery'
-import { AnimatedDialog } from '@/components/custom-utils/AnimatedDialog'
+import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
+import { cn } from '@/lib/utils'
 
 interface PriceRange {
     min: number
@@ -39,7 +31,7 @@ export default function PriceFilter({
 }: PriceFilterProps) {
     
     const [isOpen, setIsOpen] = useState(false)
-    const isDesktop = useMediaQuery('(min-width: 1024px)')
+    const isTablet = useMediaQuery('(min-width: 768px)')
     
     const defaultMax = 500000
     const [priceRange, setPriceRange] = useState<PriceRange>(
@@ -102,8 +94,8 @@ export default function PriceFilter({
 
     return (
         <>
-            {/* Mobile & Tablet - Bottom Sheet */}
-            {!isDesktop && (
+            {/* Mobile - Bottom Sheet */}
+            {!isTablet && (
                 <>
                     {filterFor === "homepage" ? (
                         <EventFilterTypeBtn 
@@ -131,34 +123,52 @@ export default function PriceFilter({
                 </>
             )}
 
-            {/* Desktop - Dialog */}
-            {isDesktop && (
-                <AnimatedDialog 
-                    onOpenChange={setIsOpen}
-                    open={isOpen}
-                    className=''
-                    title='Price'
-                    trigger= {
-                        filterFor === "homepage" ? (
-                            <EventFilterTypeBtn
-                                onClick={() => setIsOpen(true)}
-                                displayText={displayText} 
-                                hasActiveFilter={!!hasActiveFilter}
-                                variant='default' 
-                            />
-                        ) : (
-                            <EventFilterTypeBtn 
-                                onClick={() => setIsOpen(true)}
-                                displayText={displayText} 
-                                hasActiveFilter={!!hasActiveFilter}
-                                variant='compact' 
-                            />
+            {/* Tablet & Desktop - Dialog */}
+            {isTablet && (
+                <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
+                    <DropdownMenuTrigger asChild>
+                        <div>
+                            {
+                                filterFor === "homepage" ? (
+                                    <EventFilterTypeBtn
+                                        onClick={() => setIsOpen(true)}
+                                        displayText={displayText} 
+                                        hasActiveFilter={!!hasActiveFilter}
+                                        variant='default' 
+                                    />
+                                ) : (
+                                    <EventFilterTypeBtn 
+                                        onClick={() => setIsOpen(true)}
+                                        displayText={displayText} 
+                                        hasActiveFilter={!!hasActiveFilter}
+                                        variant='compact' 
+                                    />
+                            )}
+                        </div>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent 
+                        className={cn(
+                            "w-[25em] z-100 p-4 rounded-xl shadow-[0px_3.69px_14.76px_0px_rgba(51,38,174,0.08)]",
+                            // Open animation
+                            "data-[state=open]:animate-in",
+                            "data-[state=open]:fade-in-0",
+                            "data-[state=open]:duration-500 data-[state=open]:ease-[cubic-bezier(0.16,1,0.3,1)]",
+                            "data-[state=open]:zoom-in-90",
+                            "data-[state=open]:slide-in-from-top-4",
+                            // Close animation
+                            "data-[state=closed]:animate-out",
+                            "data-[state=closed]:fade-out-0",
+                            "data-[state=closed]:duration-400 data-[state=closed]:ease-in",
+                            "data-[state=closed]:zoom-out-90",
+                            "data-[state=closed]:slide-out-to-top-4"
                         )}
+                        align="start"
                     >
-                    <div className="space-y-6">
-                        {filterContent}
-                    </div>
-                </AnimatedDialog>
+                        <div className="space-y-6">
+                            {filterContent}
+                        </div>
+                    </DropdownMenuContent>
+                </DropdownMenu>
             )}
         </>
     )

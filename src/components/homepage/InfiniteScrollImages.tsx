@@ -34,7 +34,7 @@ function InfiniteScrollRow({
                 }}
             >
                 {duplicatedImages.map((image, index) => (
-                    <Image key={index} src={image} alt={`carousel image-${index + 1}`} width={300} height={300} className='h-64 aspect-square rounded-2xl object-cover' />
+                    <Image key={index} src={image} alt={`carousel image-${index + 1}`} width={300} height={300} className='h-48 aspect-square rounded-2xl object-cover' />
                 ))}
             </motion.div>
         </div>
@@ -54,7 +54,7 @@ export default function InfiniteScrollImages() {
             </div>
 
             {/* Second Row - Scroll Right */}
-            <div className="mb-12">
+            <div className="">
                 <InfiniteScrollRow 
                     images={slides_onlyImages} 
                     direction="right"

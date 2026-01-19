@@ -14,6 +14,7 @@ import { getAvatarColor } from "@/helper-fns/getAvatarColor"
 import { getInitialsFromName } from "@/helper-fns/getInitialFromName"
 import { statusStyles, StatusStylesRecord } from "@/components-data/event-status-styles"
 import { EVENT_ROUTES } from '@/components-data/navigation/navLinks'
+import { Skeleton } from '@/components/ui/skeleton'
 
 export default function EventsCard1(cardData: IEvent) {
 
@@ -23,7 +24,7 @@ export default function EventsCard1(cardData: IEvent) {
     return (
         <Link 
             href={eventUrl}
-            className="block w-full p-3 relative min-h-[25em] rounded-[32px] border border-neutral-6 bg-secondary-1 hover:border-neutral-7 hover:shadow-md transition-all duration-200 focus:outline-none focus:ring-[1.5px] focus:ring-accent-5 focus:ring-offset-[1.5px] group"
+            className="block w-full p-3 relative min-h-[25em] rounded-[32px] border border-neutral-6 bg-white hover:bg-secondary-1 hover:shadow-sm transition-all duration-200 focus:outline-none focus:ring-[1.5px] focus:ring-accent-5 focus:ring-offset-[1.5px] group"
             aria-label={`View event: ${cardData.title}`}
         >
             <div className="flex flex-col h-full">
@@ -43,7 +44,7 @@ export default function EventsCard1(cardData: IEvent) {
                     )}
 
                     <figure className="relative w-full aspect-4/3 h-40 rounded-4xl overflow-hidden">
-                        {!imageError ? (
+                        {!imageError && cardData.image ? (
                         <Image
                             src={cardData.image}
                             alt={cardData.title}
@@ -55,12 +56,7 @@ export default function EventsCard1(cardData: IEvent) {
                             priority={false}
                         />
                         ) : (
-                        <div className="w-full h-full bg-linear-to-br from-neutral-3 to-neutral-2 flex items-center justify-center">
-                            <Icon
-                                icon="hugeicons:image-not-found"
-                                className="size-16 text-neutral-5 opacity-50"
-                            />
-                        </div>
+                            <Skeleton className="w-full h-full bg-linear-to-br from-neutral-4 to-neutral-5 flex items-center justify-center" />
                         )}
                     </figure>
 
@@ -88,14 +84,14 @@ export default function EventsCard1(cardData: IEvent) {
                     </div>
                 </div>
 
-                <div className="flex flex-col justify-between flex-1 mt-3">
+                <div className="flex flex-col justify-between flex-1 mt-1">
                     <div>
                         <span className="bg-accent-1 w-fit block text-accent-7 font-medium py-1 px-2 mt-2 rounded-2xl text-center text-xs">
-                        {cardData.category}
+                            {cardData.category}
                         </span>
 
                         <span className="text-[11px] block mt-1 w-fit text-neutral-7 truncate max-w-full">
-                        Hosted by {cardData.host}
+                         Hosted by {cardData.host}
                         </span>
 
                         <p className="text-sm text-secondary-9 font-medium mt-1 mb-3 line-clamp-2">

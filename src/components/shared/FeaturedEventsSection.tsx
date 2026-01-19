@@ -5,8 +5,14 @@ import useEmblaCarousel from 'embla-carousel-react'
 import Autoplay from 'embla-carousel-autoplay'
 import Image from 'next/image'
 import { space_grotesk } from '@/lib/fonts'
-import { demoFeaturedEvents } from '@/components-data/demo-data'
+import { demoFeaturedEvents, eventsMock } from '@/components-data/demo-data'
 import CarouselActionBtns from '../custom-utils/buttons/CarouselActionBtns'
+import { Icon } from '@iconify/react'
+import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar'
+import { getAvatarColor } from '@/helper-fns/getAvatarColor'
+import { getInitialsFromName } from '@/helper-fns/getInitialFromName'
+import Link from 'next/link'
+import { EVENT_ROUTES } from '@/components-data/navigation/navLinks'
 
 
 const dupliactedFeaturedEvents: FeaturedEvent[] = [...demoFeaturedEvents, ...demoFeaturedEvents, ...demoFeaturedEvents].map(
@@ -60,6 +66,7 @@ export default function FeaturedEventsSection() {
     const [canScrollPrev, setCanScrollPrev] = useState(false)
     const [canScrollNext, setCanScrollNext] = useState(false)
 
+
     const onSelect = useCallback(() => {
         if (!emblaApi) return
         setCanScrollPrev(emblaApi.canScrollPrev())
@@ -91,32 +98,108 @@ export default function FeaturedEventsSection() {
 
                 {/* Carousel */}
                 <div className="overflow-hidden" ref={emblaRef}>
-                    <div className="flex gap-6 px-3">
+                    <div className="flex pt-3">
                         {dupliactedFeaturedEvents.map((event) => (
-                            <div 
-                                key={event.id}
-                                onMouseOver={() => pauseAutoPlay()}
-                                onMouseLeave={() => play()}
-                                className="flex-[0_0_85%] sm:flex-[0_0_30%] md:w-[23.75]"
-                            >
-                                <div className="group relative aspect-3/4 rounded-4xl overflow-hidden cursor-pointer">
-                                    <Image
-                                        src={event.image}
-                                        alt={event.title}
-                                        fill
-                                        className="object-cover group-hover:scale-105 transition-transform duration-300"
-                                    />
-                                    {/* Overlay */}
-                                    <div className="absolute inset-0 linear-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                                    
-                                    {/* Title on hover */}
-                                    <div className="absolute bottom-0 left-0 right-0 p-6 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                                        <h3 className="text-white text-xl font-semibold">
-                                            {event.title}
-                                        </h3>
+                            <Link key={event.id} href={EVENT_ROUTES.EVENTS_DETAILS.href.replace("[event_id]", event.id.toString())} className='flex-[0_0_85%] sm:flex-[0_0_30%] md:w-[23.75] mr-2'>
+                                <div
+                                    onMouseOver={pauseAutoPlay}
+                                    onMouseLeave={play}
+                                    className="pr-6"
+                                >
+                                    <div className="group relative aspect-3/4 bg-white cursor-pointer">
+
+                                        {/* IMAGE */}
+                                        <Image
+                                            src={event.image}
+                                            alt={event.title}
+                                            fill
+                                            className="object-cover rounded-4xl transition-transform duration-400 md:group-hover:scale-103"
+                                        />
+
+                                        {/* WHITE SLIDE-UP DETAILS */}
+                                        <div
+                                            className="
+                                                absolute inset-x-0 bottom-0
+                                                bg-white
+                                                p-4
+                                                w-full
+                                                group-hover:scale-103
+                                                shadow-[0px_-8px_24px_rgba(0,0,0,0.08)]
+
+                                                transform transition-all duration-400
+                                                ease-[cubic-bezier(0.22,1,0.36,1)]
+
+                                                translate-y-0 opacity-100
+                                                md:translate-y-full md:opacity-0
+                                                md:group-hover:translate-y-0 md:group-hover:opacity-100
+                                            "
+                                        >
+                                            {/* CATEGORY */}
+                                            <span className="bg-accent-1 w-fit block text-accent-7 font-medium py-1 px-2 rounded-2xl text-xs">
+                                                {eventsMock[0].category}
+                                            </span>
+
+                                            {/* TITLE */}
+                                            <p className="text-sm text-secondary-9 font-medium mt-2 line-clamp-2">
+                                                {eventsMock[0].title}
+                                            </p>
+
+                                            {/* HOST */}
+                                            <span className="text-[11px] block mt-1 text-neutral-7">
+                                                Hosted by {eventsMock[0].host}
+                                            </span>
+
+                                            {/* DATE */}
+                                            <div className="flex items-center gap-1 mt-2 text-neutral-7 text-[11px]">
+                                                <Icon icon="hugeicons:calendar-04" className="size-4" />
+                                                <span>{eventsMock[0].date}</span>
+                                            </div>
+
+                                            {/* LOCATION */}
+                                            <div className="flex items-center gap-1 mt-1 text-neutral-7 text-[11px]">
+                                                <Icon icon="hugeicons:location-01" className="size-4" />
+                                                <span>{eventsMock[0].location}</span>
+                                            </div>
+
+                                            {/* FOOTER */}
+                                            <div className="flex items-center justify-between pt-4">
+                                                {/* ATTENDEES */}
+                                                <div className="flex -space-x-2">
+                                                    {eventsMock[0].attendees.slice(0, 3).map((user) => (
+                                                        <Avatar key={user.id} className="ring-2 ring-white size-7">
+                                                            <AvatarFallback
+                                                                className={`${getAvatarColor(user.id.toString())} text-white text-xs`}
+                                                            >
+                                                                {getInitialsFromName(user.name)}
+                                                            </AvatarFallback>
+                                                        </Avatar>
+                                                    ))}
+                                                    {eventsMock[0].attendees.length > 3 && (
+                                                        <Avatar className="ring-2 ring-white size-7">
+                                                            <AvatarFallback className="bg-primary-1 text-xs font-medium">
+                                                                +{eventsMock[0].attendees.length - 3}
+                                                            </AvatarFallback>
+                                                        </Avatar>
+                                                    )}
+                                                </div>
+
+                                                {/* PRICE */}
+                                                <div className="text-right">
+                                                    {eventsMock[0].originalPrice && (
+                                                        <p className="text-xs text-neutral-6 line-through">
+                                                            {eventsMock[0].originalPrice}
+                                                        </p>
+                                                    )}
+                                                    <p className={`${space_grotesk.className} font-medium text-lg text-secondary-9`}>
+                                                        {eventsMock[0].price}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                                
+                            </Link>
                         ))}
                     </div>
                 </div>

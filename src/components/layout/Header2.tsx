@@ -9,12 +9,14 @@ import { useState } from "react"
 import MobileMenu from "./MobileMenu"
 import logoSrc from "@/public-assets/logo/qavtix-logo-white.svg"
 import { pathsForHeader2 } from "@/helper-fns/pathNameResolvers"
+import SearchModal from "../modals/SearchModal"
 
 export default function Header2() {
 
     const router = useRouter()
     const pathName = usePathname()
     const [showMobileMenu, setShowMobileMenu] = useState(false)
+    const [showSearchModal, setShowSearchModal] = useState(false)
 
     const isActive = (href: string) => {
         if (href === '/') return pathName === href
@@ -58,7 +60,7 @@ export default function Header2() {
 
                     <div className="flex items-center gap-6">
                         <div className="hidden lg:flex items-center justify-between gap-2">
-                            <button aria-label="Search Event" onClick={() => router.push(EVENT_ROUTES.SEARCH_EVENTS.href)}>
+                            <button aria-label="Search Event" onClick={() => setShowSearchModal(true)}>
                                 <Icon icon="lineicons:search-1" width="24" height="25" className="size-7 hover:text-primary-7" />
                             </button>
                             {
@@ -98,7 +100,7 @@ export default function Header2() {
                         </div>
 
                         <div className="flex gap-3 lg:hidden items-center text-secondary-9">
-                            <button aria-label="Search Event">
+                            <button onClick={() => setShowSearchModal(true)} aria-label="Search Event">
                                 <Icon icon="lineicons:search-1" width="24" height="25" className="size-7" />
                             </button>
                             <button
@@ -116,6 +118,7 @@ export default function Header2() {
                     </div>
                 </div>
                 <MobileMenu openMobileMenu={showMobileMenu} setOpenMobileMenu={setShowMobileMenu} />
+                <SearchModal openSearchModal={showSearchModal} setOpenSearchModal={setShowSearchModal} />
             </header>
         )
     )

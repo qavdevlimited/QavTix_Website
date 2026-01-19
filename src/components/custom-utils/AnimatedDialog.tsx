@@ -11,6 +11,7 @@ interface AnimatedDialogProps {
   title?: string
   children: React.ReactNode
   className?: string
+  position?: 'center' | 'top'
 }
 
 export function AnimatedDialog({
@@ -19,27 +20,28 @@ export function AnimatedDialog({
   trigger,
   title,
   children,
-  className = ''
+  className = '',
+  position = 'center'
 }: AnimatedDialogProps) {
   return (
     <DialogPrimitive.Root open={open} onOpenChange={onOpenChange}>
       {trigger && <DialogPrimitive.Trigger asChild>{trigger}</DialogPrimitive.Trigger>}
 
       <DialogPrimitive.Portal>
-        {/* Overlay - smooth fade only (no blur on mobile) */}
         <DialogPrimitive.Overlay
           className={cn(
-            "fixed inset-0 z-50 bg-black/60",
-            // Open
+            "fixed inset-0 z-100 bg-black/60",
             "data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:duration-300 data-[state=open]:ease-out",
-            // Close
             "data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:duration-200 data-[state=closed]:ease-in",
           )}
         />
 
         <DialogPrimitive.Content
           className={cn(
-            "fixed left-1/2 top-1/2 z-50 -translate-x-1/2 -translate-y-1/2 w-full max-w-125 bg-white rounded-4xl shadow-2xl outline-none",
+            "fixed z-100 w-full max-w-125 bg-white rounded-4xl shadow-2xl outline-none",
+            // Position classes
+            position === 'center' && "left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2",
+            position === 'top' && "left-1/2 top-20 -translate-x-1/2",
             // Open animation
             "data-[state=open]:animate-in",
             "data-[state=open]:fade-in-0",

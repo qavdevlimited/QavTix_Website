@@ -20,7 +20,7 @@ export default function EventsPage(){
             <WhereItsHappeningSection />
             <EventsNearYouSection />
             <EventCategorySection2 />
-            <div className="mt-12 md:mt-20">
+            <div className="mt-12">
                 <TrendingEvents />
             </div>
             <TopDestinationTravelledSection />

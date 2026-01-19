@@ -1,7 +1,7 @@
 "use client"
 
 import { usePathname } from "next/navigation";
-import SearchEventInput1 from "../custom-utils/inputs/event-search/SearchEventInput1";
+import SearchInput1 from "../custom-utils/inputs/event-search/SearchInput1";
 import Logo from "./Logo";
 import Link from "next/link";
 import { Icon } from "@iconify/react";
@@ -10,11 +10,13 @@ import { useState } from "react";
 import MobileMenu from "./MobileMenu";
 import logoSrc from "@/public-assets/logo/qavtix-logo.svg"
 import { pathsForHeader1 } from "@/helper-fns/pathNameResolvers";
+import SearchModal from "../modals/SearchModal";
 
 export default function Header(){
 
     const pathName = usePathname()
     const [showMobileMenu,setShowMobileMenu] = useState(false)
+    const [showSearchModal, setShowSearchModal] = useState(false)
 
     const isActive = (href: string) => {
         if (href === '/') {
@@ -32,7 +34,7 @@ export default function Header(){
         <header className="py-8 w-full absolute top-0 left-0 z-100 flex justify-between items-center global-px">
             <div className="flex items-center gap-8">
                 <Logo logo={logoSrc} />
-                <SearchEventInput1 className="hidden lg:block" />
+                <SearchInput1 className="hidden lg:block" />
             </div>
             <nav className="items-center gap-1 hidden lg:flex">
                 {navLinks.map((link) => {
@@ -84,8 +86,8 @@ export default function Header(){
                 </button>
             </div>
 
-
             <MobileMenu openMobileMenu={showMobileMenu} setOpenMobileMenu={setShowMobileMenu} />
+            <SearchModal openSearchModal={showSearchModal} setOpenSearchModal={setShowSearchModal} />
         </header>
     )
 }
