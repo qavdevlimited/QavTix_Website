@@ -17,6 +17,7 @@ export default function Header(){
     const pathName = usePathname()
     const [showMobileMenu,setShowMobileMenu] = useState(false)
     const [showSearchModal, setShowSearchModal] = useState(false)
+    const [searchValue, setSearchValue] = useState<string>("")
 
     const isActive = (href: string) => {
         if (href === '/') {
@@ -34,7 +35,10 @@ export default function Header(){
         <header className="py-8 w-full absolute top-0 left-0 z-100 flex justify-between items-center global-px">
             <div className="flex items-center gap-8">
                 <Logo logo={logoSrc} />
-                <SearchInput1 className="hidden lg:block" />
+                <SearchInput1 onSearch={(v) => {
+                    setSearchValue(v)
+                    setShowSearchModal(true)
+                }} className="hidden lg:block" />
             </div>
             <nav className="items-center gap-1 hidden lg:flex">
                 {navLinks.map((link) => {
@@ -87,7 +91,7 @@ export default function Header(){
             </div>
 
             <MobileMenu openMobileMenu={showMobileMenu} setOpenMobileMenu={setShowMobileMenu} />
-            <SearchModal openSearchModal={showSearchModal} setOpenSearchModal={setShowSearchModal} />
+            <SearchModal searchValue={searchValue} setSearchValue={setSearchValue} openSearchModal={showSearchModal} setOpenSearchModal={setShowSearchModal} />
         </header>
     )
 }

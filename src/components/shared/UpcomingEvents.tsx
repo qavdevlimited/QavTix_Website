@@ -95,7 +95,7 @@ export default function UpcomingEvents({ upcomingEventsData }: UpcomingEventsPro
                     onMouseEnter={pauseAutoPlay}
                     onMouseLeave={resumeAutoPlay}
                 >
-                <div className="flex gap-4 px-3">
+                <div className="flex gap-4 px-3 py-2">
                     {duplicatedEvents.map((event) => (
                     <div
                         key={event._uniqueId}
