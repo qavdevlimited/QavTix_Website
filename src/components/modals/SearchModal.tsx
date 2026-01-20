@@ -17,7 +17,7 @@ export default function SearchModal({
     setSearchValue
 }: SearchModalProps) {
     return (
-        <AnimatedDialog position="top" title="Search" open={openSearchModal} onOpenChange={(v) => setOpenSearchModal(v)}>
+        <AnimatedDialog position="top" title="Qavtix Search" open={openSearchModal} onOpenChange={(v) => setOpenSearchModal(v)}>
             <div className="w-full mt-10">
                 <div className="relative group">
                     <Icon 
