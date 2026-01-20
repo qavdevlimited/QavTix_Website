@@ -13,7 +13,6 @@ import SearchModal from "../modals/SearchModal"
 
 export default function Header2() {
 
-    const router = useRouter()
     const pathName = usePathname()
     const [showMobileMenu, setShowMobileMenu] = useState(false)
     const [showSearchModal, setShowSearchModal] = useState(false)
@@ -118,7 +117,7 @@ export default function Header2() {
                     </div>
                 </div>
                 <MobileMenu openMobileMenu={showMobileMenu} setOpenMobileMenu={setShowMobileMenu} />
-                <SearchModal openSearchModal={showSearchModal} setOpenSearchModal={setShowSearchModal} />
+                <SearchModal searchValue="" setSearchValue={() => {}} openSearchModal={showSearchModal} setOpenSearchModal={setShowSearchModal} />
             </header>
         )
     )
