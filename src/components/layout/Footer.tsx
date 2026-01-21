@@ -4,41 +4,22 @@ import Link from 'next/link'
 import { Icon } from '@iconify/react'
 import { useState } from 'react'
 import Logo from './Logo'
-import { space_grotesk } from '@/lib/redux/fonts'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select'
+import { space_grotesk } from '@/lib/fonts'
 import { footerData } from '@/components-data/footer-data'
 import { usePathname } from 'next/navigation'
-
-interface FooterLink {
-  label: string
-  href: string
-}
-
-
+import { isHighlightedSocial } from '@/helper-fns/isHighlightedSocial'
+import { cn } from '@/lib/utils'
+import CurrencySwitcher from '../settings/CurrencySwitcher'
+import RegionSwitcher from '../settings/RegionSwitcher'
 
 
 export default function Footer() {
 
     const pathName = usePathname()
-    const [selectedCurrency, setSelectedCurrency] = useState('NG')
-    const [selectedRegion, setSelectedRegion] = useState('Naira')
-
-
-    // Featuring Only Nigeria Region
-    const currencies = [
-        { code: 'NG', label: 'NG', flag: '🇳🇬' },
-        // { code: 'US', label: 'US', flag: '🇺🇸' },
-        // { code: 'GB', label: 'GB', flag: '🇬🇧' },
-    ]
-
-    const regions = [
-        { code: 'Naira', label: 'Naira', symbol: '₦' },
-        // { code: 'Dollar', label: 'Dollar', symbol: '$' },
-        // { code: 'Pound', label: 'Pound', symbol: '£' },
-    ]
 
     return (
         !pathName.match("/auth") &&
+        !pathName.match("/checkout") &&
         <footer className="w-full relative bg-primary-1 px-6 lg:px-16 py-12">
             <div className="max-w-7xl mx-auto">
                 {/* Main Footer Content */}
@@ -113,18 +94,39 @@ export default function Footer() {
 
                         {/* Social Links */}
                         <div className="hidden md:flex gap-4 mt-6">
-                            {footerData.social.map((social) => (
-                                <Link
-                                    key={social.label}
-                                    href={social.href}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="flex items-center justify-center hover:scale-110 transition-transform"
-                                    aria-label={social.label}
-                                >
-                                    <Icon icon={social.icon} width="24" height="24" className='text-primary-6 size-9' />
-                                </Link>
-                            ))}
+                            {footerData.social.map((social) => {
+                                const isHighlighted =
+                                    isHighlightedSocial(social.label) ||
+                                    isHighlightedSocial(social.href)
+                                return (
+
+                                    <Link
+                                        href={social.href}
+                                        target="_blank"
+                                        key={social.href}
+                                        rel="noopener noreferrer"
+                                        aria-label={social.label}
+                                        className="flex items-center justify-center hover:scale-105 ease-linear duration-150"
+                                    >
+                                        <div
+                                            className={cn(
+                                                'flex items-center py-2 justify-center transition-all',
+                                                isHighlighted
+                                                ? 'bg-primary-6 text-white rounded-full p-2'
+                                                : 'text-primary-6'
+                                            )}
+                                            >
+                                            <Icon
+                                                icon={social.icon}
+                                                width="24"
+                                                height="24"
+                                                className={cn(isHighlighted ? "size-7" : "size-9")}
+                                            />
+                                        </div>
+                                    </Link>
+                                )
+                            }
+                            )}
                         </div>
                     </div>
                 </div>
@@ -167,39 +169,11 @@ export default function Footer() {
                     </div>
 
                     <div className="flex relative z-10 items-center gap-3 order-3 md:order-[unset]">
-                        {/* Currency Selector */}
-                        <Select value={selectedCurrency} onValueChange={setSelectedCurrency}>
-                            <SelectTrigger className="w-28 bg-white rounded-lg border-neutral-3 hover:border-neutral-4 focus:border-primary-6">
-                                <SelectValue placeholder="Select currency" />
-                            </SelectTrigger>
-                            <SelectContent>
-                                {currencies.map((currency) => (
-                                    <SelectItem key={currency.code} value={currency.code}>
-                                        <span className="flex items-center gap-2">
-                                            <span className='text-2xl'>{currency.flag}</span>
-                                            <span>{currency.label}</span>
-                                        </span>
-                                    </SelectItem>
-                                ))}
-                            </SelectContent>
-                        </Select>
-
                         {/* Region Selector */}
-                        <Select value={selectedRegion} onValueChange={setSelectedRegion}>
-                            <SelectTrigger className="w-28 bg-white rounded-lg border-neutral-3 hover:border-neutral-4 focus:border-primary-6">
-                                <SelectValue placeholder="Select region" />
-                            </SelectTrigger>
-                            <SelectContent>
-                                {regions.map((region) => (
-                                    <SelectItem key={region.code} value={region.code}>
-                                        <span className="flex items-center gap-2">
-                                            <span>{region.symbol}</span>
-                                            <span>{region.label}</span>
-                                        </span>
-                                    </SelectItem>
-                                ))}
-                            </SelectContent>
-                        </Select>
+                        <RegionSwitcher />
+
+                        {/* Currency Selector */}
+                        <CurrencySwitcher  />
                     </div>
                 </div>
             </div>

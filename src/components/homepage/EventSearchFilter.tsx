@@ -35,13 +35,13 @@ export function EventSearchFilters() {
     ))
 
     return (
-        <div className="w-full py-8 md:mt-12">
+        <div className="w-full py-8 md:py-0 md:mt-[6vh]">
             <div>
                 <div className="space-y-4">
                     {/* First Row */}
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <DateFilter
-                            value={filters.dateRange || { from: new Date(), to: new Date() }}
+                            value={filters.dateRange}
                             onChange={(v) => setFilters({...filters, dateRange: v || { from: new Date(), to: new Date()} as DateRange})}
                         />
                         <LocationFilterDropdown
@@ -69,7 +69,7 @@ export function EventSearchFilters() {
                 {/* Search Button */}
                 <Button
                     onClick={handleSearch}
-                    className="w-40 bg-primary hover:bg-primary-7 h-14 mt-5 md:mt-10 px-8 rounded-full"
+                    className="w-40 bg-primary hover:bg-primary-7 h-14 md:h-[9vh] mt-5 md:mt-[4vh] px-8 rounded-full"
                 >
                     <Search className="mr-2 size-6" />
                     Search event

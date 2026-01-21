@@ -4,10 +4,11 @@ import { useCallback, useEffect, useState } from 'react'
 import useEmblaCarousel from 'embla-carousel-react'
 import Autoplay from 'embla-carousel-autoplay'
 import Image from 'next/image'
-import { space_grotesk } from '@/lib/redux/fonts'
+import { space_grotesk } from '@/lib/fonts'
 import CarouselActionBtns from '../custom-utils/buttons/CarouselActionBtns'
 import { demoHosts } from '@/components-data/demo-data'
 import FollowHostBtn1 from '../custom-utils/buttons/FollowHostBtn1'
+import TopHostCard from '../custom-utils/cards/TopHostCard'
 
 
 const dupliactedHostsData: Host[] = [...demoHosts, ...demoHosts, ...demoHosts].map((event,index) => {
@@ -70,8 +71,8 @@ export default function TopHostsSection() {
     }, [emblaApi, onSelect])
 
     return (
-        <section className="w-full pt-20 pb-24 px-4 md:ps-10 lg:ps-16 md:pe-0">
-            <div className="max-w-7xl mx-auto">
+        <section className="w-full pt-16 md:pt-10 pb-24 px-4 md:ps-10 lg:ps-16 md:pe-0">
+            <div className="">
                 <div className="flex items-center gap-6 justify-between md:pe-16">
                     <h2 className={`text-2xl sm:text-3xl  md:text-[2rem] font-bold text-secondary-9 ${space_grotesk.className}`}>
                         Top Hosts
@@ -86,38 +87,15 @@ export default function TopHostsSection() {
                 </div>
 
                 {/* Carousel */}
-                <div className="overflow-hidden mt-14 md:mt-16" ref={emblaRef}>
+                <div className="overflow-hidden mt-12 py-4" ref={emblaRef}>
                     <div className="flex gap-6 px-3">
                         {dupliactedHostsData.map((host) => (
-                            <div 
+                            <TopHostCard
                                 key={host.id}
-                                onMouseOver={() => pauseAutoPlay()}
-                                onMouseLeave={() => play()}
-                                className="flex-[0_0_85%] sm:flex-[0_0_30%] lg:flex-[0_0_20%] min-w-0 flex justify-between items-center flex-col bg-secondary-1 rounded-3xl py-6 min-h-[19em]"
-                            >
-                                <Image
-                                    src={host.profile_img}
-                                    alt={host.name}
-                                    width={400}
-                                    height={400}
-                                    className="object-cover rounded-full aspect-square w-28"
-                                />
-                                <div>
-                                    <h3 className={`${space_grotesk.className} text-center text-lg font-medium text-secondary-9 mb-1`}>{host.name}</h3>
-                                    <div className="flex gap-3 text-xs font-medium text-neutral-8 items-center">
-                                        <span>
-                                            <span className='text-neutral-7'>{host.followers}</span> Followers
-                                        </span>
-                                        <hr className="w-px h-2 border border-neutral-6" />
-                                        <span>
-                                            <span className='text-neutral-7'>{host.events}</span> Events
-                                        </span>
-                                    </div>
-                                </div>
-
-
-                                <FollowHostBtn1 />
-                            </div>
+                                host={host}
+                                onMouseOver={pauseAutoPlay}
+                                onMouseLeave={play}
+                            />
                         ))}
                     </div>
                 </div>

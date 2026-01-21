@@ -1,7 +1,21 @@
-interface EventCardUser {
+type AuthUser = {
+    tickets: TicketTier[],
+    profile_img: string,
+    full_name: string,
+    id: string,
+    email: string,
+    phone: string
+}
+
+
+type UserGroup = {
     id: string
-    image?: string
-    initials: string
+    name: string
+    members: {
+        name: string
+        email: string
+        phone: string
+    }[]
 }
 
  // Havent confirmed Proper Type //
@@ -19,5 +33,10 @@ type Attendee = {
     id: number,
     name: string,
     profile_img: string,
-    username: string
+    username: string,
+    socials?: {
+        href: string,
+        text: string,
+        icon: string
+    }[]
 }

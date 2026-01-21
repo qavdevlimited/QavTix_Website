@@ -7,7 +7,7 @@ import AuthPageFlexWrapper from "@/components/auth-pages/AuthPageFlexWrapper";
 import ActionButton1 from "@/components/custom-utils/buttons/ActionButton1";
 import ActionButton2 from "@/components/custom-utils/buttons/ActionButton2";
 import { RadioGroup } from "@/components/ui/radio-group";
-import { space_grotesk } from "@/lib/redux/fonts";
+import { space_grotesk } from "@/lib/fonts";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -29,9 +29,9 @@ export default function SignUpPage(){
                     <AccountTypeBox value={AccountTypes.HOST} />
                 </RadioGroup>
 
-                <div className="flex flex-col gap-4 mt-12">
-                    <ActionButton2 buttonText="Cancel" action={() => router.push("/")}   />
-                    <ActionButton1 buttonText="Continue" action={() => router.push(`${NAV_LINKS.SIGN_UP.href}/${accountType}${accountType === "host" ? "?type=individual" : ""}`)} />
+                <div className="flex flex-col md:flex-row gap-4 mt-12">
+                    <ActionButton2 buttonText="Cancel" action={() => router.push("/")} className="w-full"   />
+                    <ActionButton1 buttonText="Continue" action={() => router.push(`${NAV_LINKS.SIGN_UP.href}/${accountType}${accountType === "host" ? "?type=individual" : ""}`)} className="w-full" />
                 </div>
 
                 <p className="text-sm text-neutral-7 mt-6 mb-8 text-center">Already have an account?<button onClick={() => router.push(NAV_LINKS.SIGN_IN.href)} className="font-medium text-accent-6 ms-1">Sign In</button></p>

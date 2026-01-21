@@ -30,7 +30,10 @@ export function EventIconActionButton({
     const [showFeedback, setShowFeedback] = useState(false)
 
 
-    const handleClick = () => {
+    const handleClick = (e: React.MouseEvent) => {
+        e.preventDefault()
+        e.stopPropagation()
+        
         setShowFeedback(true)
         onClick()
         setTimeout(() => setShowFeedback(false), 1200)

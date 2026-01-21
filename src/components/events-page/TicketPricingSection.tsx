@@ -1,4 +1,6 @@
 import { ticketTiers } from "@/components-data/demo-data"
+import { EVENT_ROUTES } from "@/components-data/navigation/navLinks"
+import { useParams, useRouter } from "next/navigation"
 import { useState } from "react"
 
 interface TicketPricingSectionProps {
@@ -14,8 +16,10 @@ export default function TicketPricingSection({
 }: TicketPricingSectionProps) {
 
 
+  const router = useRouter()
   const [showAll, setShowAll] = useState(false)
 
+  const params = useParams<{ event_id: string }>()
   const visibleTickets = showAll ? tickets : tickets.slice(0, initialVisibleCount)
   const hasMore = tickets.length > initialVisibleCount
 
@@ -55,6 +59,7 @@ export default function TicketPricingSection({
 
       <div className="mt-8">
         <button
+          onClick={() => router.push(`${EVENT_ROUTES.CHECKOUT.href.replace("[event_id]", params.event_id)}`)}
           className="bg-primary-6 hover:bg-primary-7 text-white px-6 py-4 rounded-full font-medium transition-colors"
         >
           Get a ticket

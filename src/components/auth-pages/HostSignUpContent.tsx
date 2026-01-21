@@ -1,14 +1,14 @@
 "use client"
 
 import { useSignup } from "@/contexts/HostSignupProvider"
-import HostSignUpSuccessMessage from "../forms/host-signup-steps/reused/HostSignupSuccessMessage"
-import { space_grotesk } from "@/lib/redux/fonts"
+import HostSignUpSuccessMessage from "../forms/auth-pages/host-signup-steps/reused/HostSignupSuccessMessage"
+import { space_grotesk } from "@/lib/fonts"
 import { HostAccountTypeSelector } from "../custom-utils/HostAccountTypeSelector"
-import { StepIndicator } from "../custom-utils/FormStepIndicator"
-import IndividualHostSignupSection from "../forms/host-signup-steps/individual"
-import OrganizationHostSignupSection from "../forms/host-signup-steps/organization"
+import IndividualHostSignupSection from "../forms/auth-pages/host-signup-steps/individual"
+import OrganizationHostSignupSection from "../forms/auth-pages/host-signup-steps/organization"
 import { HostAccountType } from "@/schemas/host-signup.schema"
 import AuthPageFlexWrapper from "./AuthPageFlexWrapper"
+import SignUpStepIndicator from "../custom-utils/SignUpFormStepIndicator"
 
 export default function HostSignUpContent({ hostAccountType }:{ hostAccountType: HostAccountType }){
 
@@ -29,7 +29,7 @@ export default function HostSignUpContent({ hostAccountType }:{ hostAccountType:
                     </div>
 
                     <HostAccountTypeSelector />
-                    <StepIndicator />
+                    <SignUpStepIndicator />
                     
                     { 
                         hostAccountType === "individual" ?

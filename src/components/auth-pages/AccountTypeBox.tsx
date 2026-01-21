@@ -1,13 +1,13 @@
 import { RadioGroupItem } from "../ui/radio-group";
 import { CustomIcons } from "../Svg-Icons";
 import { Label } from "../ui/label";
-import { space_grotesk } from "@/lib/redux/fonts";
+import { space_grotesk } from "@/lib/fonts";
 
 export default function AccountTypeBox({ value }: { value: AccountType }) {
 
     return (
         <Label htmlFor={value} className="cursor-pointer block w-full">
-            <div className="bg-gray-200 rounded-xl h-52 px-6 py-4 flex flex-col justify-between border-2 border-transparent hover:border-primary-5 transition-colors">
+            <div className="bg-gray-200 rounded-xl h-57 px-6 py-4 flex flex-col justify-between border-2 border-transparent hover:border-primary-5 transition-colors">
                 <RadioGroupItem 
                     value={value} 
                     id={value}

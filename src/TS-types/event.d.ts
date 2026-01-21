@@ -2,11 +2,24 @@ interface TicketTier {
   id: string
   name: string
   price: number
+  originalPrice: number
   currency: string
   description?: string
   features?: string[]
   available: boolean
   soldOut?: boolean
+}
+
+interface Discount {
+    type: 'coupon' | 'membership'
+    code?: string
+    percentage?: number
+    amount?: number
+    description?: string
+}
+
+interface CheckoutTicket extends TicketTier {
+    quantity: number
 }
 
 
@@ -28,7 +41,7 @@ interface Location {
 
 
 interface FilterValues {
-    dateRange?: DateRange
+    dateRange?: DateRange | null
     location?: {
         country: string,
         state: string

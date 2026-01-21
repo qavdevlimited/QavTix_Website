@@ -7,7 +7,7 @@ import CountdownTimer from "@/components/custom-utils/CountDownTimer";
 import OTPInput from "@/components/custom-utils/inputs/OTPInput";
 import PasswordInput1 from "@/components/custom-utils/inputs/PasswordInput1";
 import { maskEmail } from "@/helper-fns/maskEmail";
-import { space_grotesk } from "@/lib/redux/fonts";
+import { space_grotesk } from "@/lib/fonts";
 import { useState } from "react";
 
 export default function ForgotPasswordPage(){

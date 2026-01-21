@@ -5,7 +5,7 @@ import useEmblaCarousel from 'embla-carousel-react'
 import Autoplay from 'embla-carousel-autoplay'
 import { usePathname } from 'next/navigation'
 import { signInSlides, signUpSlides } from '@/components-data/auth-pages/slides'
-import { space_grotesk } from '@/lib/redux/fonts'
+import { space_grotesk } from '@/lib/fonts'
 
 export default function AuthPageImageCarousel() {
 

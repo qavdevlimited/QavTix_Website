@@ -1,4 +1,4 @@
-import { space_grotesk } from "@/lib/redux/fonts";
+import { space_grotesk } from "@/lib/fonts";
 import FeatureCards from "../custom-utils/cards/FeatureCards";
 
 export default function WhyChooseUsSection(){

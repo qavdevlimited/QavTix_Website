@@ -8,13 +8,14 @@ import { EVENT_ROUTES, header2NavLinks, NAV_LINKS } from "@/components-data/navi
 import { useState } from "react"
 import MobileMenu from "./MobileMenu"
 import logoSrc from "@/public-assets/logo/qavtix-logo-white.svg"
-import { containsEventPage } from "@/helper-fns/pathNameResolvers"
+import { pathsForHeader2 } from "@/helper-fns/pathNameResolvers"
+import SearchModal from "../modals/SearchModal"
 
 export default function Header2() {
 
-    const router = useRouter()
     const pathName = usePathname()
     const [showMobileMenu, setShowMobileMenu] = useState(false)
+    const [showSearchModal, setShowSearchModal] = useState(false)
 
     const isActive = (href: string) => {
         if (href === '/') return pathName === href
@@ -24,11 +25,11 @@ export default function Header2() {
     const mainNavLinks = header2NavLinks.filter(link => link.type !== 'cta' && link.type !== "auth")
     const ctaLinks = header2NavLinks.filter(link => link.type === 'cta')
 
-    // Show header only on non-auth pages,
-    // excluding the homepage and event location routes
-
     return (
-        !pathName.startsWith("/auth") && pathName !== "/" && !containsEventPage(pathName) && (
+        pathName !== "/" && 
+        !pathName.startsWith("/auth") && 
+        !pathName.match("/checkout") && 
+        pathsForHeader2(pathName) && (
             <header className="py-8 w-full absolute top-0 left-0 z-100">
                 <div className="global-px flex items-center justify-between">
                     <Logo logo={logoSrc} />
@@ -41,13 +42,13 @@ export default function Header2() {
                                     key={link.href}
                                     href={link.href}
                                     className={`
-                                        px-4 py-2 rounded-lg text-sm transition-all duration-150
+                                        px-4 py-2 text-sm transition-all duration-150
                                         ${active
                                             ? 'text-white'
                                             : 'text-neutral-6 hover:text-neutral-5'
                                         }
                                         active:scale-[0.98]
-                                        focus:outline-none focus:ring-2 focus:ring-neutral-4 focus:ring-offset-2
+                                        focus:outline-none focus:border-b-2 focus:border-neutral-4
                                     `}
                                 >
                                     {link.label}
@@ -58,7 +59,7 @@ export default function Header2() {
 
                     <div className="flex items-center gap-6">
                         <div className="hidden lg:flex items-center justify-between gap-2">
-                            <button aria-label="Search Event" onClick={() => router.push(EVENT_ROUTES.SEARCH_EVENTS.href)}>
+                            <button aria-label="Search Event" onClick={() => setShowSearchModal(true)}>
                                 <Icon icon="lineicons:search-1" width="24" height="25" className="size-7 hover:text-primary-7" />
                             </button>
                             {
@@ -98,7 +99,7 @@ export default function Header2() {
                         </div>
 
                         <div className="flex gap-3 lg:hidden items-center text-secondary-9">
-                            <button aria-label="Search Event">
+                            <button onClick={() => setShowSearchModal(true)} aria-label="Search Event">
                                 <Icon icon="lineicons:search-1" width="24" height="25" className="size-7" />
                             </button>
                             <button
@@ -106,20 +107,17 @@ export default function Header2() {
                                 aria-label="Toggle menu"
                             >
                                 <Icon
-                                    icon={showMobileMenu ? "codicon:close" : "lineicons:menu-hamburger-1"}
+                                    icon="lineicons:menu-hamburger-1"
                                     width="30"
                                     height="30"
-                                    className="size-9"
+                                    className="size-8"
                                 />
                             </button>
                         </div>
                     </div>
                 </div>
-
-                {
-                    showMobileMenu &&
-                    <MobileMenu openMobileMenu={showMobileMenu} setOpenMobileMenu={setShowMobileMenu} />
-                }
+                <MobileMenu openMobileMenu={showMobileMenu} setOpenMobileMenu={setShowMobileMenu} />
+                <SearchModal searchValue="" setSearchValue={() => {}} openSearchModal={showSearchModal} setOpenSearchModal={setShowSearchModal} />
             </header>
         )
     )

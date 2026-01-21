@@ -1,6 +1,6 @@
 "use client"
 
-import { space_grotesk } from "@/lib/redux/fonts";
+import { space_grotesk } from "@/lib/fonts";
 import { useRouter } from "next/navigation";
 
 export default function SellTicketsSection(){
@@ -8,7 +8,7 @@ export default function SellTicketsSection(){
     const router = useRouter()
 
     return (
-        <section className="global-px mt-14 mb-28 lg:my-24 flex flex-col justify-center items-center text-center">
+        <section className="global-px mt-14 mb-28 flex flex-col justify-center items-center text-center">
             <h2
                 className={`text-2xl sm:text-3xl  md:text-[2rem] font-bold text-secondary-9 ${space_grotesk.className}`}
             >

@@ -20,7 +20,7 @@ export default function EventFilterTypeBtn({
 
     const variants = {
         default: cn(
-            'w-full justify-between text-left text-sm rounded-xl font-normal h-14 px-4',
+            'w-full justify-between text-left text-sm rounded-xl font-normal h-14 md:h-[8vh] px-4',
             'bg-accent-1 hover:bg-accent-2/60 border border-transparent'
         ),
         compact: cn(

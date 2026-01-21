@@ -1,23 +1,16 @@
-
 'use client'
 
 import { useState } from 'react'
-import { cn } from '@/lib/utils'
-import { Icon } from '@iconify/react'
 import { MobileBottomSheet } from '@/components/custom-utils/EventFilterDropdownMobileBottomSheet'
 import FilterButtonsActions1 from '@/components/custom-utils/buttons/event-search/FilterActionButtons1'
 import { QuickDateButtons } from '@/components/custom-utils/buttons/event-search/QuickDateButtons'
 import { EventSearchDateRangePicker } from '@/components/custom-utils/inputs/event-search/EventSearchDateRangePicker'
 import { formatDate } from '@/helper-fns/date-utils'
 import { DateRange } from 'react-day-picker'
-import {
-    Dialog,
-    DialogContent,
-    DialogHeader,
-    DialogTitle,
-    DialogTrigger,
-} from '@/components/ui/dialog'
 import EventFilterTypeBtn from '@/components/custom-utils/buttons/event-search/EventFilterTypeBtn'
+import { useMediaQuery } from '@/lib/custom-hooks/UseMediaQuery'
+import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
+import { cn } from '@/lib/utils'
 
 interface DateFilterProps {
     value?: DateRange | null
@@ -26,7 +19,11 @@ interface DateFilterProps {
 }
 
 export default function DateFilter({ value, onChange, filterFor = "homepage" }: DateFilterProps) {
+
+    
     const [isOpen, setIsOpen] = useState(false)
+    const isTablet = useMediaQuery('(min-width: 768px)')
+    
     const [dateRange, setDateRange] = useState<DateRange>(
         value || { from: undefined, to: undefined }
     )
@@ -58,99 +55,89 @@ export default function DateFilter({ value, onChange, filterFor = "homepage" }: 
         setDateRange(range)
     }
 
+    const triggerVariant = filterFor === "homepage" ? 'default' : 'compact'
+
+    const filterContent = (
+        <>
+            <QuickDateButtons
+                selectedRange={dateRange}
+                onSelect={handleQuickSelect}
+            />
+
+            <EventSearchDateRangePicker
+                value={dateRange}
+                onChange={setDateRange}
+            />
+        </>
+    )
+
     return (
         <>
-            {/* Mobile & Tablet - Bottom Sheet */}
-            <div className="lg:hidden relative">
-
-                {
-                    filterFor === "homepage" ?
+            {/* Mobile - Bottom Sheet */}
+            {!isTablet && (
+                <>
                     <EventFilterTypeBtn 
                         onClick={() => setIsOpen(true)}
                         displayText={displayText} 
                         hasActiveFilter={!!hasActiveFilter}
-                        variant='default' 
-                    />
-                    :
-                    <EventFilterTypeBtn 
-                        onClick={() => setIsOpen(true)}
-                        displayText={displayText} 
-                        hasActiveFilter={!!hasActiveFilter}
-                        variant='compact' 
-                    />
-                }
-
-                <MobileBottomSheet
-                    isOpen={isOpen}
-                    onClose={() => setIsOpen(false)}
-                    title="Date"
-                >
-                    <QuickDateButtons
-                        selectedRange={dateRange}
-                        onSelect={handleQuickSelect}
+                        variant={triggerVariant}
                     />
 
-                    <div className="pt-6">
-                        <EventSearchDateRangePicker
-                            value={dateRange}
-                            onChange={setDateRange}
+                    <MobileBottomSheet
+                        isOpen={isOpen}
+                        onClose={() => setIsOpen(false)}
+                        title="Date"
+                    >
+                        {filterContent}
+                        <FilterButtonsActions1
+                            onApply={handleApply}
+                            onClear={handleClear}
                         />
-                    </div>
+                    </MobileBottomSheet>
+                </>
+            )}
 
-                    <FilterButtonsActions1
-                        onApply={handleApply}
-                        onClear={handleClear}
-                    />
-                </MobileBottomSheet>
-            </div>
-
-
-
-
-            {/* Desktop - Dialog */}
-            <div className="hidden lg:block">
-                <Dialog open={isOpen} onOpenChange={setIsOpen}>
-                    <DialogTrigger asChild>
-                        {
-                            filterFor === "homepage" ?
+            {/* Tablet - Dialog */}
+            {isTablet && (
+                <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
+                    <DropdownMenuTrigger asChild>
+                        <div>
                             <EventFilterTypeBtn 
                                 onClick={() => setIsOpen(true)}
                                 displayText={displayText} 
                                 hasActiveFilter={!!hasActiveFilter}
-                                variant='default' 
+                                variant={triggerVariant}
                             />
-                            :
-                            <EventFilterTypeBtn 
-                                onClick={() => setIsOpen(true)}
-                                displayText={displayText} 
-                                hasActiveFilter={!!hasActiveFilter}
-                                variant='compact' 
-                            />
-                        }
-                    </DialogTrigger>
-                    <DialogContent className="max-w-150 rounded-2xl">
-                        <DialogHeader>
-                            <DialogTitle className="text-xl">Date</DialogTitle>
-                        </DialogHeader>
+                        </div>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent 
+                        className={cn(
+                            "w-[25em] z-100! p-4 rounded-xl shadow-[0px_3.69px_14.76px_0px_rgba(51,38,174,0.08)]",
+                            // Open animation
+                            "data-[state=open]:animate-in",
+                            "data-[state=open]:fade-in-0",
+                            "data-[state=open]:duration-500 data-[state=open]:ease-[cubic-bezier(0.16,1,0.3,1)]",
+                            "data-[state=open]:zoom-in-90",
+                            "data-[state=open]:slide-in-from-top-4",
+                            // Close animation
+                            "data-[state=closed]:animate-out",
+                            "data-[state=closed]:fade-out-0",
+                            "data-[state=closed]:duration-400 data-[state=closed]:ease-in",
+                            "data-[state=closed]:zoom-out-90",
+                            "data-[state=closed]:slide-out-to-top-4"
+                        )}
+                        align="start"
+                    >
                         <div className="space-y-6">
-                            <QuickDateButtons
-                                selectedRange={dateRange}
-                                onSelect={handleQuickSelect}
-                            />
-
-                            <EventSearchDateRangePicker
-                                value={dateRange}
-                                onChange={setDateRange}
-                            />
-
+                            {filterContent}
                             <FilterButtonsActions1
                                 onApply={handleApply}
                                 onClear={handleClear}
                             />
                         </div>
-                    </DialogContent>
-                </Dialog>
-            </div>
+                    </DropdownMenuContent>
+                </DropdownMenu>
+            )}
         </>
     )
 }

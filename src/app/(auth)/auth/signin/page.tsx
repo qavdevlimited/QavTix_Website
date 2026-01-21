@@ -2,8 +2,8 @@
 
 import AuthPageFlexWrapper from "@/components/auth-pages/AuthPageFlexWrapper";
 import Link from "next/link";
-import SignInForm from "@/components/forms/SignInForm";
-import { space_grotesk } from "@/lib/redux/fonts";
+import SignInForm from "@/components/forms/auth-pages/SignInForm";
+import { space_grotesk } from "@/lib/fonts";
 import { useRouter } from "next/navigation";
 import SocialAuthButtons from "@/components/auth-pages/SocialAuthButtons";
 

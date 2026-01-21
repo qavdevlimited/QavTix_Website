@@ -1,5 +1,6 @@
 'use client'
 
+import { isValidUrl } from '@/helper-fns/isValidUrl'
 import { cn } from '@/lib/utils'
 
 interface MapProps {
@@ -18,17 +19,19 @@ export default function MapEmbed({
   width = '100%',
   allowFullScreen = true
 }: MapProps) {
-    const encodedLocation = encodeURIComponent(location)
     
-    const searchUrl = `https://www.google.com/maps?q=${encodedLocation}&output=embed`
+    const src = isValidUrl(location)
+    ? location
+    : `https://www.google.com/maps?q=${encodeURIComponent(location)}&output=embed`
+
 
     return (
-        <div className={cn('overflow-hidden rounded-xl', className)}>
+        <div className={cn('overflow-hidden rounded-3xl', className)}>
             <iframe
-                src={searchUrl}
+                src={src}
                 width={width}
                 height={height}
-                style={{ border: 0 }}
+                style={{ border: 0, filter: 'grayscale(100%)' }}
                 allowFullScreen={allowFullScreen}
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"

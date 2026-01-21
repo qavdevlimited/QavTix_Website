@@ -6,7 +6,7 @@ import EventsNearYouSection from "@/components/shared/EventsNearYou";
 import FeaturedEventsSection from "@/components/shared/FeaturedEventsSection";
 import SectionHeading from "@/components/shared/SectionHeading";
 import WhereItsHappeningSection from "@/components/shared/WhereItsHappeningSection";
-import { space_grotesk } from "@/lib/redux/fonts";
+import { space_grotesk } from "@/lib/fonts";
 
 export default function EventsPage(){
     return (
@@ -20,7 +20,7 @@ export default function EventsPage(){
             <WhereItsHappeningSection />
             <EventsNearYouSection />
             <EventCategorySection2 />
-            <div className="mt-12 md:mt-20">
+            <div className="mt-12">
                 <TrendingEvents />
             </div>
             <TopDestinationTravelledSection />

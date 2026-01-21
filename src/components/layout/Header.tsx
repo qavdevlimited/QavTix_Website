@@ -1,20 +1,23 @@
 "use client"
 
 import { usePathname } from "next/navigation";
-import SearchEventInput1 from "../custom-utils/inputs/event-search/SearchEventInput1";
+import SearchInput1 from "../custom-utils/inputs/event-search/SearchInput1";
 import Logo from "./Logo";
 import Link from "next/link";
 import { Icon } from "@iconify/react";
-import { NAV_LINKS, navLinks } from "@/components-data/navigation/navLinks";
+import { navLinks } from "@/components-data/navigation/navLinks";
 import { useState } from "react";
 import MobileMenu from "./MobileMenu";
 import logoSrc from "@/public-assets/logo/qavtix-logo.svg"
-import { containsEventPage } from "@/helper-fns/pathNameResolvers";
+import { pathsForHeader1 } from "@/helper-fns/pathNameResolvers";
+import SearchModal from "../modals/SearchModal";
 
 export default function Header(){
 
     const pathName = usePathname()
     const [showMobileMenu,setShowMobileMenu] = useState(false)
+    const [showSearchModal, setShowSearchModal] = useState(false)
+    const [searchValue, setSearchValue] = useState<string>("")
 
     const isActive = (href: string) => {
         if (href === '/') {
@@ -24,19 +27,18 @@ export default function Header(){
     }
 
 
-
-    // Show header only on non-auth pages, homepage and event routes
     return (
         !pathName.startsWith("/auth") &&
-            (
-                pathName === "/" ||
-                containsEventPage(pathName)
-            )
+        !pathName.match("/checkout") &&
+        pathsForHeader1(pathName)
         ) && (
         <header className="py-8 w-full absolute top-0 left-0 z-100 flex justify-between items-center global-px">
             <div className="flex items-center gap-8">
                 <Logo logo={logoSrc} />
-                <SearchEventInput1 className="hidden lg:block" />
+                <SearchInput1 onSearch={(v) => {
+                    setSearchValue(v)
+                    setShowSearchModal(true)
+                }} className="hidden lg:block" />
             </div>
             <nav className="items-center gap-1 hidden lg:flex">
                 {navLinks.map((link) => {
@@ -67,7 +69,7 @@ export default function Header(){
                                     : 'text-secondary-4 hover:text-primary-7'
                                 }
                                 active:scale-[0.98]
-                                focus:outline-none focus:ring-2 focus:ring-neutral-4 focus:ring-offset-2
+                                focus:outline-none focus:border-b-2 focus:border-neutral-4
                             `}
                         >
                             {link.label}
@@ -82,17 +84,14 @@ export default function Header(){
                     <Icon icon="lineicons:search-1" width="24" height="25" className="size-7" />
                     <span className="sr-only">Search</span>
                 </button>
-                <button>
-                    <Icon icon={!showMobileMenu ? "lineicons:menu-hamburger-1" : "codicon:close"} width="25" height="30" className="size-9" />
+                <button onClick={() => setShowMobileMenu(true)}>
+                    <Icon icon="lineicons:menu-hamburger-1" width="25" height="30" className="size-9" />
                     <span className="sr-only">Toggle Menu</span>
                 </button>
             </div>
 
-
-            {
-                showMobileMenu &&
-                <MobileMenu openMobileMenu={showMobileMenu} setOpenMobileMenu={setShowMobileMenu} />
-            }
+            <MobileMenu openMobileMenu={showMobileMenu} setOpenMobileMenu={setShowMobileMenu} />
+            <SearchModal searchValue={searchValue} setSearchValue={setSearchValue} openSearchModal={showSearchModal} setOpenSearchModal={setShowSearchModal} />
         </header>
     )
 }

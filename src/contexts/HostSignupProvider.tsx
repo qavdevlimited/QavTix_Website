@@ -32,7 +32,11 @@ const SignupContext = createContext<SignupContextType | undefined>(undefined)
 
 export function HostSignupProvider({ children }: { children: ReactNode }) {
   const [currentStep, setCurrentStep] = useState(1)
-  const [formData, setFormData] = useState<HostSignupFormData>({})
+  const [formData, setFormData] = useState<HostSignupFormData>({
+    state: "",
+    country: "",
+    agreedToTerms: false
+  })
 
   const updateFormData = (data: Partial<HostSignupFormData>) => {
     setFormData(prev => ({ ...prev, ...data }))

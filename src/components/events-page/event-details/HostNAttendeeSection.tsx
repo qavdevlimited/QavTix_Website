@@ -1,16 +1,20 @@
 import { mockAttendees } from "@/components-data/demo-data";
-import { NAV_LINKS } from "@/components-data/navigation/navLinks";
+import { EVENT_ROUTES, NAV_LINKS } from "@/components-data/navigation/navLinks";
 import FollowHostBtn1 from "@/components/custom-utils/buttons/FollowHostBtn1";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { getAvatarColor } from "@/helper-fns/getAvatarColor";
 import { getInitialsFromName } from "@/helper-fns/getInitialFromName";
-import { space_grotesk } from "@/lib/redux/fonts";
+import { space_grotesk } from "@/lib/fonts";
 import { cn } from "@/lib/utils";
 import { Icon } from "@iconify/react";
 import Link from "next/link";
+import { useParams } from "next/navigation";
 
 const HostNAttendeeDetailsSection = ({ className }:{ className?: string }) => {
+
+    const { event_id } = useParams()
+
     return (
         <div className={cn(
             className
@@ -29,7 +33,7 @@ const HostNAttendeeDetailsSection = ({ className }:{ className?: string }) => {
                         <p className="text-xs text-neutral-7">Hosted by</p>
                         <Link 
                             className="flex items-center text-secondary-9 text-sm"
-                            href={NAV_LINKS.HOST_PROFILE.href.replace('[id]', "3636273")}
+                            href={NAV_LINKS.HOST_PROFILE.href.replace('[host_id]', "3636273")}
                             >
                             <strong className="font-normal whitespace-nowrap">Qavdev Limited</strong>
                             <Icon icon="line-md:chevron-right" width="20" height="20" />
@@ -49,30 +53,39 @@ const HostNAttendeeDetailsSection = ({ className }:{ className?: string }) => {
             )}>
                 Attendees
             </h3>
-            <div className="flex -space-x-2">
-                {mockAttendees.slice(0, 4).map((user) => (
-                    <Avatar key={user.id} className="ring-2 ring-background size-9">
-                        {
-                            user.profile_img &&
-                            <AvatarImage src={user.profile_img} />
-                        }
+
+            <Link
+                href={`${EVENT_ROUTES.EVENTS_DETAILS.href.replace("[event_id]", String(event_id))}/attendees`}
+                aria-label="View event attendees"
+                className="inline-flex focus:outline-none"
+                >
+                <div className="flex -space-x-2">
+                    {mockAttendees.slice(0, 4).map((user) => (
+                    <Avatar
+                        key={user.id}
+                        className="ring-2 ring-background size-9"
+                    >
+                        {user.profile_img ? (
+                        <AvatarImage src={user.profile_img} alt={user.name} />
+                        ) : null}
+
                         <AvatarFallback
-                            className={`${getAvatarColor(user.id.toString())} text-white font-medium`}
+                        className={`${getAvatarColor(user.id.toString())} text-white font-medium`}
                         >
-                            {getInitialsFromName(user.name)}
+                        {getInitialsFromName(user.name)}
                         </AvatarFallback>
                     </Avatar>
-                ))}
-                {mockAttendees.length > 4 && (
+                    ))}
+
+                    {mockAttendees.length > 4 && (
                     <Avatar className="ring-1 size-9 ring-background">
-                        <AvatarFallback
-                            className="bg-primary-1 font-medium text-secondary-7"
-                        >
-                            +{mockAttendees.length - 4}
+                        <AvatarFallback className="bg-primary-1 font-medium text-secondary-7">
+                        +{mockAttendees.length - 4}
                         </AvatarFallback>
                     </Avatar>
-                )}
-            </div>
+                    )}
+                </div>
+                </Link>
             <p className="text-neutral-7 mt-1">
                 {
                     mockAttendees.slice(0, 4).map((v,i) => (

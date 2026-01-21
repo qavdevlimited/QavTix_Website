@@ -14,7 +14,7 @@ const FormTextarea1 = forwardRef<HTMLTextAreaElement, FormTextareaProps>(
         return (
             <div className="w-full">
                 <label className="block text-sm font-medium text-neutral-9 mb-2">
-                    {label} {required && <span className="text-red-500">*</span>}
+                    {label} {required && <span className="text-neutral-9">*</span>}
                 </label>
                 <textarea
                     ref={ref}
