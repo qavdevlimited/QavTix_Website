@@ -49,6 +49,9 @@ export default function Header2() {
                                             px-4 py-2 text-sm transition-all duration-150
                                             ${active
                                                 ? 'text-white'
+                                                :
+                                                pathName === NAV_LINKS.SEARCH_PAGE.href ?
+                                                "text-neutral-7"
                                                 : 'text-neutral-6 hover:text-neutral-5'
                                             }
                                             active:scale-[0.98]

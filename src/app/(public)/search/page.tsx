@@ -1,8 +1,13 @@
 "use client"
 
+import CategoryFilter from "@/components/homepage/dropdowns/CategoryFilter";
+import DateFilter from "@/components/homepage/dropdowns/DateFilter";
+import LocationFilter from "@/components/homepage/dropdowns/LocationFilter";
+import PriceFilter from "@/components/homepage/dropdowns/PriceFilter";
 import { Icon } from "@iconify/react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
+import { countries, getStates } from "@/components-data/location"
 
 export default function SearchPage(){
 
@@ -12,7 +17,7 @@ export default function SearchPage(){
 
     return (
         <>
-            <main className="h-screen bg-white mt-28 global-px">
+            <main className="bg-white min-h-screen pt-28 pb-10 global-px">
                 <div className="relative group max-w-3xl mx-auto">
                     <Icon 
                         icon="hugeicons:search-01" 
@@ -42,6 +47,32 @@ export default function SearchPage(){
                             className="absolute right-5 top-1/2 -translate-y-1/2 size-7 text-neutral-7 group-focus-within:text-primary transition-colors duration-200" 
                         />
                     </button>
+                </div>
+
+
+                <div className='flex flex-wrap gap-4 mb-8 max-w-3xl mx-auto justify-center mt-5'>
+                    <CategoryFilter
+                        filterFor='eventPage'
+                        value={[]}
+                        onChange={(categories) => {}}
+                    />
+                    <LocationFilter
+                        filterFor='eventPage'
+                        value={null}
+                        onChange={(location) => {}} 
+                        countries={countries}
+                        getStates={getStates}
+                    />
+                    <PriceFilter
+                        filterFor='eventPage'
+                        value={null}
+                        onChange={(priceRange) => {}}
+                    />
+                    <DateFilter
+                        filterFor='eventPage'
+                        value={null}
+                        onChange={(v) => {}}
+                    />
                 </div>
             </main>
         </>
