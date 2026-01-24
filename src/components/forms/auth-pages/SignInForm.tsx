@@ -13,7 +13,7 @@ export default function SignInForm(){
             </div>
             <div>
                 <label className="text-sm font-medium text-neutral-10 mb-2 block">Password</label>
-                <PasswordInput1 />
+                <PasswordInput1 helperText="Must be at least 8 characters" />
             </div>
             <ActionButton1 buttonText="Sign in" className="mt-6 w-full" />
         </form>

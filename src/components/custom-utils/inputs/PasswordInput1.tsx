@@ -5,6 +5,7 @@ interface IPasswordInput1Props {
     placeholder?: string;
     error?: string;
     value?: string;
+    helperText?: string
     onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
     [key: string]: any;
 }
@@ -13,6 +14,7 @@ export default function PasswordInput1({
     placeholder = 'Password',
     error,
     value,
+    helperText,
     onChange,
     ...props 
 }: IPasswordInput1Props) {
@@ -57,6 +59,10 @@ export default function PasswordInput1({
                     )}
                 </button>
             </div>
+            {
+                helperText && !error &&
+                <p className='text-sm text-neutral-8 mt-1'>{helperText}</p>
+            }
             {error && (
                 <p className="text-xs text-red-500 mt-1.5 ml-1">
                     {error}
