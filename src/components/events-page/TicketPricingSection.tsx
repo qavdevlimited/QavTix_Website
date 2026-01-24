@@ -13,7 +13,6 @@ interface TicketPricingSectionProps {
 export default function TicketPricingSection({
   tickets = ticketTiers,
   initialVisibleCount = 4,
-  onGetTicket
 }: TicketPricingSectionProps) {
 
 
