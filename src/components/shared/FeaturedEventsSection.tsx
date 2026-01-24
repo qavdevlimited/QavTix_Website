@@ -97,8 +97,8 @@ export default function FeaturedEventsSection() {
                 </div>
 
                 {/* Carousel */}
-                <div className="overflow-hidden" ref={emblaRef}>
-                    <div className="flex pt-3 px-1">
+                <div className="overflow-hidden p-1.5 lg:py-2" ref={emblaRef}>
+                    <div className="flex">
                         {dupliactedFeaturedEvents.map((event) => (
                             <Link key={event.id} href={EVENT_ROUTES.EVENTS_DETAILS.href.replace("[event_id]", event.id.toString())} className='flex-[0_0_85%] sm:flex-[0_0_30%] md:w-[23.75] mr-2'>
                                 <div
@@ -106,7 +106,7 @@ export default function FeaturedEventsSection() {
                                     onMouseLeave={play}
                                     className="pr-6"
                                 >
-                                    <div className="group shadow-[0px_-8px_24px_rgba(0,0,0,0.08)] relative aspect-3/4 bg-white cursor-pointer">
+                                    <div className="group drop-shadow-sm lg:drop-shadow-xs bg-transparent relative aspect-3/4 cursor-pointer">
 
                                         {/* IMAGE */}
                                         <Image
@@ -119,12 +119,12 @@ export default function FeaturedEventsSection() {
                                         {/* WHITE SLIDE-UP DETAILS */}
                                         <div
                                             className="
-                                                absolute inset-x-0 bottom-0
+                                                absolute inset-x-0 -bottom-1
                                                 bg-white
-                                                p-4
+                                                p-5
                                                 w-full
                                                 group-hover:scale-103
-                                                border-b rounded-b-4xl lg:rounded-b-none
+                                                border-b rounded-b-4xl lg:rounded-b-sm
                                                 transform transition-all duration-400
                                                 ease-[cubic-bezier(0.22,1,0.36,1)]
 
